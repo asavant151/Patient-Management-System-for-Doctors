@@ -25,7 +25,7 @@ const Login = () => {
   const handleSubmit = async (values, { setSubmitting }) => {
     try {
       const response = await axios.post(
-        "http://localhost:9500/v1/admin/admin-login",
+        "https://live-bakend.onrender.com/admin/admin-login",
         {
           identifier: values.email, // 'email' represents both email and phone
           password: values.password,

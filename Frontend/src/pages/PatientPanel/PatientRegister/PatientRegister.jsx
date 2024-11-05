@@ -62,7 +62,7 @@ const PatientRegister = () => {
       console.log("Form values:", values);
     try {
       const response = await axios.post(
-        "http://localhost:9500/v1/patient/create-patient",
+        "https://live-bakend.onrender.com/patient/create-patient",
         payload
       );
       // Optionally, you can redirect or show a success message
@@ -114,7 +114,7 @@ const PatientRegister = () => {
   const fetchHospitals = async () => {
     try {
       const response = await axios.get(
-        "http://localhost:9500/v1/hospital/get-hospitals"
+        "https://live-bakend.onrender.com/hospital/get-hospitals"
       );
       setHospitals(response.data.data);
     } catch (error) {

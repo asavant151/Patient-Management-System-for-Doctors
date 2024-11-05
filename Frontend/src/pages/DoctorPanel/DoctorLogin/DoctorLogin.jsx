@@ -24,7 +24,7 @@ const DoctorLogin = () => {
   const handleSubmit = async (values, { setSubmitting }) => {
     try {
       const response = await axios.post(
-        "http://localhost:9500/v1/doctor/doctor-login",
+        "https://live-bakend.onrender.com/doctor/doctor-login",
         {
           identifier: values.email,
           password: values.password,

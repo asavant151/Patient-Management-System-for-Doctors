@@ -32,7 +32,7 @@ const DoctorResetPassword = () => {
 
     try {
       const response = await fetch(
-        "http://localhost:9500/v1/doctor/reset-password",
+        "https://live-bakend.onrender.com/doctor/reset-password",
         {
           method: "PUT",
           headers: {

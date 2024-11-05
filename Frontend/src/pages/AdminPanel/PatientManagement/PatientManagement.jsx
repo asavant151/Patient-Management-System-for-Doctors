@@ -44,7 +44,7 @@ const PatientManagement = () => {
       }
 
       const todayResponse = await axios.get(
-        "http://localhost:9500/v1/dashboard-adminFlow/appointement-today",
+        "https://live-bakend.onrender.com/dashboard-adminFlow/appointement-today",
         { params: { adminId: adminId } }
       );
 
@@ -85,7 +85,7 @@ const PatientManagement = () => {
       }
 
       const upcomingResponse = await axios.get(
-        "http://localhost:9500/v1/dashboard-adminFlow/appointement-upcomming",
+        "https://live-bakend.onrender.com/dashboard-adminFlow/appointement-upcomming",
         { params: { adminId: adminId } }
       );
 
@@ -126,7 +126,7 @@ const PatientManagement = () => {
       }
 
       const previousResponse = await axios.get(
-        "http://localhost:9500/v1/dashboard-adminFlow/appointement-previous",
+        "https://live-bakend.onrender.com/dashboard-adminFlow/appointement-previous",
         { params: { adminId: adminId } }
       );
 
@@ -167,7 +167,7 @@ const PatientManagement = () => {
       }
 
       const canceledResponse = await axios.get(
-        "http://localhost:9500/v1/dashboard-adminFlow/appointement-cancel",
+        "https://live-bakend.onrender.com/dashboard-adminFlow/appointement-cancel",
         { params: { adminId: adminId } }
       );
 

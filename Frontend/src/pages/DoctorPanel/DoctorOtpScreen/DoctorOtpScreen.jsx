@@ -33,7 +33,7 @@ const DoctorOtpScreen = () => {
     try {
       // Make the API request with the email and OTP
       const response = await axios.post(
-        "http://localhost:9500/v1/doctor/verify-otp",
+        "https://live-bakend.onrender.com/doctor/verify-otp",
         {
           email, // Pass the stored email
           otp: values.otp.join(""), // Concatenate the OTP array to a string

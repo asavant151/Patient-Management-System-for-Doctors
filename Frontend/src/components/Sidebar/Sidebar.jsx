@@ -1,8 +1,13 @@
 import React from "react";
 import "./Sidebar.scss";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 const Sidebar = ({ isOpen, sidebarRef, activeLink }) => {
+  const navigate = useNavigate();
+  const logout = () => {
+    localStorage.removeItem("token");
+    navigate("/login");
+  };
   return (
     <>
       <div
@@ -131,9 +136,9 @@ const Sidebar = ({ isOpen, sidebarRef, activeLink }) => {
           </li>
         </ul>
         <div className="logout-section">
-          <a href="#logout" className="nav-link nav-links-6">
+          <button className="nav-link nav-links-6" onClick={logout}>
             Logout
-          </a>
+          </button>
         </div>
       </div>
     </>

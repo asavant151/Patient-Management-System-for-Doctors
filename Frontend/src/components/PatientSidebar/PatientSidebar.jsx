@@ -3,11 +3,16 @@ import { Link, useNavigate } from "react-router-dom";
 import "./PatientSidebar.scss";
 
 const PatientSidebar = ({ isOpen, sidebarRef, activeLink }) => {
-  const navigate = useNavigate ();
+  const navigate = useNavigate();
 
   const handleBookAppointment = () => {
-    navigate("/patientAppointment")
-  }
+    navigate("/patientAppointment");
+  };
+
+  const logout = () => {
+    localStorage.removeItem("token");
+    navigate("/patient-login");
+  };
   return (
     <>
       <div
@@ -28,7 +33,14 @@ const PatientSidebar = ({ isOpen, sidebarRef, activeLink }) => {
             <Link
               to={"/personalHealthRecord"}
               className={`nav-link nav-links-1 ${
-                activeLink === "/personalHealthRecord" || activeLink === "/patientDetailsEdit" || activeLink === "/personalHealthRecordPrescription" || activeLink === "/personalHealthTestReport" || activeLink === "/personalHealthMedicalHistory" || activeLink === "/personalHealthMedicalHistoryDetails" ? "active" : ""
+                activeLink === "/personalHealthRecord" ||
+                activeLink === "/patientDetailsEdit" ||
+                activeLink === "/personalHealthRecordPrescription" ||
+                activeLink === "/personalHealthTestReport" ||
+                activeLink === "/personalHealthMedicalHistory" ||
+                activeLink === "/personalHealthMedicalHistoryDetails"
+                  ? "active"
+                  : ""
               }`}
             >
               Personal Health Record
@@ -63,7 +75,11 @@ const PatientSidebar = ({ isOpen, sidebarRef, activeLink }) => {
             <Link
               to={"/patientTeleconsultationAccess"}
               className={`nav-link nav-links-4 ${
-                activeLink === "/patientTeleconsultationAccess" || activeLink === "/patientMeetingConference" || activeLink === "/patientTeleconsulationAppointmentTimeSlot" ? "active" : ""
+                activeLink === "/patientTeleconsultationAccess" ||
+                activeLink === "/patientMeetingConference" ||
+                activeLink === "/patientTeleconsulationAppointmentTimeSlot"
+                  ? "active"
+                  : ""
               }`}
             >
               Teleconsultation Access
@@ -83,7 +99,11 @@ const PatientSidebar = ({ isOpen, sidebarRef, activeLink }) => {
             <Link
               to={"/bills"}
               className={`nav-link nav-links-7 ${
-                activeLink === "/bills" || activeLink === "/billInvoice" || activeLink === "/paidBillInvoice" ? "active" : ""
+                activeLink === "/bills" ||
+                activeLink === "/billInvoice" ||
+                activeLink === "/paidBillInvoice"
+                  ? "active"
+                  : ""
               }`}
             >
               Bills
@@ -98,7 +118,11 @@ const PatientSidebar = ({ isOpen, sidebarRef, activeLink }) => {
           />
           <h6>Hospital appointment</h6>
           <p>You have to fill up the form to be admitted to the hospital.</p>
-          <button type="button" className="appontment-btn" onClick={handleBookAppointment}>
+          <button
+            type="button"
+            className="appontment-btn"
+            onClick={handleBookAppointment}
+          >
             <img
               src="/assets/images/calendar-white.svg"
               alt="calendar-white"
@@ -108,9 +132,9 @@ const PatientSidebar = ({ isOpen, sidebarRef, activeLink }) => {
           </button>
         </div>
         <div className="logout-section">
-          <a href="#logout" className="nav-link nav-links-6">
+          <button className="nav-link nav-links-6" onClick={logout}>
             Logout
-          </a>
+          </button>
         </div>
       </div>
     </>
