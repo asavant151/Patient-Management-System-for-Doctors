@@ -5,7 +5,7 @@ import { useAuth } from "../hooks/useAuth";
 const PrivateDoctorRoute = ({ children }) => {
   const { isAuthenticated } = useAuth();
 
-  return isAuthenticated ? children : <Navigate to="/doctor-login" replace />;
+  return isAuthenticated ? children : <Navigate to="/doctor-login" />;
 };
 
 export default PrivateDoctorRoute;
