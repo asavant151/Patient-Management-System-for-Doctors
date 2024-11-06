@@ -106,7 +106,7 @@ const DoctorManagement = () => {
     if (selectedDoctor) {
       try {
         await axios.delete(
-          `https://live-bakend.onrender.com/admin/delete-doc-by-admin`,
+          `https://live-bakend.onrender.com/v1/admin/delete-doc-by-admin`,
           {
             headers: {
               Authorization: `Bearer ${token}`, // Include the token in the headers
@@ -130,7 +130,7 @@ const DoctorManagement = () => {
   const fetchDoctors = async () => {
     try {
       const response = await axios.get(
-        "https://live-bakend.onrender.com/doctor/getAlldoctors"
+        "https://live-bakend.onrender.com/v1/doctor/getAlldoctors"
       );
       setDoctors(response.data.data);
       setFilteredDoctors(response.data.searchResults);
@@ -151,7 +151,7 @@ const DoctorManagement = () => {
         const token = localStorage.getItem("token");
         axios
           .get(
-            `https://live-bakend.onrender.com/dashboard-admin/search-doctor-and-patient-list?query=${searchTerm}`,
+            `https://live-bakend.onrender.com/v1/dashboard-admin/search-doctor-and-patient-list?query=${searchTerm}`,
             {
               headers: {
                 Authorization: `Bearer ${token}`, // Include the token in the headers
@@ -175,7 +175,7 @@ const DoctorManagement = () => {
       const adminId = localStorage.getItem("adminId");
   
       const response = await axios.post(
-        `https://live-bakend.onrender.com/dashboard-adminFlow/doctor-list-id`,
+        `https://live-bakend.onrender.com/v1/dashboard-adminFlow/doctor-list-id`,
         {
           adminId: adminId,
           doctorId: doctorId,

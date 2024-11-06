@@ -169,7 +169,7 @@ const MonitorBilling = () => {
 
   const fetchBillingData = async () => {
     try {
-        const response = await axios.get('https://live-bakend.onrender.com/bill/list-bill');
+        const response = await axios.get('https://live-bakend.onrender.com/v1/bill/list-bill');
         console.log(response.data, "response");
 
         // Check if the response was successful and contains billing data

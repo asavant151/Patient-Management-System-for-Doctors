@@ -40,7 +40,7 @@ const Register = () => {
       console.log("Form values:", values);
 
       const response = await axios.post(
-        "https://live-bakend.onrender.com/admin/create-admin",
+        "https://live-bakend.onrender.com/v1/admin/create-admin",
         {
           first_name: values.first_name,
           last_name: values.last_name,
@@ -113,7 +113,7 @@ const Register = () => {
   const fetchHospitals = async () => {
     try {
       const response = await axios.get(
-        "https://live-bakend.onrender.com/hospital/get-hospitals"
+        "https://live-bakend.onrender.com/v1/hospital/get-hospitals"
       );
       setHospitals(response.data.data);
     } catch (error) {

@@ -17,7 +17,7 @@ const DoctorForgotPassword = () => {
       localStorage.removeItem("adminId");
       // Make the API request
       const response = await axios.post(
-        "https://live-bakend.onrender.com/doctor/forgot-pass",
+        "https://live-bakend.onrender.com/v1/doctor/forgot-pass",
         {
           email: values.email,
         }

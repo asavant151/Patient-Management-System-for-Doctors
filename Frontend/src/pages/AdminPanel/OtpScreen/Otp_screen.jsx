@@ -33,7 +33,7 @@ const Otp_screen = () => {
     try {
       // Make the API request with the email and OTP
       const response = await axios.post(
-        "https://live-bakend.onrender.com/admin/verify-otp",
+        "https://live-bakend.onrender.com/v1/admin/verify-otp",
         {
           email, // Pass the stored email
           otp: values.otp.join(""), // Concatenate the OTP array to a string

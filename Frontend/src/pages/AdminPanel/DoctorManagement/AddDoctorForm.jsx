@@ -152,7 +152,7 @@ const AddDoctorForm = () => {
         formData.append("signature", signature);
       }
 
-      const response = await axios.post("https://live-bakend.onrender.com/admin/add-doctor-by-admin", formData, {
+      const response = await axios.post("https://live-bakend.onrender.com/v1/admin/add-doctor-by-admin", formData, {
         headers: {
           "Content-Type": "multipart/form-data",
         },

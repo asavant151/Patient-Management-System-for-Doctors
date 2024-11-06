@@ -118,7 +118,7 @@ const EditDoctor = () => {
       const adminId = localStorage.getItem("adminId");
       try {
         const response = await axios.post(
-          `https://live-bakend.onrender.com/dashboard-adminFlow/doctor-list-id`,
+          `https://live-bakend.onrender.com/v1/dashboard-adminFlow/doctor-list-id`,
           {
             adminId: adminId,
             doctorId: doctorId,
@@ -174,7 +174,7 @@ const EditDoctor = () => {
         formData.append("signatureImage", signatureFile);
       }
       const response = await axios.put(
-        "https://live-bakend.onrender.com/admin/update-doctor-by-admin",
+        "https://live-bakend.onrender.com/v1/admin/update-doctor-by-admin",
         formData,
         {
           headers: {

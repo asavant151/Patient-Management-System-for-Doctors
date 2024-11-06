@@ -159,7 +159,7 @@ const AdminProfile = () => {
 
     try {
       const response = await axios.post(
-        "https://live-bakend.onrender.com/admin/change-password",
+        "https://live-bakend.onrender.com/v1/admin/change-password",
         {
           oldpass: oldPass,
           newpass: newPass,
@@ -188,7 +188,7 @@ const AdminProfile = () => {
   const fetchHospitalData = async (hospitalId) => {
     try {
       const response = await axios.post(
-        "https://live-bakend.onrender.com/hospital/get-hospital-by-id",
+        "https://live-bakend.onrender.com/v1/hospital/get-hospital-by-id",
         { id: hospitalId },
         {
           headers: {
