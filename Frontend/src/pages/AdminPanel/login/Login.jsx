@@ -6,11 +6,13 @@ import "./Login.scss";
 import { loginValidationSchema } from "../../../validation/AuthValidation";
 import axios from "axios";
 import toast from "react-hot-toast";
+import { useAuth } from "../../../hooks/useAuth";
 
 const Login = () => {
   const [showPassword, setShowPassword] = useState(false);
   const [error, setError] = useState(null);
   const navigate = useNavigate();
+  const { login } = useAuth();
 
   const togglePasswordVisibility = () => {
     setShowPassword(!showPassword);
@@ -37,6 +39,9 @@ const Login = () => {
         localStorage.setItem("adminId", adminId);
         const token = response.data.token;
         localStorage.setItem("token", token);
+        if (token) {
+          login(token);
+        }
         setError(null);
         toast.success(response.data.message);
         setTimeout(() => {

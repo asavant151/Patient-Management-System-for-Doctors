@@ -348,7 +348,7 @@ const Dashboard = () => {
                       </div>
                     </Dropdown.Toggle>
                     <Dropdown.Menu>
-                      <Dropdown.Item href="#/profile">Profile</Dropdown.Item>
+                      <Dropdown.Item href="/adminProfile">Profile</Dropdown.Item>
                       <Dropdown.Item href="#/settings">Settings</Dropdown.Item>
                       <Dropdown.Item href="#/logout">Logout</Dropdown.Item>
                     </Dropdown.Menu>
@@ -419,7 +419,7 @@ const Dashboard = () => {
                         </div>
                       </Dropdown.Toggle>
                       <Dropdown.Menu>
-                        <Dropdown.Item href="#/profile">Profile</Dropdown.Item>
+                        <Dropdown.Item href="/adminProfile">Profile</Dropdown.Item>
                         <Dropdown.Item href="#/settings">
                           Settings
                         </Dropdown.Item>

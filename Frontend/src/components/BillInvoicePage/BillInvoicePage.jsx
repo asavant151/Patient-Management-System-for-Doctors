@@ -251,7 +251,7 @@ const BillInvoicePage = () => {
                         </div>
                       </Dropdown.Toggle>
                       <Dropdown.Menu>
-                        <Dropdown.Item href="#/profile">Profile</Dropdown.Item>
+                        <Dropdown.Item href="/adminProfile">Profile</Dropdown.Item>
                         <Dropdown.Item href="#/settings">
                           Settings
                         </Dropdown.Item>
@@ -324,7 +324,7 @@ const BillInvoicePage = () => {
                       </div>
                     </Dropdown.Toggle>
                     <Dropdown.Menu>
-                      <Dropdown.Item href="#/profile">Profile</Dropdown.Item>
+                      <Dropdown.Item href="/adminProfile">Profile</Dropdown.Item>
                       <Dropdown.Item href="#/settings">Settings</Dropdown.Item>
                       <Dropdown.Item href="#/logout">Logout</Dropdown.Item>
                     </Dropdown.Menu>

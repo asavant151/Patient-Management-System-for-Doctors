@@ -26,7 +26,7 @@ const Sidebar = ({ isOpen, sidebarRef, activeLink }) => {
             <Link
               to={"/"}
               className={`nav-link nav-links-1 ${
-                activeLink === "/adminProfile" || activeLink === "/"
+                activeLink === "/" || activeLink === "/adminProfile"
                   ? "active"
                   : ""
               }`}

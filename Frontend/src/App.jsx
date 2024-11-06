@@ -74,421 +74,427 @@ import PublicRoute from "./Routes/PublicRoute";
 import PrivateRoute from "./Routes/PrivateRoute";
 import PublicDoctorRoute from "./Routes/PublicDoctorRoute";
 import PrivateDoctorRoute from "./Routes/PrivateDoctorRoute";
+import { AuthProvider } from "./hooks/useAuth";
 
 function App() {
   return (
-    <BrowserRouter>
-      <ScrollToTop />
-      <Routes>
-        {/* Admin */}
-        <Route
-          path="/register"
-          element={
-            <PublicRoute>
-              <Register />
-            </PublicRoute>
-          }
-        />
-        <Route
-          path="/login"
-          element={
-            <PublicRoute>
-              <Login />
-            </PublicRoute>
-          }
-        />
-        <Route
-          path="/forgot-password"
-          element={
-            <PublicRoute>
-              <Forgot_Password />
-            </PublicRoute>
-          }
-        />
-        <Route
-          path="/otp-verification"
-          element={
-            <PublicRoute>
-              <Otp_screen />
-            </PublicRoute>
-          }
-        />
-        <Route
-          path="/reset-password"
-          element={
-            <PublicRoute>
-              <ResetPassword />
-            </PublicRoute>
-          }
-        />
-        <Route
-          path="/"
-          element={
-            <PrivateRoute>
-              <Dashboard />
-            </PrivateRoute>
-          }
-        />
-        <Route
-          path="/adminProfile"
-          element={
-            <PrivateRoute>
-              <AdminProfile />
-            </PrivateRoute>
-          }
-        />
-        <Route
-          path="/doctor-management"
-          element={
-            <PrivateRoute>
-              <DoctorManagement />
-            </PrivateRoute>
-          }
-        />
-        <Route
-          path="/patient-management"
-          element={
-            <PrivateRoute>
-              <PatientManagement />
-            </PrivateRoute>
-          }
-        />
-        <Route
-          path="/billing/monitor-billing"
-          element={
-            <PrivateRoute>
-              <MonitorBilling />
-            </PrivateRoute>
-          }
-        />
-        <Route
-          path="/billing/monitor-billing/invoice"
-          element={
-            <PrivateRoute>
-              <MonitorBillingInvoice />
-            </PrivateRoute>
-          }
-        />
-        <Route
-          path="/add-new-doctor"
-          element={
-            <PrivateRoute>
-              <AddDoctorForm />
-            </PrivateRoute>
-          }
-        />
-        <Route
-          path="/edit-doctor/:doctorId"
-          element={
-            <PrivateRoute>
-              <EditDoctor />
-            </PrivateRoute>
-          }
-        />
-        <Route
-          path="/billing/pandingbills"
-          element={
-            <PrivateRoute>
-              <PendingBills />
-            </PrivateRoute>
-          }
-        />
-        <Route
-          path="/billing/monitor-billing/pending-invoice"
-          element={
-            <PrivateRoute>
-              <BookingInvoice />
-            </PrivateRoute>
-          }
-        />
-        <Route
-          path="/billing/monitor-billing/createBill"
-          element={
-            <PrivateRoute>
-              <CreateBill />
-            </PrivateRoute>
-          }
-        />
-        <Route
-          path="/billing/monitor-billing/invoice-create-bill/:templateId"
-          element={
-            <PrivateRoute>
-              <InvoiceCreateBill />
-            </PrivateRoute>
-          }
-        />
-        <Route
-          path="/billing/monitor-billing/editInvoice"
-          element={
-            <PrivateRoute>
-              <EditInvoiceDesign />
-            </PrivateRoute>
-          }
-        />
-        <Route
-          path="/billing/monitor-billing/selectInvoiceTheme"
-          element={
-            <PrivateRoute>
-              <SelectInvoiceTheme />
-            </PrivateRoute>
-          }
-        />
-        <Route
-          path="/billing/insurance-claims"
-          element={
-            <PrivateRoute>
-              <InsuranceClaims />
-            </PrivateRoute>
-          }
-        />
-        <Route
-          path="/billing/insurance-claims/Invoice"
-          element={
-            <PrivateRoute>
-              <InsuranceClaimsInvoice />
-            </PrivateRoute>
-          }
-        />
-        <Route
-          path="/billing/payment-process"
-          element={
-            <PrivateRoute>
-              <PaymentProcess />
-            </PrivateRoute>
-          }
-        />
-        <Route
-          path="/billing/payment-process/edit"
-          element={
-            <PrivateRoute>
-              <PaymentProcessEditBill />
-            </PrivateRoute>
-          }
-        />
-        <Route
-          path="/billing/payment-process/invoice"
-          element={
-            <PrivateRoute>
-              <PaymentProcessInvoice />
-            </PrivateRoute>
-          }
-        />
-        <Route
-          path="/analytics"
-          element={
-            <PrivateRoute>
-              <ReportingAndAnalytics />
-            </PrivateRoute>
-          }
-        />
-        {/* Doctor */}
-        <Route
-          path="/doctor-login"
-          element={
-            <PublicDoctorRoute>
-              <DoctorLogin />
-            </PublicDoctorRoute>
-          }
-        />
-        <Route
-          path="/doctor-forgot-password"
-          element={
-            <PublicDoctorRoute>
-              <DoctorForgotPassword />
-            </PublicDoctorRoute>
-          }
-        />
-        <Route
-          path="/doctor-otp-verification"
-          element={
-            <PublicDoctorRoute>
-              <DoctorOtpScreen />
-            </PublicDoctorRoute>
-          }
-        />
-        <Route
-          path="/doctor-reset-password"
-          element={
-            <PublicDoctorRoute>
-              <DoctorResetPassword />
-            </PublicDoctorRoute>
-          }
-        />
-        <Route
-          path="/doctorProfile"
-          element={
-            <PrivateDoctorRoute>
-              <DoctorProfile />
-            </PrivateDoctorRoute>
-          }
-        />
-        <Route
-          path="/doctorAppointmentManagement"
-          element={
-            <PrivateDoctorRoute>
-              <DoctorAppointment />
-            </PrivateDoctorRoute>
-          }
-        />
-        <Route
-          path="/doctorAppointmentTimeSlot"
-          element={
-            <PrivateDoctorRoute>
-              <DoctorAppointmentTimeSlot />
-            </PrivateDoctorRoute>
-          }
-        />
-        <Route
-          path="/doctorTeleconsulationAppointmentTimeSlot"
-          element={
-            <PrivateDoctorRoute>
-              <DoctorTeleconsulationTimeSlot />
-            </PrivateDoctorRoute>
-          }
-        />
-        <Route
-          path="/patientRecordAccess"
-          element={
-            <PrivateDoctorRoute>
-              <PatientRecordAccess />
-            </PrivateDoctorRoute>
-          }
-        />
-        <Route
-          path="/patientRecordFile"
-          element={
-            <PrivateDoctorRoute>
-              <PatientRecordFile />
-            </PrivateDoctorRoute>
-          }
-        />
-        <Route
-          path="/patientDetails"
-          element={
-            <PrivateDoctorRoute>
-              <PatientDetails />
-            </PrivateDoctorRoute>
-          }
-        />
-        <Route
-          path="/prescription-tools"
-          element={
-            <PrivateDoctorRoute>
-              <PrescriptionTools />
-            </PrivateDoctorRoute>
-          }
-        />
-        <Route
-          path="/prescription-tools/create/details"
-          element={
-            <PrivateDoctorRoute>
-              <PrescriptionToolsDetails />
-            </PrivateDoctorRoute>
-          }
-        />
-        <Route
-          path="/prescription-tools/create"
-          element={
-            <PrivateDoctorRoute>
-              <CreatePrescription />
-            </PrivateDoctorRoute>
-          }
-        />
-        <Route
-          path="/prescription-tools/manage"
-          element={
-            <PrivateDoctorRoute>
-              <PrescriptionToolsManage />
-            </PrivateDoctorRoute>
-          }
-        />
-        <Route
-          path="/doctorMeetingConference"
-          element={
-            <PrivateDoctorRoute>
-              <DoctorMeetingConference />
-            </PrivateDoctorRoute>
-          }
-        />
-        <Route
-          path="/doctorTeleconsultation"
-          element={
-            <PrivateDoctorRoute>
-              <DoctorTeleconsultation />
-            </PrivateDoctorRoute>
-          }
-        />
-        <Route
-          path="/doctor-chat"
-          element={
-            <PrivateDoctorRoute>
-              <DoctorChat />
-            </PrivateDoctorRoute>
-          }
-        />
-        {/* Patient */}
-        <Route path="/patient-register" element={<PatientRegister />} />
-        <Route path="/patient-login" element={<PatientLogin />} />
-        <Route
-          path="/patient-forgot-password"
-          element={<PatientForgotPassword />}
-        />
-        <Route
-          path="/patient-otp-verification"
-          element={<PatientOtpScreen />}
-        />
-        <Route
-          path="/patient-reset-password"
-          element={<PatientResetPassword />}
-        />
-        <Route
-          path="/personalHealthRecord"
-          element={<PersonalHealthRecord />}
-        />
-        <Route path="/patientDetailsEdit" element={<PatientDetailsEdit />} />
-        <Route
-          path="/personalHealthRecordPrescription"
-          element={<PersonalHealthRecordPrescription />}
-        />
-        <Route
-          path="/personalHealthTestReport"
-          element={<PersonalHealthTestReports />}
-        />
-        <Route
-          path="/personalHealthMedicalHistory"
-          element={<PersonalHealthMedicalRecord />}
-        />
-        <Route
-          path="/personalHealthMedicalHistoryDetails"
-          element={<PersonalHealthMedicalRecordDetails />}
-        />
-        <Route path="/patientAppointment" element={<PatientAppointment />} />
-        <Route
-          path="/patientBookAppointment"
-          element={<PatientBookAppointment />}
-        />
-        <Route path="/invoice" element={<InvoicePage />} />
-        <Route path="/billInvoice" element={<BillInvoicePage />} />
-        <Route path="/paidBillInvoice" element={<PaidBillInvoicePage />} />
-        <Route path="/appointmentTimeSlot" element={<AppointmentTimeSlot />} />
-        <Route
-          path="/patientTeleconsulationAppointmentTimeSlot"
-          element={<PatientTeleconsulationTimeSlot />}
-        />
-        <Route path="/prescriptionAccess" element={<PrescriptionAccess />} />
-        <Route
-          path="/patientMeetingConference"
-          element={<PatientMeetingConference />}
-        />
-        <Route
-          path="/patientTeleconsultationAccess"
-          element={<PatientTeleconsultation />}
-        />
-        <Route path="/patient-chat" element={<PatientChat />} />
-        <Route path="/bills" element={<PatientBills />} />
-      </Routes>
-      <Toaster position="top-right" />
-    </BrowserRouter>
+    <AuthProvider>
+      <BrowserRouter>
+        <ScrollToTop />
+        <Routes>
+          {/* Admin */}
+          <Route
+            path="/register"
+            element={
+              <PublicRoute>
+                <Register />
+              </PublicRoute>
+            }
+          />
+          <Route
+            path="/login"
+            element={
+              <PublicRoute>
+                <Login />
+              </PublicRoute>
+            }
+          />
+          <Route
+            path="/forgot-password"
+            element={
+              <PublicRoute>
+                <Forgot_Password />
+              </PublicRoute>
+            }
+          />
+          <Route
+            path="/otp-verification"
+            element={
+              <PublicRoute>
+                <Otp_screen />
+              </PublicRoute>
+            }
+          />
+          <Route
+            path="/reset-password"
+            element={
+              <PublicRoute>
+                <ResetPassword />
+              </PublicRoute>
+            }
+          />
+          <Route
+            path="/"
+            element={
+              <PrivateRoute>
+                <Dashboard />
+              </PrivateRoute>
+            }
+          />
+          <Route
+            path="/adminProfile"
+            element={
+              <PrivateRoute>
+                <AdminProfile />
+              </PrivateRoute>
+            }
+          />
+          <Route
+            path="/doctor-management"
+            element={
+              <PrivateRoute>
+                <DoctorManagement />
+              </PrivateRoute>
+            }
+          />
+          <Route
+            path="/patient-management"
+            element={
+              <PrivateRoute>
+                <PatientManagement />
+              </PrivateRoute>
+            }
+          />
+          <Route
+            path="/billing/monitor-billing"
+            element={
+              <PrivateRoute>
+                <MonitorBilling />
+              </PrivateRoute>
+            }
+          />
+          <Route
+            path="/billing/monitor-billing/invoice"
+            element={
+              <PrivateRoute>
+                <MonitorBillingInvoice />
+              </PrivateRoute>
+            }
+          />
+          <Route
+            path="/add-new-doctor"
+            element={
+              <PrivateRoute>
+                <AddDoctorForm />
+              </PrivateRoute>
+            }
+          />
+          <Route
+            path="/edit-doctor/:doctorId"
+            element={
+              <PrivateRoute>
+                <EditDoctor />
+              </PrivateRoute>
+            }
+          />
+          <Route
+            path="/billing/pandingbills"
+            element={
+              <PrivateRoute>
+                <PendingBills />
+              </PrivateRoute>
+            }
+          />
+          <Route
+            path="/billing/monitor-billing/pending-invoice"
+            element={
+              <PrivateRoute>
+                <BookingInvoice />
+              </PrivateRoute>
+            }
+          />
+          <Route
+            path="/billing/monitor-billing/createBill"
+            element={
+              <PrivateRoute>
+                <CreateBill />
+              </PrivateRoute>
+            }
+          />
+          <Route
+            path="/billing/monitor-billing/invoice-create-bill/:templateId"
+            element={
+              <PrivateRoute>
+                <InvoiceCreateBill />
+              </PrivateRoute>
+            }
+          />
+          <Route
+            path="/billing/monitor-billing/editInvoice"
+            element={
+              <PrivateRoute>
+                <EditInvoiceDesign />
+              </PrivateRoute>
+            }
+          />
+          <Route
+            path="/billing/monitor-billing/selectInvoiceTheme"
+            element={
+              <PrivateRoute>
+                <SelectInvoiceTheme />
+              </PrivateRoute>
+            }
+          />
+          <Route
+            path="/billing/insurance-claims"
+            element={
+              <PrivateRoute>
+                <InsuranceClaims />
+              </PrivateRoute>
+            }
+          />
+          <Route
+            path="/billing/insurance-claims/Invoice"
+            element={
+              <PrivateRoute>
+                <InsuranceClaimsInvoice />
+              </PrivateRoute>
+            }
+          />
+          <Route
+            path="/billing/payment-process"
+            element={
+              <PrivateRoute>
+                <PaymentProcess />
+              </PrivateRoute>
+            }
+          />
+          <Route
+            path="/billing/payment-process/edit"
+            element={
+              <PrivateRoute>
+                <PaymentProcessEditBill />
+              </PrivateRoute>
+            }
+          />
+          <Route
+            path="/billing/payment-process/invoice"
+            element={
+              <PrivateRoute>
+                <PaymentProcessInvoice />
+              </PrivateRoute>
+            }
+          />
+          <Route
+            path="/analytics"
+            element={
+              <PrivateRoute>
+                <ReportingAndAnalytics />
+              </PrivateRoute>
+            }
+          />
+          {/* Doctor */}
+          <Route
+            path="/doctor-login"
+            element={
+              <PublicDoctorRoute>
+                <DoctorLogin />
+              </PublicDoctorRoute>
+            }
+          />
+          <Route
+            path="/doctor-forgot-password"
+            element={
+              <PublicDoctorRoute>
+                <DoctorForgotPassword />
+              </PublicDoctorRoute>
+            }
+          />
+          <Route
+            path="/doctor-otp-verification"
+            element={
+              <PublicDoctorRoute>
+                <DoctorOtpScreen />
+              </PublicDoctorRoute>
+            }
+          />
+          <Route
+            path="/doctor-reset-password"
+            element={
+              <PublicDoctorRoute>
+                <DoctorResetPassword />
+              </PublicDoctorRoute>
+            }
+          />
+          <Route
+            path="/doctorProfile"
+            element={
+              <PrivateDoctorRoute>
+                <DoctorProfile />
+              </PrivateDoctorRoute>
+            }
+          />
+          <Route
+            path="/doctorAppointmentManagement"
+            element={
+              <PrivateDoctorRoute>
+                <DoctorAppointment />
+              </PrivateDoctorRoute>
+            }
+          />
+          <Route
+            path="/doctorAppointmentTimeSlot"
+            element={
+              <PrivateDoctorRoute>
+                <DoctorAppointmentTimeSlot />
+              </PrivateDoctorRoute>
+            }
+          />
+          <Route
+            path="/doctorTeleconsulationAppointmentTimeSlot"
+            element={
+              <PrivateDoctorRoute>
+                <DoctorTeleconsulationTimeSlot />
+              </PrivateDoctorRoute>
+            }
+          />
+          <Route
+            path="/patientRecordAccess"
+            element={
+              <PrivateDoctorRoute>
+                <PatientRecordAccess />
+              </PrivateDoctorRoute>
+            }
+          />
+          <Route
+            path="/patientRecordFile"
+            element={
+              <PrivateDoctorRoute>
+                <PatientRecordFile />
+              </PrivateDoctorRoute>
+            }
+          />
+          <Route
+            path="/patientDetails"
+            element={
+              <PrivateDoctorRoute>
+                <PatientDetails />
+              </PrivateDoctorRoute>
+            }
+          />
+          <Route
+            path="/prescription-tools"
+            element={
+              <PrivateDoctorRoute>
+                <PrescriptionTools />
+              </PrivateDoctorRoute>
+            }
+          />
+          <Route
+            path="/prescription-tools/create/details"
+            element={
+              <PrivateDoctorRoute>
+                <PrescriptionToolsDetails />
+              </PrivateDoctorRoute>
+            }
+          />
+          <Route
+            path="/prescription-tools/create"
+            element={
+              <PrivateDoctorRoute>
+                <CreatePrescription />
+              </PrivateDoctorRoute>
+            }
+          />
+          <Route
+            path="/prescription-tools/manage"
+            element={
+              <PrivateDoctorRoute>
+                <PrescriptionToolsManage />
+              </PrivateDoctorRoute>
+            }
+          />
+          <Route
+            path="/doctorMeetingConference"
+            element={
+              <PrivateDoctorRoute>
+                <DoctorMeetingConference />
+              </PrivateDoctorRoute>
+            }
+          />
+          <Route
+            path="/doctorTeleconsultation"
+            element={
+              <PrivateDoctorRoute>
+                <DoctorTeleconsultation />
+              </PrivateDoctorRoute>
+            }
+          />
+          <Route
+            path="/doctor-chat"
+            element={
+              <PrivateDoctorRoute>
+                <DoctorChat />
+              </PrivateDoctorRoute>
+            }
+          />
+          {/* Patient */}
+          <Route path="/patient-register" element={<PatientRegister />} />
+          <Route path="/patient-login" element={<PatientLogin />} />
+          <Route
+            path="/patient-forgot-password"
+            element={<PatientForgotPassword />}
+          />
+          <Route
+            path="/patient-otp-verification"
+            element={<PatientOtpScreen />}
+          />
+          <Route
+            path="/patient-reset-password"
+            element={<PatientResetPassword />}
+          />
+          <Route
+            path="/personalHealthRecord"
+            element={<PersonalHealthRecord />}
+          />
+          <Route path="/patientDetailsEdit" element={<PatientDetailsEdit />} />
+          <Route
+            path="/personalHealthRecordPrescription"
+            element={<PersonalHealthRecordPrescription />}
+          />
+          <Route
+            path="/personalHealthTestReport"
+            element={<PersonalHealthTestReports />}
+          />
+          <Route
+            path="/personalHealthMedicalHistory"
+            element={<PersonalHealthMedicalRecord />}
+          />
+          <Route
+            path="/personalHealthMedicalHistoryDetails"
+            element={<PersonalHealthMedicalRecordDetails />}
+          />
+          <Route path="/patientAppointment" element={<PatientAppointment />} />
+          <Route
+            path="/patientBookAppointment"
+            element={<PatientBookAppointment />}
+          />
+          <Route path="/invoice" element={<InvoicePage />} />
+          <Route path="/billInvoice" element={<BillInvoicePage />} />
+          <Route path="/paidBillInvoice" element={<PaidBillInvoicePage />} />
+          <Route
+            path="/appointmentTimeSlot"
+            element={<AppointmentTimeSlot />}
+          />
+          <Route
+            path="/patientTeleconsulationAppointmentTimeSlot"
+            element={<PatientTeleconsulationTimeSlot />}
+          />
+          <Route path="/prescriptionAccess" element={<PrescriptionAccess />} />
+          <Route
+            path="/patientMeetingConference"
+            element={<PatientMeetingConference />}
+          />
+          <Route
+            path="/patientTeleconsultationAccess"
+            element={<PatientTeleconsultation />}
+          />
+          <Route path="/patient-chat" element={<PatientChat />} />
+          <Route path="/bills" element={<PatientBills />} />
+        </Routes>
+        <Toaster position="top-right" />
+      </BrowserRouter>
+    </AuthProvider>
   );
 }
 
