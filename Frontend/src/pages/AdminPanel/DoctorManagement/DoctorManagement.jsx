@@ -2,7 +2,7 @@ import React, { useEffect, useRef, useState } from "react";
 import { Dropdown } from "react-bootstrap";
 import DeleteDoctorModal from "../../../components/modals/DeleteDoctorModal";
 import DoctorDetailsDrawer from "../../../components/Drawer/DoctorDetailsDrawer";
-import { useLocation, useNavigate } from "react-router-dom";
+import { NavLink, useLocation, useNavigate } from "react-router-dom";
 import Sidebar from "../../../components/Sidebar/Sidebar";
 import axios from "axios";
 import "./DoctorManagement.scss";
@@ -326,7 +326,7 @@ const DoctorManagement = () => {
                     </Dropdown>
                     <Dropdown>
                       <Dropdown.Toggle variant="link" id="dropdown-user">
-                        <div className="d-flex align-items-center">
+                        <NavLink to={"/adminProfile"} className="d-flex align-items-center">
                           <img
                             src="/assets/images/profile.png"
                             alt="Lincoln Philips"
@@ -336,7 +336,7 @@ const DoctorManagement = () => {
                             <h3 className="user-name mb-0">Lincoln Philips</h3>
                             <span className="user-role">Admin</span>
                           </div>
-                        </div>
+                        </NavLink>
                       </Dropdown.Toggle>
                     </Dropdown>
                   </div>
@@ -397,7 +397,7 @@ const DoctorManagement = () => {
                   </Dropdown>
                   <Dropdown>
                     <Dropdown.Toggle variant="link" id="dropdown-user">
-                      <div className="d-flex align-items-center">
+                      <NavLink to={"/adminProfile"} className="d-flex align-items-center">
                         <img
                           src="/assets/images/profile.png"
                           alt="Lincoln Philips"
@@ -407,7 +407,7 @@ const DoctorManagement = () => {
                           <h3 className="user-name mb-0">Lincoln Philips</h3>
                           <span className="user-role">Admin</span>
                         </div>
-                      </div>
+                      </NavLink>
                     </Dropdown.Toggle>
                   </Dropdown>
                 </div>

@@ -1,7 +1,7 @@
 import React, { useEffect, useRef, useState } from "react";
 import { Dropdown } from "react-bootstrap";
 import "./BookingInvoice.scss";
-import { useLocation } from "react-router-dom";
+import { NavLink, useLocation } from "react-router-dom";
 import Sidebar from "../Sidebar/Sidebar";
 
 const BookingInvoice = () => {
@@ -206,7 +206,7 @@ const BookingInvoice = () => {
                     </Dropdown>
                     <Dropdown>
                       <Dropdown.Toggle variant="link" id="dropdown-user">
-                        <div className="d-flex align-items-center">
+                        <NavLink to={"/adminProfile"} className="d-flex align-items-center">
                           <img
                             src="/assets/images/profile.png"
                             alt="Lincoln Philips"
@@ -216,7 +216,7 @@ const BookingInvoice = () => {
                             <h3 className="user-name mb-0">Lincoln Philips</h3>
                             <span className="user-role">Admin</span>
                           </div>
-                        </div>
+                        </NavLink>
                       </Dropdown.Toggle>
                     </Dropdown>
                   </div>
@@ -272,7 +272,7 @@ const BookingInvoice = () => {
                   </Dropdown>
                   <Dropdown>
                     <Dropdown.Toggle variant="link" id="dropdown-user">
-                      <div className="d-flex align-items-center">
+                      <NavLink to={"/adminProfile"} className="d-flex align-items-center">
                         <img
                           src="/assets/images/profile.png"
                           alt="Lincoln Philips"
@@ -282,7 +282,7 @@ const BookingInvoice = () => {
                           <h3 className="user-name mb-0">Lincoln Philips</h3>
                           <span className="user-role">Admin</span>
                         </div>
-                      </div>
+                      </NavLink>
                     </Dropdown.Toggle>
                   </Dropdown>
                 </div>

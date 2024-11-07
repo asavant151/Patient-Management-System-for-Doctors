@@ -1,7 +1,7 @@
 import React, { useEffect, useRef, useState } from "react";
 import { Dropdown, Tab, Tabs } from "react-bootstrap";
 import Sidebar from "../../../components/Sidebar/Sidebar";
-import { useLocation, useNavigate } from "react-router-dom";
+import { NavLink, useLocation, useNavigate } from "react-router-dom";
 import "./PatientManagement.scss";
 import PatientDetailsModal from "../../../components/modals/PatientDetailsModal/PatientDetailsModal";
 import axios from 'axios';
@@ -534,7 +534,7 @@ const PatientManagement = () => {
                     </Dropdown>
                     <Dropdown>
                       <Dropdown.Toggle variant="link" id="dropdown-user">
-                        <div className="d-flex align-items-center">
+                        <NavLink to={"/adminProfile"} className="d-flex align-items-center">
                           <img
                             src="/assets/images/profile.png"
                             alt="Lincoln Philips"
@@ -544,7 +544,7 @@ const PatientManagement = () => {
                             <h3 className="user-name mb-0">Lincoln Philips</h3>
                             <span className="user-role">Admin</span>
                           </div>
-                        </div>
+                        </NavLink>
                       </Dropdown.Toggle>
                     </Dropdown>
                   </div>
@@ -600,7 +600,7 @@ const PatientManagement = () => {
                   </Dropdown>
                   <Dropdown>
                     <Dropdown.Toggle variant="link" id="dropdown-user">
-                      <div className="d-flex align-items-center">
+                      <NavLink to={"/adminProfile"} className="d-flex align-items-center">
                         <img
                           src="/assets/images/profile.png"
                           alt="Lincoln Philips"
@@ -610,7 +610,7 @@ const PatientManagement = () => {
                           <h3 className="user-name mb-0">Lincoln Philips</h3>
                           <span className="user-role">Admin</span>
                         </div>
-                      </div>
+                      </NavLink>
                     </Dropdown.Toggle>
                   </Dropdown>
                 </div>

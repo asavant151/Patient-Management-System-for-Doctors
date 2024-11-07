@@ -1,6 +1,6 @@
 import React, { useEffect, useRef, useState } from "react";
 import { Button, Dropdown, Form, Modal, Tab, Tabs } from "react-bootstrap";
-import { useLocation, useNavigate } from "react-router-dom";
+import { NavLink, useLocation, useNavigate } from "react-router-dom";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import "./DoctorTeleconsultation.scss";
@@ -614,7 +614,7 @@ const DoctorTeleconsultation = () => {
                     </Dropdown>
                     <Dropdown>
                       <Dropdown.Toggle variant="link" id="dropdown-user">
-                        <div className="d-flex align-items-center">
+                        <NavLink to={"/doctorProfile"} className="d-flex align-items-center">
                           <img
                             src="/assets/images/profile.png"
                             alt="Lincoln Philips"
@@ -624,7 +624,7 @@ const DoctorTeleconsultation = () => {
                             <h3 className="user-name mb-0">Lincoln Philips</h3>
                             <span className="user-role">Admin</span>
                           </div>
-                        </div>
+                        </NavLink>
                       </Dropdown.Toggle>
                     </Dropdown>
                   </div>
@@ -680,7 +680,7 @@ const DoctorTeleconsultation = () => {
                   </Dropdown>
                   <Dropdown>
                     <Dropdown.Toggle variant="link" id="dropdown-user">
-                      <div className="d-flex align-items-center">
+                      <NavLink to={"/doctorProfile"} className="d-flex align-items-center">
                         <img
                           src="/assets/images/profile.png"
                           alt="Lincoln Philips"
@@ -690,7 +690,7 @@ const DoctorTeleconsultation = () => {
                           <h3 className="user-name mb-0">Lincoln Philips</h3>
                           <span className="user-role">Admin</span>
                         </div>
-                      </div>
+                      </NavLink>
                     </Dropdown.Toggle>
                   </Dropdown>
                 </div>

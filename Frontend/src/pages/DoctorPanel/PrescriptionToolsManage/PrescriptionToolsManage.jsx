@@ -1,6 +1,6 @@
 import React, { useEffect, useRef, useState } from "react";
 import "./PrescriptionToolsManage.scss";
-import { useLocation, useNavigate } from "react-router-dom";
+import { NavLink, useLocation, useNavigate } from "react-router-dom";
 import { Dropdown, Modal, Tab, Tabs } from "react-bootstrap";
 import DoctorSidebar from "../../../components/DoctorSidebar/DoctorSidebar";
 import { Calendar } from "lucide-react";
@@ -257,7 +257,7 @@ const PrescriptionToolsManage = () => {
                     </Dropdown>
                     <Dropdown>
                       <Dropdown.Toggle variant="link" id="dropdown-user">
-                        <div className="d-flex align-items-center">
+                        <NavLink to={"/doctorProfile"} className="d-flex align-items-center">
                           <img
                             src="/assets/images/profile.png"
                             alt="Lincoln Philips"
@@ -267,7 +267,7 @@ const PrescriptionToolsManage = () => {
                             <h3 className="user-name mb-0">Lincoln Philips</h3>
                             <span className="user-role">Admin</span>
                           </div>
-                        </div>
+                        </NavLink>
                       </Dropdown.Toggle>
                     </Dropdown>
                   </div>
@@ -323,7 +323,7 @@ const PrescriptionToolsManage = () => {
                   </Dropdown>
                   <Dropdown>
                     <Dropdown.Toggle variant="link" id="dropdown-user">
-                      <div className="d-flex align-items-center">
+                      <NavLink to={"/doctorProfile"} className="d-flex align-items-center">
                         <img
                           src="/assets/images/profile.png"
                           alt="Lincoln Philips"
@@ -333,7 +333,7 @@ const PrescriptionToolsManage = () => {
                           <h3 className="user-name mb-0">Lincoln Philips</h3>
                           <span className="user-role">Admin</span>
                         </div>
-                      </div>
+                      </NavLink>
                     </Dropdown.Toggle>
                   </Dropdown>
                 </div>

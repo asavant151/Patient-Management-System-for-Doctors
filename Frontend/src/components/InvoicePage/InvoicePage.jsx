@@ -3,6 +3,7 @@ import { Dropdown, Modal, Button, Form } from "react-bootstrap";
 import "./InvoicePage.scss";
 import PatientSidebar from "../PatientSidebar/PatientSidebar";
 import PaymentSuccessModal from "../modals/PaymentSuccessModal/PaymentSuccessModal";
+import { NavLink } from "react-router-dom";
 
 const InvoicePage = () => {
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
@@ -224,7 +225,7 @@ const InvoicePage = () => {
                   </Dropdown>
                   <Dropdown>
                     <Dropdown.Toggle variant="link" id="dropdown-user">
-                      <div className="d-flex align-items-center">
+                      <NavLink to={"/adminProfile"} className="d-flex align-items-center">
                         <img
                           src="/assets/images/profile.png"
                           alt="Lincoln Philips"
@@ -234,7 +235,7 @@ const InvoicePage = () => {
                           <h3 className="user-name mb-0">Lincoln Philips</h3>
                           <span className="user-role">Admin</span>
                         </div>
-                      </div>
+                      </NavLink>
                     </Dropdown.Toggle>
                   </Dropdown>
                   </div>
@@ -290,7 +291,7 @@ const InvoicePage = () => {
                   </Dropdown>
                   <Dropdown>
                     <Dropdown.Toggle variant="link" id="dropdown-user">
-                      <div className="d-flex align-items-center">
+                      <NavLink to={"/adminProfile"} className="d-flex align-items-center">
                         <img
                           src="/assets/images/profile.png"
                           alt="Lincoln Philips"
@@ -300,7 +301,7 @@ const InvoicePage = () => {
                           <h3 className="user-name mb-0">Lincoln Philips</h3>
                           <span className="user-role">Admin</span>
                         </div>
-                      </div>
+                      </NavLink>
                     </Dropdown.Toggle>
                   </Dropdown>
                 </div>
