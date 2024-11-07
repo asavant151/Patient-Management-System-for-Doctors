@@ -9,22 +9,22 @@ const AuthSlider = () => {
   return (
     <>
       <img
-        src="./assets/images/shape-1.png"
+        src="/assets/images/shape-1.png"
         alt="shape-1"
         className="img-fluid shape_1_img"
       />
       <img
-        src="./assets/images/shape-2.png"
+        src="/assets/images/shape-2.png"
         alt="shape-2"
         className="img-fluid shape_2_img"
       />
       <img
-        src="./assets/images/shape-3.png"
+        src="/assets/images/shape-3.png"
         alt="shape-3"
         className="img-fluid shape_3_img"
       />
       <div className="text-center logo_img">
-        <img src="./assets/images/logo.png" alt="logo" className="img-fluid" />
+        <img src="/assets/images/logo.png" alt="logo" className="img-fluid" />
       </div>
       <div className="auth-slider-area">
         <Swiper
@@ -42,7 +42,7 @@ const AuthSlider = () => {
           <SwiperSlide>
             <div className="slider-img-area">
               <img
-                src="./assets/images/slider_img_1.png"
+                src="/assets/images/slider_img_1.png"
                 className="img-fluid"
                 alt="slider-img"
               />
@@ -57,7 +57,7 @@ const AuthSlider = () => {
           <SwiperSlide>
             <div className="slider-img-area">
               <img
-                src="./assets/images/slider_img_2.png"
+                src="/assets/images/slider_img_2.png"
                 className="img-fluid"
                 alt="slider-img"
               />

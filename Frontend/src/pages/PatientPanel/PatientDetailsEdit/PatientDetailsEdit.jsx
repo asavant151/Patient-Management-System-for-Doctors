@@ -317,7 +317,7 @@ const PatientDetailsEdit = () => {
 
                         <div className="img-upload">
                           <img
-                            src="./assets/images/camera.svg"
+                            src="/assets/images/camera.svg"
                             alt="camera"
                             className="img-fluid"
                           />

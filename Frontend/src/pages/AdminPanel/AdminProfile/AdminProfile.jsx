@@ -30,7 +30,7 @@ const AdminProfile = () => {
   });
 
   const [profileImage, setProfileImage] = useState(
-    "./assets/images/profile-2.png"
+    "/assets/images/profile-2.png"
   );
   const [hospitalName, setHospitalName] = useState(""); // State to hold hospital name
   const [isEditable, setIsEditable] = useState(false);
@@ -480,7 +480,7 @@ const AdminProfile = () => {
                           {isEditable ? (
                             <div className="form-group d-flex align-items-center img-upload">
                               <img
-                                src="./assets/images/camera.svg"
+                                src="/assets/images/camera.svg"
                                 alt="camera"
                                 className="img-fluid"
                               />
@@ -575,7 +575,7 @@ const AdminProfile = () => {
                                 className="edit-btn"
                               >
                                 <img
-                                  src="./assets/images/edit.svg"
+                                  src="/assets/images/edit.svg"
                                   alt="edit"
                                   className="img-fluid me-2"
                                 />
@@ -781,13 +781,13 @@ const AdminProfile = () => {
                                 >
                                   {showPassword ? (
                                     <img
-                                      src="./assets/images/eye-slash.svg"
+                                      src="/assets/images/eye-slash.svg"
                                       alt="eye-slash"
                                       className="img-fluid"
                                     />
                                   ) : (
                                     <img
-                                      src="./assets/images/eye.svg"
+                                      src="/assets/images/eye.svg"
                                       alt="eye"
                                       className="img-fluid"
                                     />
@@ -815,13 +815,13 @@ const AdminProfile = () => {
                                 >
                                   {showPassword2 ? (
                                     <img
-                                      src="./assets/images/eye-slash.svg"
+                                      src="/assets/images/eye-slash.svg"
                                       alt="eye-slash"
                                       className="img-fluid"
                                     />
                                   ) : (
                                     <img
-                                      src="./assets/images/eye.svg"
+                                      src="/assets/images/eye.svg"
                                       alt="eye"
                                       className="img-fluid"
                                     />
@@ -849,13 +849,13 @@ const AdminProfile = () => {
                                 >
                                   {showPassword3 ? (
                                     <img
-                                      src="./assets/images/eye-slash.svg"
+                                      src="/assets/images/eye-slash.svg"
                                       alt="eye-slash"
                                       className="img-fluid"
                                     />
                                   ) : (
                                     <img
-                                      src="./assets/images/eye.svg"
+                                      src="/assets/images/eye.svg"
                                       alt="eye"
                                       className="img-fluid"
                                     />

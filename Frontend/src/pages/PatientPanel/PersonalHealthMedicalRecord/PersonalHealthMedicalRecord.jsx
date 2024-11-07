@@ -11,7 +11,7 @@ const PrescriptionCard = ({ doctor, patientIssue, date, handleDetailnavigate }) 
         <h5 className="mb-0">{doctor}</h5>
         <div className="d-flex align-items-center">
           <button className="btn p-0" onClick={handleDetailnavigate}>
-            <img src="./assets/images/eye-gray.svg" alt="Print" />
+            <img src="/assets/images/eye-gray.svg" alt="Print" />
           </button>
         </div>
       </div>

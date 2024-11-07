@@ -84,7 +84,7 @@ const Otp_screen = () => {
                     <div className="d-flex align-items-center justify-content-between">
                       <div className="mb-3 d-flex align-items-center">
                         <img
-                          src="./assets/images/clock.svg"
+                          src="/assets/images/clock.svg"
                           alt="clock"
                           className="img-fluid me-2"
                         />

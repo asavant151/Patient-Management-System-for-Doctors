@@ -441,7 +441,7 @@ const Dashboard = () => {
                         <div className="col-md-4 col-sm-6 mb-4">
                           <div className="stat-card stat-card-1">
                             <img
-                              src="./assets/images/total-patients.png"
+                              src="/assets/images/total-patients.png"
                               alt="total-patients"
                               className="img-fluid"
                             />
@@ -455,7 +455,7 @@ const Dashboard = () => {
                         <div className="col-md-4 col-sm-6 mb-4">
                           <div className="stat-card stat-card-2">
                             <img
-                              src="./assets/images/total-doctors.png"
+                              src="/assets/images/total-doctors.png"
                               alt="total-doctors"
                               className="img-fluid"
                             />
@@ -469,7 +469,7 @@ const Dashboard = () => {
                         <div className="col-md-4 col-sm-6 mb-4">
                           <div className="stat-card stat-card-3">
                             <img
-                              src="./assets/images/todays-appo.png"
+                              src="/assets/images/todays-appo.png"
                               alt="todays-appo"
                               className="img-fluid"
                             />
@@ -554,7 +554,7 @@ const Dashboard = () => {
                         <h3 className="billing-title">Billing & Payments</h3>
                         <button className="create-btn" onClick={handleCreateBill}>
                           <img
-                            src="./assets/images/add.svg"
+                            src="/assets/images/add.svg"
                             alt="add"
                             className="img-fluid me-2"
                           />
@@ -640,7 +640,7 @@ const Dashboard = () => {
                                 </td>
                                 <td className="action-btn py-3">
                                   <img
-                                    src="./assets/images/eye-blue.svg"
+                                    src="/assets/images/eye-blue.svg"
                                     alt="eye-blue"
                                     className="img-fluid"
                                   />
@@ -787,7 +787,7 @@ const Dashboard = () => {
                                     <tr key={index}>
                                       <td>
                                         <img
-                                          src={`./assets/images/${appointment.icon}`}
+                                          src={`/assets/images/${appointment.icon}`}
                                           alt={appointment.doctorName}
                                           style={{
                                             width: "30px",
@@ -799,7 +799,7 @@ const Dashboard = () => {
                                         {appointment.doctorName}
                                       </td>
                                       <td><img
-                                          src={`./assets/images/${appointment.gender}`}
+                                          src={`/assets/images/${appointment.gender}`}
                                           alt={appointment.doctorName}
                                           style={{
                                             width: "30px",
@@ -821,7 +821,7 @@ const Dashboard = () => {
                                       </td>
                                       <td className="text-center">
                                         <img
-                                          src="./assets/images/eye-blue.svg"
+                                          src="/assets/images/eye-blue.svg"
                                           alt="eye-blue"
                                           className="img-fluid"
                                         />
@@ -863,7 +863,7 @@ const Dashboard = () => {
                                     <tr key={index}>
                                       <td>
                                         <img
-                                          src={`./assets/images/${appointment.icon}`}
+                                          src={`/assets/images/${appointment.icon}`}
                                           alt={appointment.patientName}
                                           style={{
                                             width: "30px",
@@ -894,7 +894,7 @@ const Dashboard = () => {
                                       </td>
                                       <td className="text-center">
                                         <img
-                                          src="./assets/images/eye-blue.svg"
+                                          src="/assets/images/eye-blue.svg"
                                           alt="eye-blue"
                                           className="img-fluid"
                                         />
@@ -945,7 +945,7 @@ const Dashboard = () => {
                                     <tr key={index}>
                                       <td>
                                         <img
-                                          src={`./assets/images/${appointment.icon}`}
+                                          src={`/assets/images/${appointment.icon}`}
                                           alt={appointment.doctorName}
                                           style={{
                                             width: "30px",
@@ -957,7 +957,7 @@ const Dashboard = () => {
                                         {appointment.doctorName}
                                       </td>
                                       <td><img
-                                          src={`./assets/images/${appointment.gender}`}
+                                          src={`/assets/images/${appointment.gender}`}
                                           alt={appointment.doctorName}
                                           style={{
                                             width: "30px",
@@ -979,7 +979,7 @@ const Dashboard = () => {
                                       </td>
                                       <td className="text-center">
                                         <img
-                                          src="./assets/images/eye-blue.svg"
+                                          src="/assets/images/eye-blue.svg"
                                           alt="eye-blue"
                                           className="img-fluid"
                                         />
@@ -1027,7 +1027,7 @@ const Dashboard = () => {
                                     <tr key={index}>
                                       <td>
                                         <img
-                                          src={`./assets/images/${appointment.icon}`}
+                                          src={`/assets/images/${appointment.icon}`}
                                           alt={appointment.patientName}
                                           style={{
                                             width: "30px",
@@ -1058,7 +1058,7 @@ const Dashboard = () => {
                                       </td>
                                       <td className="text-center">
                                         <img
-                                          src="./assets/images/eye-blue.svg"
+                                          src="/assets/images/eye-blue.svg"
                                           alt="eye-blue"
                                           className="img-fluid"
                                         />

@@ -476,8 +476,8 @@ const PatientRegister = () => {
                         <img
                           src={
                             showPassword
-                              ? "./assets/images/eye-slash.svg"
-                              : "./assets/images/eye.svg"
+                              ? "/assets/images/eye-slash.svg"
+                              : "/assets/images/eye.svg"
                           }
                           alt="toggle password"
                           className="img-fluid"
@@ -511,8 +511,8 @@ const PatientRegister = () => {
                         <img
                           src={
                             showConfirmPassword
-                              ? "./assets/images/eye-slash.svg"
-                              : "./assets/images/eye.svg"
+                              ? "/assets/images/eye-slash.svg"
+                              : "/assets/images/eye.svg"
                           }
                           alt="toggle confirm password"
                           className="img-fluid"

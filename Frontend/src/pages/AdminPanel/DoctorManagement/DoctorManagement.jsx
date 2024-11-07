@@ -500,7 +500,7 @@ const DoctorManagement = () => {
                       </td>
                       <td>
                         <img
-                          src={`./assets/images/${doctor.gender}`}
+                          src={`/assets/images/${doctor.gender}`}
                           alt={doctor.firstName}
                           style={{
                             width: "30px",

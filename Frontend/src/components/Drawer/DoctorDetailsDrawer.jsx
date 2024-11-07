@@ -44,7 +44,7 @@ const DoctorDetailsDrawer = ({ open, onClose, doctor }) => {
                     {doctor?.gender === "Male" ? (
                       <>
                         <img
-                          src={`./assets/images/${doctor?.gender}`}
+                          src={`/assets/images/${doctor?.gender}`}
                           alt={doctor?.firstName}
                           style={{
                             width: "30px",
@@ -57,7 +57,7 @@ const DoctorDetailsDrawer = ({ open, onClose, doctor }) => {
                     ) : (
                       <>
                         <img
-                          src={`./assets/images/${doctor?.gender}`}
+                          src={`/assets/images/${doctor?.gender}`}
                           alt={doctor?.firstName}
                           style={{
                             width: "30px",
@@ -155,7 +155,7 @@ const DoctorDetailsDrawer = ({ open, onClose, doctor }) => {
                     {doctor?.gender === "Male" ? (
                       <>
                         <img
-                          src={`./assets/images/${doctor?.gender}`}
+                          src={`/assets/images/${doctor?.gender}`}
                           alt={doctor?.firstName}
                           style={{
                             width: "30px",
@@ -168,7 +168,7 @@ const DoctorDetailsDrawer = ({ open, onClose, doctor }) => {
                     ) : (
                       <>
                         <img
-                          src={`./assets/images/${doctor?.gender}`}
+                          src={`/assets/images/${doctor?.gender}`}
                           alt={doctor?.firstName}
                           style={{
                             width: "30px",

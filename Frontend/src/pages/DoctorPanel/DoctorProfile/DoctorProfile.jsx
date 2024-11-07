@@ -23,7 +23,7 @@ const DoctorProfile = () => {
     country: "",
   });
   const [profileImage, setProfileImage] = useState(
-    "./assets/images/doctor-pic.png"
+    "/assets/images/doctor-pic.png"
   );
   const [imagePreview, setImagePreview] = useState(null);
   const [isEditable, setIsEditable] = useState(false);
@@ -398,7 +398,7 @@ const DoctorProfile = () => {
                         {isEditable ? (
                           <div className="form-group d-flex align-items-center img-upload">
                             <img
-                              src="./assets/images/camera.svg"
+                              src="/assets/images/camera.svg"
                               alt="camera"
                               className="img-fluid"
                             />
@@ -491,7 +491,7 @@ const DoctorProfile = () => {
                               className="edit-btn"
                             >
                               <img
-                                src="./assets/images/edit.svg"
+                                src="/assets/images/edit.svg"
                                 alt="edit"
                                 className="img-fluid me-2"
                               />
@@ -695,13 +695,13 @@ const DoctorProfile = () => {
                               >
                                 {showPassword ? (
                                   <img
-                                    src="./assets/images/eye-slash.svg"
+                                    src="/assets/images/eye-slash.svg"
                                     alt="eye-slash"
                                     className="img-fluid"
                                   />
                                 ) : (
                                   <img
-                                    src="./assets/images/eye.svg"
+                                    src="/assets/images/eye.svg"
                                     alt="eye"
                                     className="img-fluid"
                                   />
@@ -729,13 +729,13 @@ const DoctorProfile = () => {
                               >
                                 {showPassword2 ? (
                                   <img
-                                    src="./assets/images/eye-slash.svg"
+                                    src="/assets/images/eye-slash.svg"
                                     alt="eye-slash"
                                     className="img-fluid"
                                   />
                                 ) : (
                                   <img
-                                    src="./assets/images/eye.svg"
+                                    src="/assets/images/eye.svg"
                                     alt="eye"
                                     className="img-fluid"
                                   />
@@ -763,13 +763,13 @@ const DoctorProfile = () => {
                               >
                                 {showPassword3 ? (
                                   <img
-                                    src="./assets/images/eye-slash.svg"
+                                    src="/assets/images/eye-slash.svg"
                                     alt="eye-slash"
                                     className="img-fluid"
                                   />
                                 ) : (
                                   <img
-                                    src="./assets/images/eye.svg"
+                                    src="/assets/images/eye.svg"
                                     alt="eye"
                                     className="img-fluid"
                                   />

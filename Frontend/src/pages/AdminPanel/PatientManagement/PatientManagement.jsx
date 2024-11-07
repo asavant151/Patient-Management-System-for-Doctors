@@ -655,11 +655,11 @@ const PatientManagement = () => {
           </Tab>
         ))}
       </Tabs>
-      <PatientDetailsModal
+      {/* <PatientDetailsModal
         open={isModalOpen}
         handleClose={() => setIsModalOpen(false)}
         patient={selectedPatient}
-      />
+      /> */}
         </div>
       </div>
       <PatientDetailsModal

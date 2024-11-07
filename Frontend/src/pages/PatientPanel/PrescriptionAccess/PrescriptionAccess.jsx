@@ -23,10 +23,10 @@ const PrescriptionCard = ({
         <h5 className="mb-0">{doctor}</h5>
         <div className="d-flex align-items-center">
           <button className="btn p-0 me-2">
-            <img src="./assets/images/download-icon.svg" alt="Download" />
+            <img src="/assets/images/download-icon.svg" alt="Download" />
           </button>
           <button className="btn p-0" onClick={handlePrescriptionPreview}>
-            <img src="./assets/images/eye-gray.svg" alt="Print" />
+            <img src="/assets/images/eye-gray.svg" alt="Print" />
           </button>
         </div>
       </div>
@@ -49,7 +49,7 @@ const PrescriptionCard = ({
         </div>
         <div className="prescription-images-box mt-3">
           <img
-            src="./assets/images/prescription-placeholder.png"
+            src="/assets/images/prescription-placeholder.png"
             alt="Prescription"
             className="img-fluid"
           />
@@ -104,7 +104,7 @@ const CustomDateRangeSelector = ({
       />
       {startDate && endDate && (
         <button className="btn reset-dates-btn" onClick={resetDates}>
-          <img src="./assets/images/cross-icon.svg" alt="Reset" />
+          <img src="/assets/images/cross-icon.svg" alt="Reset" />
         </button>
       )}
     </div>

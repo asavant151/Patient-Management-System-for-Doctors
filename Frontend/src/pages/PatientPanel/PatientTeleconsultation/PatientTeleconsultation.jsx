@@ -47,7 +47,7 @@ const CustomDateRangeSelector = ({
       />
       {startDate && endDate && (
         <Button variant="link" className="reset-dates-btn" onClick={resetDates}>
-          <img src="./assets/images/cross-icon.svg" alt="Reset" />
+          <img src="/assets/images/cross-icon.svg" alt="Reset" />
         </Button>
       )}
     </div>
