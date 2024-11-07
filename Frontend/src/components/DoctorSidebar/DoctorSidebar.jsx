@@ -72,7 +72,7 @@ const DoctorSidebar = ({ isOpen, sidebarRef, activeLink }) => {
               <li>
                 <Link
                   to={"/prescription-tools/create"}
-                  className={`nav-link ${
+                  className={`${
                     activeLink === "/prescription-tools/create" ||
                     activeLink === "/prescription-tools/create/details"
                       ? "active"
@@ -85,7 +85,7 @@ const DoctorSidebar = ({ isOpen, sidebarRef, activeLink }) => {
               <li>
                 <Link
                   to={"/prescription-tools/manage"}
-                  className={`nav-link ${
+                  className={`${
                     activeLink === "/prescription-tools/manage" ? "active" : ""
                   }`}
                 >

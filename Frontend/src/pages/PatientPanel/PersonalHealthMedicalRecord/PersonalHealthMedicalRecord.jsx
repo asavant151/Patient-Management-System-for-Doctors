@@ -276,13 +276,6 @@ const PersonalHealthMedicalRecord = () => {
                           </div>
                         </div>
                       </Dropdown.Toggle>
-                      <Dropdown.Menu>
-                        <Dropdown.Item href="/adminProfile">Profile</Dropdown.Item>
-                        <Dropdown.Item href="#/settings">
-                          Settings
-                        </Dropdown.Item>
-                        <Dropdown.Item href="#/logout">Logout</Dropdown.Item>
-                      </Dropdown.Menu>
                     </Dropdown>
                   </div>
                 </div>
@@ -349,11 +342,6 @@ const PersonalHealthMedicalRecord = () => {
                         </div>
                       </div>
                     </Dropdown.Toggle>
-                    <Dropdown.Menu>
-                      <Dropdown.Item href="/adminProfile">Profile</Dropdown.Item>
-                      <Dropdown.Item href="#/settings">Settings</Dropdown.Item>
-                      <Dropdown.Item href="#/logout">Logout</Dropdown.Item>
-                    </Dropdown.Menu>
                   </Dropdown>
                 </div>
               </div>

@@ -68,6 +68,7 @@ const Sidebar = ({ isOpen, sidebarRef, activeLink }) => {
               aria-expanded="false"
             >
               Billing And Payments
+              
             </Link>
             <ul
               id="billing"
@@ -76,9 +77,10 @@ const Sidebar = ({ isOpen, sidebarRef, activeLink }) => {
               }`}
             >
               <li>
+              
                 <Link
                   to={"/billing/monitor-billing"}
-                  className={`nav-link ${
+                  className={`${
                     activeLink === "/billing/monitor-billing" ||
                     activeLink === "/billing/pandingbills" ||
                     activeLink === "/billing/monitor-billing/invoice" ||
@@ -92,26 +94,32 @@ const Sidebar = ({ isOpen, sidebarRef, activeLink }) => {
                       : ""
                   }`}
                 >
-                  Monitor Billing
+                <div className="active-indicator">
+                <span className="dot"></span>
+                <span className="line"></span>
+                </div>  Monitor Billing
                 </Link>
               </li>
               <li>
                 <Link
                   to={"/billing/insurance-claims"}
-                  className={`nav-link ${
+                  className={`${
                     activeLink === "/billing/insurance-claims" ||
                     activeLink === "/billing/insurance-claims/Invoice"
                       ? "active"
                       : ""
                   }`}
                 >
-                  Insurance Claims
+                  <div className="active-indicator">
+                <span className="dot"></span>
+                <span className="line"></span>
+                </div> Insurance Claims
                 </Link>
               </li>
               <li>
                 <Link
                   to={"/billing/payment-process"}
-                  className={`nav-link ${
+                  className={`${
                     activeLink === "/billing/payment-process" ||
                     activeLink === "/billing/payment-process/edit" ||
                     activeLink === "/billing/payment-process/invoice"
@@ -119,7 +127,10 @@ const Sidebar = ({ isOpen, sidebarRef, activeLink }) => {
                       : ""
                   }`}
                 >
-                  Payment Process
+                 <div className="active-indicator">
+                <span className="dot"></span>
+                <span className="line"></span>
+                </div> Payment Process
                 </Link>
               </li>
             </ul>

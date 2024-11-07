@@ -67,7 +67,7 @@ const DoctorAppointment = () => {
 
   const doctorAppointmentTableRidrect = () => {
     navigate("/doctorAppointmentTimeSlot");
-  }
+  };
 
   const handleClickOutside = (event) => {
     if (
@@ -151,7 +151,7 @@ const DoctorAppointment = () => {
                 <td>{appointment.patientIssue}</td>
                 <td>{appointment.appointmentDate}</td>
                 <td className="appo-time">{appointment.appointmentTime}</td>
-                <td className="text-center appo-badge">
+                <td className="appo-badge">
                   <span
                     className={`badge badge-${
                       appointment.appointmentType === "Online"
@@ -163,14 +163,20 @@ const DoctorAppointment = () => {
                   </span>
                 </td>
                 <td>
-                  <button className="me-3" onClick={handleCancelAppointment}>
+                  <button
+                    className="bg-transparent me-3"
+                    onClick={handleCancelAppointment}
+                  >
                     <img
                       src="/assets/images/calendar-red-remove.svg"
                       alt="calendar-red-remove"
                       className="img-fluid"
                     />
                   </button>
-                  <button onClick={doctorAppointmentTableRidrect}>
+                  <button
+                    className="bg-transparent"
+                    onClick={doctorAppointmentTableRidrect}
+                  >
                     <img
                       src="/assets/images/calendar-blue-tick.svg"
                       alt="calendar-blue-tick"
@@ -277,7 +283,12 @@ const DoctorAppointment = () => {
                       <Dropdown.Menu className="notification-menu">
                         <div className="notification-header d-flex justify-content-between align-items-center">
                           <span>Notification</span>
-                          <button className="close-btn" onClick={clearNotifications}>&times;</button>
+                          <button
+                            className="close-btn"
+                            onClick={clearNotifications}
+                          >
+                            &times;
+                          </button>
                         </div>
                         {notifications.length > 0 ? (
                           notifications.map((notification) => (
@@ -324,13 +335,6 @@ const DoctorAppointment = () => {
                           </div>
                         </div>
                       </Dropdown.Toggle>
-                      <Dropdown.Menu>
-                        <Dropdown.Item href="/adminProfile">Profile</Dropdown.Item>
-                        <Dropdown.Item href="#/settings">
-                          Settings
-                        </Dropdown.Item>
-                        <Dropdown.Item href="#/logout">Logout</Dropdown.Item>
-                      </Dropdown.Menu>
                     </Dropdown>
                   </div>
                 </div>
@@ -350,7 +354,12 @@ const DoctorAppointment = () => {
                     <Dropdown.Menu className="notification-menu">
                       <div className="notification-header d-flex justify-content-between align-items-center">
                         <span>Notification</span>
-                        <button className="close-btn" onClick={clearNotifications}>&times;</button>
+                        <button
+                          className="close-btn"
+                          onClick={clearNotifications}
+                        >
+                          &times;
+                        </button>
                       </div>
                       {notifications.length > 0 ? (
                         notifications.map((notification) => (
@@ -397,11 +406,6 @@ const DoctorAppointment = () => {
                         </div>
                       </div>
                     </Dropdown.Toggle>
-                    <Dropdown.Menu>
-                      <Dropdown.Item href="/adminProfile">Profile</Dropdown.Item>
-                      <Dropdown.Item href="#/settings">Settings</Dropdown.Item>
-                      <Dropdown.Item href="#/logout">Logout</Dropdown.Item>
-                    </Dropdown.Menu>
                   </Dropdown>
                 </div>
               </div>
@@ -433,7 +437,11 @@ const DoctorAppointment = () => {
                       className="search-icon"
                     />
                   </div>
-                  <button type="button"  onClick={() => setShowDateRangeModal(true)} className="calendar-btn">
+                  <button
+                    type="button"
+                    onClick={() => setShowDateRangeModal(true)}
+                    className="calendar-btn me-md-3 me-0"
+                  >
                     <Calendar size={16} /> Any Date
                   </button>
                   <button type="button" className="clock-btn mt-lg-0 mt-2">
@@ -464,7 +472,11 @@ const DoctorAppointment = () => {
                       className="search-icon"
                     />
                   </div>
-                  <button type="button"  onClick={() => setShowDateRangeModal(true)} className="calendar-btn me-2">
+                  <button
+                    type="button"
+                    onClick={() => setShowDateRangeModal(true)}
+                    className="calendar-btn me-2"
+                  >
                     <Calendar size={16} /> Any Date
                   </button>
                   <button type="button" className="clock-btn">
@@ -495,7 +507,11 @@ const DoctorAppointment = () => {
                       className="search-icon"
                     />
                   </div>
-                  <button type="button" onClick={() => setShowDateRangeModal(true)} className="calendar-btn me-2">
+                  <button
+                    type="button"
+                    onClick={() => setShowDateRangeModal(true)}
+                    className="calendar-btn me-2"
+                  >
                     <Calendar size={16} /> Any Date
                   </button>
                   <button type="button" className="clock-btn">
@@ -521,7 +537,11 @@ const DoctorAppointment = () => {
                       className="search-icon"
                     />
                   </div>
-                  <button type="button" onClick={() => setShowDateRangeModal(true)} className="calendar-btn me-2">
+                  <button
+                    type="button"
+                    onClick={() => setShowDateRangeModal(true)}
+                    className="calendar-btn me-2"
+                  >
                     <Calendar size={16} /> Any Date
                   </button>
                   <button type="button" className="clock-btn">
@@ -534,15 +554,18 @@ const DoctorAppointment = () => {
           </Tabs>
         </div>
       </div>
-      <CancelDoctorAppointment show={showModal} handleClose={handleCloseModal} />
+      <CancelDoctorAppointment
+        show={showModal}
+        handleClose={handleCloseModal}
+      />
       <DateRangeModal
-  show={showDateRangeModal}
-  handleClose={() => setShowDateRangeModal(false)}
-  handleApply={(startDate, endDate) => {
-    console.log("Date range selected:", startDate, endDate);
-    // Add your logic here to handle the selected date range
-  }}
-/>
+        show={showDateRangeModal}
+        handleClose={() => setShowDateRangeModal(false)}
+        handleApply={(startDate, endDate) => {
+          console.log("Date range selected:", startDate, endDate);
+          // Add your logic here to handle the selected date range
+        }}
+      />
     </div>
   );
 };

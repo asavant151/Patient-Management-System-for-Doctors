@@ -4,32 +4,37 @@ import Sidebar from "../../../../components/Sidebar/Sidebar";
 import { useLocation } from "react-router-dom";
 import { Minus } from "lucide-react";
 import "./CreateBill.scss";
+import axios from "axios";
+import toast from "react-hot-toast";
+
+const initialFormState = {
+  patientName: "",
+  phoneNumber: "",
+  gender: "",
+  age: "",
+  doctorName: "",
+  diseaseName: "",
+  description: "",
+  paymentType: "",
+  billDate: "",
+  billTime: "",
+  billNumber: "",
+  discount: "",
+  tax: "",
+  amount: "",
+  totalAmount: "",
+  address: "",
+  insuranceCompany: "",
+  insurancePlan: "",
+  claimAmount: "",
+  claimedAmount: "",
+  prescriptionId: "6712ad98c336ad16fa2364e3"
+};
 
 const CreateBill = () => {
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
   const [isSearchVisible, setIsSearchVisible] = useState(false);
-  const [formData, setFormData] = useState({
-    patientName: "",
-    phoneNumber: "",
-    gender: "",
-    age: "",
-    doctorName: "",
-    diseaseName: "",
-    description: "",
-    paymentType: "",
-    billDate: "",
-    billTime: "",
-    billNumber: "",
-    discount: "",
-    tax: "",
-    amount: "",
-    totalAmount: "",
-    address: "",
-    insuranceCompany: "",
-    insurancePlan: "",
-    claimAmount: "",
-    claimedAmount: "",
-  });
+  const [formData, setFormData] = useState(initialFormState);
 
   const [notifications, setNotifications] = useState([
     {
@@ -112,8 +117,22 @@ const CreateBill = () => {
     setFormData(newFormData);
   };
 
-  const handleSave = () => {
-    console.log("Form Data:", formData); // Log form data to the console
+  const handleSave = async (event) => {
+    event.preventDefault();
+  
+    try {
+      const response = await axios.post(
+        "https://live-bakend.onrender.com/v1/bill/create-bill",
+        formData
+      );
+      console.log(formData, "formData");
+      
+      console.log("Bill created successfully:", response.data);
+      toast.success(response.data.message);
+      setFormData(initialFormState);
+    } catch (error) {
+      toast.error(error);
+    }
   };
 
   const renderField = (key, value) => {
@@ -326,7 +345,7 @@ const CreateBill = () => {
                         </div>
                       </Dropdown.Toggle>
                       <Dropdown.Menu>
-                        <Dropdown.Item href="/adminProfile">Profile</Dropdown.Item>
+                        <Dropdown.Item href="#/profile">Profile</Dropdown.Item>
                         <Dropdown.Item href="#/settings">
                           Settings
                         </Dropdown.Item>
@@ -399,7 +418,7 @@ const CreateBill = () => {
                       </div>
                     </Dropdown.Toggle>
                     <Dropdown.Menu>
-                      <Dropdown.Item href="/adminProfile">Profile</Dropdown.Item>
+                      <Dropdown.Item href="#/profile">Profile</Dropdown.Item>
                       <Dropdown.Item href="#/settings">Settings</Dropdown.Item>
                       <Dropdown.Item href="#/logout">Logout</Dropdown.Item>
                     </Dropdown.Menu>
@@ -415,8 +434,8 @@ const CreateBill = () => {
             <form>
               <div className="row">
                 {Object.entries(formData).map(([key, value]) => (
-                  <div className="col-lg-3 col-md-6 col-12 mb-5">
-                    <div className="form-floating position-relative" key={key}>
+                  <div className="col-lg-3 col-md-6 col-12 mb-5"  key={key}>
+                    <div className="form-floating position-relative">
                       {renderField(key, value)}
                       <label htmlFor={key}>
                         {key.charAt(0).toUpperCase() + key.slice(1)}
@@ -487,4 +506,4 @@ const CreateBill = () => {
   );
 };
 
-export default CreateBill;
+export default CreateBill;
