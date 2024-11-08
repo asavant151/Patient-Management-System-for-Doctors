@@ -1,14 +1,14 @@
 import React, { useEffect, useRef, useState } from "react";
 import { Dropdown } from "react-bootstrap";
 import "./DoctorProfile.scss";
-import { NavLink, useLocation } from "react-router-dom";
+import { useLocation } from "react-router-dom";
 import DoctorSidebar from "../../../components/DoctorSidebar/DoctorSidebar";
 
 const DoctorProfile = () => {
   const [activeSection, setActiveSection] = useState("profile");
-  const [showPassword, setShowPassword] = useState(false);
-  const [showPassword2, setShowPassword2] = useState(false);
-  const [showPassword3, setShowPassword3] = useState(false);
+  const [oldPass, setOldPass] = useState(false);
+  const [newPass, setNewPass] = useState(false);
+  const [confirmPass, setConfirmPass] = useState(false);
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
   const [isSearchVisible, setIsSearchVisible] = useState(false);
   const [profileData, setProfileData] = useState({
@@ -16,50 +16,21 @@ const DoctorProfile = () => {
     lastName: "",
     email: "",
     phoneNumber: "",
-    hospitalName: "",  
+    hospitalName: "",
     gender: "",
     city: "",
     state: "",
     country: "",
   });
   const [profileImage, setProfileImage] = useState(
-    "/assets/images/doctor-pic.png"
+    "./assets/images/doctor-pic.png"
   );
   const [imagePreview, setImagePreview] = useState(null);
   const [isEditable, setIsEditable] = useState(false);
   const sidebarRef = useRef(null);
   const location = useLocation();
 
-  const [notifications, setNotifications] = useState([
-    {
-      id: 1,
-      title: "Change Invoice Theme",
-      description: "Lincoln Philips changed the Invoice Theme.",
-      time: "5 min ago",
-      icon: "theme-icon.svg",
-    },
-    {
-      id: 2,
-      title: "Dr.Bharat",
-      description: "Created a bill by Dr. Bharat.",
-      time: "5 min ago",
-      icon: "theme-icon.svg",
-    },
-    {
-      id: 3,
-      title: "Payment Received",
-      description: "24,668 is the payment done of Miracle Canter.",
-      time: "1:52PM",
-      icon: "payment-received-icon.svg",
-    },
-    {
-      id: 4,
-      title: "Payment Cancelled",
-      description: "24,668 is the payment cancelled of Miracle Canter.",
-      time: "1:52PM",
-      icon: "payment-cancelled-icon.svg",
-    },
-  ]);
+  const [notifications, setNotifications] = useState([]);
 
   const noNotificationImage = "/assets/images/no-notification.png";
 
@@ -72,15 +43,15 @@ const DoctorProfile = () => {
   };
 
   const togglePasswordVisibility = () => {
-    setShowPassword(!showPassword);
+    setOldPass(!oldPass);
   };
 
   const togglePasswordVisibility2 = () => {
-    setShowPassword2(!showPassword2);
+    setNewPass(!newPass);
   };
 
   const togglePasswordVisibility3 = () => {
-    setShowPassword3(!showPassword3);
+    setConfirmPass(!confirmPass);
   };
 
   const toggleSection = (section) => {
@@ -135,24 +106,64 @@ const DoctorProfile = () => {
       setProfileImage(imagePreview);
     }
   };
+  const handleSubmit = async (e) => {
+    e.preventDefault();
 
+    if (newPass !== confirmPass) {
+      alert("New password and confirm password do not match.");
+      return;
+    }
+
+    try {
+      const response = await axios.post(
+        "https://live-bakend.onrender.com/v1/doctor/change-password",
+        {
+          oldpass: oldPass,
+          newpass: newPass,
+          confirmpass: confirmPass,
+          adminId: profileData._id,
+        },
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      );
+
+      if (response?.data?.success) {
+        alert("Password changed successfully!");
+      } else {
+        alert(
+          "Failed to change password: " +
+            (response?.data?.message || "Unknown error")
+        );
+      }
+    } catch (error) {
+      console.error("Error occurred:", error);
+      alert(
+        "Error changing password: " +
+          (error.response?.data?.message || error.message)
+      );
+    }
+  };
   useEffect(() => {
-    const storedData = localStorage.getItem("doctorData");
+    const storedData = localStorage.getItem("user");
     if (storedData) {
       const parsedData = JSON.parse(storedData);
-     
+
       setProfileData({
         firstName: parsedData.firstName || "",
-        lastName: parsedData.lastName || "",  
+        lastName: parsedData.lastName || "",
         email: parsedData.email || "",
         phoneNumber: parsedData.phoneNumber || "",
-        hospitalName: parsedData.hospitalName || "",  
-        gender: parsedData.gender === "1" ? "Male" : "Female",  
+        hospitalName: parsedData.hospitalName || "",
+        gender: parsedData.gender === "1" ? "Male" : "Female",
         city: parsedData.city || "",
         state: parsedData.state || "",
         country: parsedData.country || "",
       });
     }
+    console.log(storedData, "storedData");
 
     document.addEventListener("mousedown", handleClickOutside);
 
@@ -192,7 +203,7 @@ const DoctorProfile = () => {
                   </ol>
                 </nav>
               </div>
-              <div className="col-md-6 col-12 d-lg-flex d-block justify-content-lg-end">
+              <div className="col-md-6 col-12 d-lg-flex d-block justify-content-lg-end header-width">
                 <div className="d-lg-flex d-none search-container me-3 mt-lg-0 mt-3">
                   <input
                     type="text"
@@ -222,84 +233,96 @@ const DoctorProfile = () => {
                     </button>
                   </nav>
                   <div className="d-flex align-items-center justify-content-center">
-                  <button className="btn" onClick={toggleSearch}>
-                    <img
-                      src="/assets/images/search.svg"
-                      alt="search"
-                      className="search-icon"
-                    />
-                  </button>
-                  {isSearchVisible && (
-                    <input
-                      type="text"
-                      className="form-control"
-                      placeholder="Quick Search"
-                      style={{ display: isSearchVisible ? "block" : "none" }}
-                    />
-                  )}
-                  <Dropdown className="notification-dropdown mx-3">
-                    <Dropdown.Toggle
-                      variant="link"
-                      className="notification-toggle"
-                    >
+                    <button className="btn" onClick={toggleSearch}>
                       <img
-                        src="/assets/images/notification-bing.svg"
-                        alt="Notification Icon"
-                        className="img-fluid"
+                        src="/assets/images/search.svg"
+                        alt="search"
+                        className="search-icon"
                       />
-                    </Dropdown.Toggle>
-
-                    <Dropdown.Menu className="notification-menu">
-                      <div className="notification-header d-flex justify-content-between align-items-center">
-                        <span>Notification</span>
-                        <button className="close-btn" onClick={clearNotifications}>&times;</button>
-                      </div>
-                      {notifications.length > 0 ? (
-                        notifications.map((notification) => (
-                          <div
-                            key={notification.id}
-                            className="notification-item d-flex align-items-start"
-                          >
-                            <img
-                              src={`/assets/images/${notification.icon}`}
-                              alt={notification.title}
-                              className="notification-icon"
-                            />
-                            <div className="notification-content">
-                              <h5>{notification.title}</h5>
-                              <p>{notification.description}</p>
-                            </div>
-                            <span className="notification-time">
-                              {notification.time}
-                            </span>
-                          </div>
-                        ))
-                      ) : (
-                        <div className="no-notifications text-center">
-                          <img
-                            src={noNotificationImage}
-                            alt="No Notifications"
-                            className="no-notifications-img"
-                          />
-                        </div>
-                      )}
-                    </Dropdown.Menu>
-                  </Dropdown>
-                  <Dropdown>
-                    <Dropdown.Toggle variant="link" id="dropdown-user">
-                      <NavLink to={"/doctorProfile"} className="d-flex align-items-center">
+                    </button>
+                    {isSearchVisible && (
+                      <input
+                        type="text"
+                        className="form-control"
+                        placeholder="Quick Search"
+                        style={{ display: isSearchVisible ? "block" : "none" }}
+                      />
+                    )}
+                    <Dropdown className="notification-dropdown mx-3">
+                      <Dropdown.Toggle
+                        variant="link"
+                        className="notification-toggle"
+                      >
                         <img
-                          src="/assets/images/profile.png"
-                          alt="Lincoln Philips"
-                          className="profile-pic img-fluid"
+                          src="/assets/images/notification-bing.svg"
+                          alt="Notification Icon"
+                          className="img-fluid"
                         />
-                        <div className="d-none text-start">
-                          <h3 className="user-name mb-0">Lincoln Philips</h3>
-                          <span className="user-role">Admin</span>
+                      </Dropdown.Toggle>
+
+                      <Dropdown.Menu className="notification-menu">
+                        <div className="notification-header d-flex justify-content-between align-items-center">
+                          <span>Notification</span>
+                          <button
+                            className="close-btn"
+                            onClick={clearNotifications}
+                          >
+                            &times;
+                          </button>
                         </div>
-                      </NavLink>
-                    </Dropdown.Toggle>
-                  </Dropdown>
+                        {notifications.length > 0 ? (
+                          notifications.map((notification) => (
+                            <div
+                              key={notification.id}
+                              className="notification-item d-flex align-items-start"
+                            >
+                              <img
+                                src={`/assets/images/${notification.icon}`}
+                                alt={notification.title}
+                                className="notification-icon"
+                              />
+                              <div className="notification-content">
+                                <h5>{notification.title}</h5>
+                                <p>{notification.description}</p>
+                              </div>
+                              <span className="notification-time">
+                                {notification.time}
+                              </span>
+                            </div>
+                          ))
+                        ) : (
+                          <div className="no-notifications text-center">
+                            <img
+                              src={noNotificationImage}
+                              alt="No Notifications"
+                              className="no-notifications-img"
+                            />
+                          </div>
+                        )}
+                      </Dropdown.Menu>
+                    </Dropdown>
+                    <Dropdown>
+                      <Dropdown.Toggle variant="link" id="dropdown-user">
+                        <div className="d-flex align-items-center">
+                          <img
+                            src="/assets/images/profile.png"
+                            alt="Lincoln Philips"
+                            className="profile-pic img-fluid"
+                          />
+                          <div className="d-none text-start">
+                            <h3 className="user-name mb-0">Lincoln Philips</h3>
+                            <span className="user-role">Admin</span>
+                          </div>
+                        </div>
+                      </Dropdown.Toggle>
+                      <Dropdown.Menu>
+                        <Dropdown.Item href="#/profile">Profile</Dropdown.Item>
+                        <Dropdown.Item href="#/settings">
+                          Settings
+                        </Dropdown.Item>
+                        <Dropdown.Item href="#/logout">Logout</Dropdown.Item>
+                      </Dropdown.Menu>
+                    </Dropdown>
                   </div>
                 </div>
                 <div className="d-lg-flex d-none align-items-center">
@@ -318,7 +341,12 @@ const DoctorProfile = () => {
                     <Dropdown.Menu className="notification-menu">
                       <div className="notification-header d-flex justify-content-between align-items-center">
                         <span>Notification</span>
-                        <button className="close-btn" onClick={clearNotifications}>&times;</button>
+                        <button
+                          className="close-btn"
+                          onClick={clearNotifications}
+                        >
+                          &times;
+                        </button>
                       </div>
                       {notifications.length > 0 ? (
                         notifications.map((notification) => (
@@ -353,7 +381,7 @@ const DoctorProfile = () => {
                   </Dropdown>
                   <Dropdown>
                     <Dropdown.Toggle variant="link" id="dropdown-user">
-                      <NavLink to={"/doctorProfile"} className="d-flex align-items-center">
+                      <div className="d-flex align-items-center">
                         <img
                           src="/assets/images/profile.png"
                           alt="Lincoln Philips"
@@ -363,8 +391,13 @@ const DoctorProfile = () => {
                           <h3 className="user-name mb-0">Lincoln Philips</h3>
                           <span className="user-role">Admin</span>
                         </div>
-                      </NavLink>
+                      </div>
                     </Dropdown.Toggle>
+                    <Dropdown.Menu>
+                      <Dropdown.Item href="#/profile">Profile</Dropdown.Item>
+                      <Dropdown.Item href="#/settings">Settings</Dropdown.Item>
+                      <Dropdown.Item href="#/logout">Logout</Dropdown.Item>
+                    </Dropdown.Menu>
                   </Dropdown>
                 </div>
               </div>
@@ -374,7 +407,7 @@ const DoctorProfile = () => {
         <div className="container-fluid doctor-profile-page py-4">
           <h1 className="page-title">Profile Setting</h1>
           <div className="row">
-            <div className="col-lg-12 col-md-4 mt-4">
+            <div className="col-12 mt-4">
               <div className="admin-spacing">
                 <div className="card">
                   <div className="row">
@@ -388,7 +421,7 @@ const DoctorProfile = () => {
                         {isEditable ? (
                           <div className="form-group d-flex align-items-center img-upload">
                             <img
-                              src="/assets/images/camera.svg"
+                              src="./assets/images/camera.svg"
                               alt="camera"
                               className="img-fluid"
                             />
@@ -481,7 +514,7 @@ const DoctorProfile = () => {
                               className="edit-btn"
                             >
                               <img
-                                src="/assets/images/edit.svg"
+                                src="./assets/images/edit.svg"
                                 alt="edit"
                                 className="img-fluid me-2"
                               />
@@ -665,16 +698,18 @@ const DoctorProfile = () => {
                           <p className="admin-content mb-4">
                             To change your password, please fill in the fields
                             below. Your password must contain at least 8
-                            characters, it must also include at least one upper
-                            case letter, one lower case letter, one number and
-                            one special character.
+                            characters, and it must also include at least one
+                            uppercase letter, one lowercase letter, one number,
+                            and one special character.
                           </p>
-                          <form>
+                          <form onSubmit={handleSubmit}>
                             <div className="form-floating mb-3 position-relative">
                               <input
-                                type={showPassword ? "text" : "password"}
+                                type={oldPass ? "text" : "password"}
+                                value={oldPass}
+                                onChange={(e) => setOldPass(e.target.value)}
                                 name="CurrentPassword"
-                                className={"form-control"}
+                                className="form-control"
                                 id="CurrentPassword"
                                 placeholder="Enter Current Password"
                               />
@@ -683,15 +718,15 @@ const DoctorProfile = () => {
                                 className="eye-btn"
                                 onClick={togglePasswordVisibility}
                               >
-                                {showPassword ? (
+                                {oldPass ? (
                                   <img
-                                    src="/assets/images/eye-slash.svg"
+                                    src="./assets/images/eye-slash.svg"
                                     alt="eye-slash"
                                     className="img-fluid"
                                   />
                                 ) : (
                                   <img
-                                    src="/assets/images/eye.svg"
+                                    src="./assets/images/eye.svg"
                                     alt="eye"
                                     className="img-fluid"
                                   />
@@ -706,9 +741,11 @@ const DoctorProfile = () => {
                             </div>
                             <div className="form-floating mb-3 position-relative">
                               <input
-                                type={showPassword2 ? "text" : "password"}
+                                type={newPass ? "text" : "password"}
+                                value={newPass}
+                                onChange={(e) => setNewPass(e.target.value)}
                                 name="newpassword"
-                                className={"form-control"}
+                                className="form-control"
                                 id="newpassword"
                                 placeholder="Enter New Password"
                               />
@@ -717,15 +754,15 @@ const DoctorProfile = () => {
                                 className="eye-btn"
                                 onClick={togglePasswordVisibility2}
                               >
-                                {showPassword2 ? (
+                                {newPass ? (
                                   <img
-                                    src="/assets/images/eye-slash.svg"
+                                    src="./assets/images/eye-slash.svg"
                                     alt="eye-slash"
                                     className="img-fluid"
                                   />
                                 ) : (
                                   <img
-                                    src="/assets/images/eye.svg"
+                                    src="./assets/images/eye.svg"
                                     alt="eye"
                                     className="img-fluid"
                                   />
@@ -740,9 +777,11 @@ const DoctorProfile = () => {
                             </div>
                             <div className="form-floating mb-3 position-relative">
                               <input
-                                type={showPassword3 ? "text" : "password"}
+                                type={confirmPass ? "text" : "password"}
+                                value={confirmPass}
+                                onChange={(e) => setConfirmPass(e.target.value)}
                                 name="ConfirmPassword"
-                                className={"form-control"}
+                                className="form-control"
                                 id="ConfirmPassword"
                                 placeholder="Enter Confirm Password"
                               />
@@ -751,15 +790,15 @@ const DoctorProfile = () => {
                                 className="eye-btn"
                                 onClick={togglePasswordVisibility3}
                               >
-                                {showPassword3 ? (
+                                {confirmPass ? (
                                   <img
-                                    src="/assets/images/eye-slash.svg"
+                                    src="./assets/images/eye-slash.svg"
                                     alt="eye-slash"
                                     className="img-fluid"
                                   />
                                 ) : (
                                   <img
-                                    src="/assets/images/eye.svg"
+                                    src="./assets/images/eye.svg"
                                     alt="eye"
                                     className="img-fluid"
                                   />

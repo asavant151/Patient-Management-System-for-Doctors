@@ -31,6 +31,7 @@ const DoctorLogin = () => {
         }
       );
 
+      localStorage.setItem("user", JSON.stringify(response.data.data)); 
       localStorage.setItem("token", response.data.token);
       localStorage.setItem("refreshToken", response.data.refreshToken);
 
