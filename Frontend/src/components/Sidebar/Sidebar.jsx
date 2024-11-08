@@ -68,7 +68,6 @@ const Sidebar = ({ isOpen, sidebarRef, activeLink }) => {
               aria-expanded="false"
             >
               Billing And Payments
-              
             </Link>
             <ul
               id="billing"
@@ -77,7 +76,6 @@ const Sidebar = ({ isOpen, sidebarRef, activeLink }) => {
               }`}
             >
               <li>
-              
                 <Link
                   to={"/billing/monitor-billing"}
                   className={`${
@@ -94,10 +92,11 @@ const Sidebar = ({ isOpen, sidebarRef, activeLink }) => {
                       : ""
                   }`}
                 >
-                <div className="active-indicator">
-                <span className="dot"></span>
-                <span className="line"></span>
-                </div>  Monitor Billing
+                  <div className="active-indicator">
+                    <span className="dot"></span>
+                    <span className="line"></span>
+                  </div>{" "}
+                  Monitor Billing
                 </Link>
               </li>
               <li>
@@ -111,9 +110,10 @@ const Sidebar = ({ isOpen, sidebarRef, activeLink }) => {
                   }`}
                 >
                   <div className="active-indicator">
-                <span className="dot"></span>
-                <span className="line"></span>
-                </div> Insurance Claims
+                    <span className="dot"></span>
+                    <span className="line"></span>
+                  </div>{" "}
+                  Insurance Claims
                 </Link>
               </li>
               <li>
@@ -127,10 +127,11 @@ const Sidebar = ({ isOpen, sidebarRef, activeLink }) => {
                       : ""
                   }`}
                 >
-                 <div className="active-indicator">
-                <span className="dot"></span>
-                <span className="line"></span>
-                </div> Payment Process
+                  <div className="active-indicator">
+                    <span className="dot"></span>
+                    <span className="line"></span>
+                  </div>{" "}
+                  Payment Process
                 </Link>
               </li>
             </ul>

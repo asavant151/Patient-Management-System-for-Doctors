@@ -2,8 +2,8 @@ import React, { useEffect, useRef, useState } from "react";
 import Sidebar from "../../../components/Sidebar/Sidebar";
 import { Dropdown } from "react-bootstrap";
 import "./AdminProfile.scss";
-import { NavLink, useLocation } from "react-router-dom";
-
+import { json, useLocation } from "react-router-dom";
+import axios from "axios";
 const AdminProfile = () => {
   const [oldPass, setOldPass] = useState("");
   const [newPass, setNewPass] = useState("");
@@ -21,7 +21,7 @@ const AdminProfile = () => {
     last_name: "",
     email: "",
     phone_number: "",
-    hospitalId: "", // Store hospitalId here
+    hospitalId: "", 
     gender: "",
     city: "",
     state: "",
@@ -30,7 +30,7 @@ const AdminProfile = () => {
   });
 
   const [profileImage, setProfileImage] = useState(
-    "/assets/images/profile-2.png"
+    "./assets/images/profile-2.png"
   );
   const [hospitalName, setHospitalName] = useState(""); // State to hold hospital name
   const [isEditable, setIsEditable] = useState(false);
@@ -185,46 +185,60 @@ const AdminProfile = () => {
   };
 
   // Fetch hospital data
-  const fetchHospitalData = async (hospitalId) => {
+  const fetchHospitalData = async () => {
     try {
-      const response = await axios.post(
-        "https://live-bakend.onrender.com/v1/hospital/get-hospital-by-id",
-        { id: hospitalId },
+      
+      const hospitalId = JSON.parse(storedData)?.hospitalId;
+      console.log("Extracted hospitalId:", hospitalId); // Log to confirm the value
+  
+      if (!hospitalId) {
+        console.error("No hospitalId found in stored data.");
+        return;
+      }
+  
+      const response = await axios.get(`https://live-bakend.onrender.com/v1/hospital/get-hospital-by-id/${hospitalId}`,
         {
           headers: {
             Authorization: `Bearer ${token}`,
-          }
+          },
         }
       );
-
+  
       if (response?.data?.success) {
-        setHospitalName(response.data.hospitalName); // Assuming the response contains a hospitalName
+        setHospitalName(response.data.data.hospitalName); 
       } else {
-        console.error("Failed to fetch hospital data: " + (response?.data?.message || "Unknown error"));
+        console.error("Failed to fetch hospital data:", response?.data?.message || "Unknown error");
       }
     } catch (error) {
       console.error("Error fetching hospital data:", error);
     }
   };
+  
+  
+  const storedData = localStorage.getItem("user");
 
   useEffect(() => {
     document.addEventListener("mousedown", handleClickOutside);
 
-    const storedData = localStorage.getItem("user");
+   
     if (storedData) {
       const data = JSON.parse(storedData);
+      
       setProfileData({
         first_name: data.first_name || "",
         last_name: data.last_name || "",
         email: data.email || "",
         phone_number: data.phone_number || "",
-        hospitalId: data.hospitalId || "", // Ensure this matches your data
+        hospitalId: data.hospitalId || "", 
         gender: data.gender || "",
         city: data.city || "",
         state: data.state || "",
         country: data.country || "",
         _id: data._id || "",
       });
+console.log(profileData);
+console.log(data.data);
+
 
       // Fetch hospital name using hospitalId
       if (data.hospitalId) {
@@ -367,7 +381,7 @@ const AdminProfile = () => {
                   </Dropdown>
                   <Dropdown>
                     <Dropdown.Toggle variant="link" id="dropdown-user">
-                      <NavLink to={"/adminProfile"} className="d-flex align-items-center">
+                      <div className="d-flex align-items-center">
                         <img
                           src="/assets/images/profile.png"
                           alt="Lincoln Philips"
@@ -377,8 +391,13 @@ const AdminProfile = () => {
                           <h3 className="user-name mb-0">Lincoln Philips</h3>
                           <span className="user-role">Admin</span>
                         </div>
-                      </NavLink>
+                      </div>
                     </Dropdown.Toggle>
+                    <Dropdown.Menu>
+                      <Dropdown.Item href="#/profile">Profile</Dropdown.Item>
+                      <Dropdown.Item href="#/settings">Settings</Dropdown.Item>
+                      <Dropdown.Item href="#/logout">Logout</Dropdown.Item>
+                    </Dropdown.Menu>
                   </Dropdown>
                   </div>
                 </div>
@@ -433,7 +452,7 @@ const AdminProfile = () => {
                     </Dropdown>
                     <Dropdown>
                       <Dropdown.Toggle variant="link" id="dropdown-user">
-                        <NavLink to={"/adminProfile"} className="d-flex align-items-center">
+                        <div className="d-flex align-items-center">
                           <img
                             src="/assets/images/profile.png"
                             alt="Lincoln Philips"
@@ -443,8 +462,15 @@ const AdminProfile = () => {
                             <h3 className="user-name mb-0">Lincoln Philips</h3>
                             <span className="user-role">Admin</span>
                           </div>
-                        </NavLink>
+                        </div>
                       </Dropdown.Toggle>
+                      <Dropdown.Menu>
+                        <Dropdown.Item href="#/profile">Profile</Dropdown.Item>
+                        <Dropdown.Item href="#/settings">
+                          Settings
+                        </Dropdown.Item>
+                        <Dropdown.Item href="#/logout">Logout</Dropdown.Item>
+                      </Dropdown.Menu>
                     </Dropdown>
                   </div>
                 </div>
@@ -468,7 +494,7 @@ const AdminProfile = () => {
                           {isEditable ? (
                             <div className="form-group d-flex align-items-center img-upload">
                               <img
-                                src="/assets/images/camera.svg"
+                                src="./assets/images/camera.svg"
                                 alt="camera"
                                 className="img-fluid"
                               />
@@ -563,7 +589,7 @@ const AdminProfile = () => {
                                 className="edit-btn"
                               >
                                 <img
-                                  src="/assets/images/edit.svg"
+                                  src="./assets/images/edit.svg"
                                   alt="edit"
                                   className="img-fluid me-2"
                                 />
@@ -738,130 +764,123 @@ const AdminProfile = () => {
                         </div>
 
                         {/* Change Password Section */}
-                        <div
-                          className={`collapse ${
-                            activeSection === "change-password" ? "show" : ""
-                          }`}
-                          id="change-password"
-                        >
-                          <div className="change-password-sec">
-                            <h4 className="admin-title">Change Password</h4>
-                            <p className="admin-content mb-4">
-                              To change your password, please fill in the fields
-                              below. Your password must contain at least 8
-                              characters, it must also include at least one
-                              upper case letter, one lower case letter, one
-                              number and one special character.
-                            </p>
-                            <form>
-                              <div className="form-floating mb-3 position-relative">
-                                <input
-                                  type={showPassword ? "text" : "password"}
-                                  name="CurrentPassword"
-                                  className={"form-control"}
-                                  id="CurrentPassword"
-                                  placeholder="Enter Current Password"
-                                />
-                                <button
-                                  type="button"
-                                  className="eye-btn"
-                                  onClick={togglePasswordVisibility}
-                                >
-                                  {showPassword ? (
-                                    <img
-                                      src="/assets/images/eye-slash.svg"
-                                      alt="eye-slash"
-                                      className="img-fluid"
-                                    />
-                                  ) : (
-                                    <img
-                                      src="/assets/images/eye.svg"
-                                      alt="eye"
-                                      className="img-fluid"
-                                    />
-                                  )}
-                                </button>
-                                <label
-                                  htmlFor="CurrentPassword"
-                                  className="floating-label"
-                                >
-                                  Current Password
-                                </label>
-                              </div>
-                              <div className="form-floating mb-3 position-relative">
-                                <input
-                                  type={showPassword2 ? "text" : "password"}
-                                  name="newpassword"
-                                  className={"form-control"}
-                                  id="newpassword"
-                                  placeholder="Enter New Password"
-                                />
-                                <button
-                                  type="button"
-                                  className="eye-btn"
-                                  onClick={togglePasswordVisibility2}
-                                >
-                                  {showPassword2 ? (
-                                    <img
-                                      src="/assets/images/eye-slash.svg"
-                                      alt="eye-slash"
-                                      className="img-fluid"
-                                    />
-                                  ) : (
-                                    <img
-                                      src="/assets/images/eye.svg"
-                                      alt="eye"
-                                      className="img-fluid"
-                                    />
-                                  )}
-                                </button>
-                                <label
-                                  htmlFor="newpassword"
-                                  className="floating-label"
-                                >
-                                  New Password
-                                </label>
-                              </div>
-                              <div className="form-floating mb-3 position-relative">
-                                <input
-                                  type={showPassword3 ? "text" : "password"}
-                                  name="ConfirmPassword"
-                                  className={"form-control"}
-                                  id="ConfirmPassword"
-                                  placeholder="Enter Confirm Password"
-                                />
-                                <button
-                                  type="button"
-                                  className="eye-btn"
-                                  onClick={togglePasswordVisibility3}
-                                >
-                                  {showPassword3 ? (
-                                    <img
-                                      src="/assets/images/eye-slash.svg"
-                                      alt="eye-slash"
-                                      className="img-fluid"
-                                    />
-                                  ) : (
-                                    <img
-                                      src="/assets/images/eye.svg"
-                                      alt="eye"
-                                      className="img-fluid"
-                                    />
-                                  )}
-                                </button>
-                                <label
-                                  htmlFor="ConfirmPassword"
-                                  className="floating-label"
-                                >
-                                  Confirm Password
-                                </label>
-                              </div>
-                              <button type="submit" className="submit-btn">
-                                Change Password
-                              </button>
-                            </form>
-                          </div>
-                        </div>
+                        
+    <div
+      className={`collapse ${activeSection === "change-password" ? "show" : ""}`}
+      id="change-password"
+    >
+      <div className="change-password-sec">
+        <h4 className="admin-title">Change Password</h4>
+        <p className="admin-content mb-4">
+          To change your password, please fill in the fields below. Your password must contain at least 8 characters, and it must also include at least one uppercase letter, one lowercase letter, one number, and one special character.
+        </p>
+        <form onSubmit={handleSubmit}>
+          <div className="form-floating mb-3 position-relative">
+            <input
+              type={showPassword ? "text" : "password"}
+              value={oldPass}
+              onChange={(e) => setOldPass(e.target.value)}
+              name="CurrentPassword"
+              className="form-control"
+              id="CurrentPassword"
+              placeholder="Enter Current Password"
+            />
+            <button
+              type="button"
+              className="eye-btn"
+              onClick={togglePasswordVisibility}
+            >
+              {showPassword ? (
+                <img
+                  src="./assets/images/eye-slash.svg"
+                  alt="eye-slash"
+                  className="img-fluid"
+                />
+              ) : (
+                <img
+                  src="./assets/images/eye.svg"
+                  alt="eye"
+                  className="img-fluid"
+                />
+              )}
+            </button>
+            <label htmlFor="CurrentPassword" className="floating-label">
+              Current Password
+            </label>
+          </div>
+          <div className="form-floating mb-3 position-relative">
+            <input
+              type={showPassword2 ? "text" : "password"}
+              value={newPass}
+              onChange={(e) => setNewPass(e.target.value)}
+              name="newpassword"
+              className="form-control"
+              id="newpassword"
+              placeholder="Enter New Password"
+            />
+            <button
+              type="button"
+              className="eye-btn"
+              onClick={togglePasswordVisibility2}
+            >
+              {showPassword2 ? (
+                <img
+                  src="./assets/images/eye-slash.svg"
+                  alt="eye-slash"
+                  className="img-fluid"
+                />
+              ) : (
+                <img
+                  src="./assets/images/eye.svg"
+                  alt="eye"
+                  className="img-fluid"
+                />
+              )}
+            </button>
+            <label htmlFor="newpassword" className="floating-label">
+              New Password
+            </label>
+          </div>
+          <div className="form-floating mb-3 position-relative">
+            <input
+              type={showPassword3 ? "text" : "password"}
+              value={confirmPass}
+              onChange={(e) => setConfirmPass(e.target.value)}
+              name="ConfirmPassword"
+              className="form-control"
+              id="ConfirmPassword"
+              placeholder="Enter Confirm Password"
+            />
+            <button
+              type="button"
+              className="eye-btn"
+              onClick={togglePasswordVisibility3}
+            >
+              {showPassword3 ? (
+                <img
+                  src="./assets/images/eye-slash.svg"
+                  alt="eye-slash"
+                  className="img-fluid"
+                />
+              ) : (
+                <img
+                  src="./assets/images/eye.svg"
+                  alt="eye"
+                  className="img-fluid"
+                />
+              )}
+            </button>
+            <label htmlFor="ConfirmPassword" className="floating-label">
+              Confirm Password
+            </label>
+          </div>
+          <button type="submit" className="submit-btn">
+            Change Password
+          </button>
+        </form>
+      </div>
+    </div>
+
 
                         {/* Terms & Conditions Section */}
                         <div
@@ -1100,4 +1119,4 @@ const AdminProfile = () => {
   );
 };
 
-export default AdminProfile;
+export default AdminProfile;
