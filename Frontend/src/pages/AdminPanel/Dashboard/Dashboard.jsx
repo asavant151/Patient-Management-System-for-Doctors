@@ -12,7 +12,7 @@ import {
 import "./Dashboard.scss";
 import Sidebar from "../../../components/Sidebar/Sidebar";
 import PatientsSummary from "../../../components/PatientsSummary/PatientsSummary";
-import { useNavigate } from "react-router-dom";
+import { NavLink, useNavigate } from "react-router-dom";
 import axios from "axios";
 const Dashboard = () => {
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
@@ -453,7 +453,7 @@ const Dashboard = () => {
                       </Dropdown>
                       <Dropdown>
                         <Dropdown.Toggle variant="link" id="dropdown-user">
-                          <div className="d-flex align-items-center">
+                          <NavLink to={"/adminProfile"} className="d-flex align-items-center">
                             <img
                               src="/assets/images/profile.png"
                               alt="Lincoln Philips"
@@ -463,17 +463,8 @@ const Dashboard = () => {
                               <h3 className="user-name mb-0">Martin</h3>
                               <span className="user-role">Admin</span>
                             </div>
-                          </div>
+                          </NavLink>
                         </Dropdown.Toggle>
-                        <Dropdown.Menu>
-                          <Dropdown.Item href="#/profile">
-                            Profile
-                          </Dropdown.Item>
-                          <Dropdown.Item href="#/settings">
-                            Settings
-                          </Dropdown.Item>
-                          <Dropdown.Item href="#/logout">Logout</Dropdown.Item>
-                        </Dropdown.Menu>
                       </Dropdown>
                     </div>
                   </div>
@@ -533,7 +524,7 @@ const Dashboard = () => {
                     </Dropdown>
                     <Dropdown>
                       <Dropdown.Toggle variant="link" id="dropdown-user">
-                        <div className="d-flex align-items-center">
+                        <NavLink to={"/adminProfile"} className="d-flex align-items-center">
                           <img
                             src="/assets/images/profile.png"
                             alt="Lincoln Philips"
@@ -543,15 +534,8 @@ const Dashboard = () => {
                             <h3 className="user-name mb-0">Martin</h3>
                             <span className="user-role">Admin</span>
                           </div>
-                        </div>
+                        </NavLink>
                       </Dropdown.Toggle>
-                      <Dropdown.Menu>
-                        <Dropdown.Item href="#/profile">Profile</Dropdown.Item>
-                        <Dropdown.Item href="#/settings">
-                          Settings
-                        </Dropdown.Item>
-                        <Dropdown.Item href="#/logout">Logout</Dropdown.Item>
-                      </Dropdown.Menu>
                     </Dropdown>
                   </div>
                 </div>
