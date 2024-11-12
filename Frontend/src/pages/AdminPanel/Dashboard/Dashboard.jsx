@@ -93,9 +93,9 @@ const Dashboard = () => {
     }
   };
   const storedData = localStorage.getItem("user");
-  const adminname = JSON.parse(storedData);
+  const adminname = JSON.parse(storedData)
 
-  // const dashbordnm = adminname.firstName + " " + adminname.lastName;
+  const dashbordnm = adminname?.first_name + " " + adminname?.last_name;
   useEffect(() => {
     document.addEventListener("mousedown", handleClickOutside);
 
@@ -157,11 +157,11 @@ const Dashboard = () => {
 
   const handleCreateBill = () => {
     navigate("/billing/monitor-billing/createBill");
-  };
+  }
 
   const handleTodayAppList = () => {
-    navigate("/patient-management");
-  };
+    navigate("/patient-management")
+  }
 
   const doctorAppointments = [
     {
@@ -210,12 +210,10 @@ const Dashboard = () => {
     // Fetch all patients data
     const fetchPatients = async () => {
       try {
-        const response = await axios.get(
-          "https://live-bakend.onrender.com/v1/patient/getAllPatients"
-        );
+        const response = await axios.get('https://live-bakend.onrender.com/v1/patient/getAllPatients');
         setPatientCount(response.data.data.length);
       } catch (error) {
-        console.error("Error fetching patient data:", error);
+        console.error('Error fetching patient data:', error);
       }
     };
 
@@ -224,12 +222,10 @@ const Dashboard = () => {
     // Fetch all doctors data
     const fetchDoctors = async () => {
       try {
-        const response = await axios.get(
-          "https://live-bakend.onrender.com/v1/doctor/getAlldoctors"
-        );
+        const response = await axios.get('https://live-bakend.onrender.com/v1/doctor/getAlldoctors');
         setDoctorCount(response.data.data.length);
       } catch (error) {
-        console.error("Error fetching doctor data:", error);
+        console.error('Error fetching doctor data:', error);
       }
     };
 
@@ -238,22 +234,16 @@ const Dashboard = () => {
     // Fetch today's appointments
     const fetchTodayAppointments = async () => {
       try {
-        const adminId = localStorage.getItem("adminId");
+        const adminId = localStorage.getItem('adminId');
         if (!adminId) {
-          console.error("Admin ID not found in localStorage");
+          console.error('Admin ID not found in localStorage');
           return;
         }
 
-        const response = await axios.get(
-          `https://live-bakend.onrender.com/v1/dashboard-adminFlow/appointement-today?adminId=${adminId}`
-        );
-        setAppointmentCount(
-          response.data.message === "No appointments found for today."
-            ? 0
-            : response.data.data.length || 0
-        );
+        const response = await axios.get(`https://live-bakend.onrender.com/v1/dashboard-adminFlow/appointement-today?adminId=${adminId}`);
+        setAppointmentCount(response.data.message === "No appointments found for today." ? 0 : response.data.data.length || 0);
       } catch (error) {
-        console.error("Error fetching today’s appointments:", error);
+        console.error('Error fetching today’s appointments:', error);
         setAppointmentCount(0);
       }
     };
@@ -263,50 +253,35 @@ const Dashboard = () => {
     // Fetch bills data
     const fetchBills = async () => {
       try {
-        const response = await axios.get(
-          "https://live-bakend.onrender.com/v1/bill/list-bill"
-        );
+        const response = await axios.get('https://live-bakend.onrender.com/v1/bill/list-bill');
         if (response.data.success) {
           setBills(response.data.data);
           const bills = response.data.data;
           setTotalBills(bills.length);
-          setPaidBills(bills.filter((bill) => bill.status === "Paid").length);
-          setPendingBills(
-            bills.filter((bill) => bill.status === "Unpaid").length
-          );
+          setPaidBills(bills.filter(bill => bill.status === "Paid").length);
+          setPendingBills(bills.filter(bill => bill.status === "Unpaid").length);
         }
       } catch (error) {
-        console.error("Error fetching bills:", error);
+        console.error('Error fetching bills:', error);
       }
     };
 
     fetchBills();
+    
   }, []);
 
-  // Fetch patient name by ID
-  const fetchPatientName = async (patientId) => {
-    if (patientNames[patientId]) return; // Avoid duplicate API calls for the same patient
 
-    try {
-      const response = await axios.post(
-        "https://live-bakend.onrender.com/v1/patient/getPatientById",
-        { patientId }
-      );
-      const { first_name, last_name } = response.data.data;
-      setPatientNames((prevNames) => ({
-        ...prevNames,
-        [patientId]: `${first_name} ${last_name}`,
-      }));
-    } catch (error) {
-      console.error(`Error fetching patient name for ID ${patientId}:, error`);
-    }
+  const handleInvoice = (bill) => {
+    console.log(bill,"bsdyfgsdifhdasuh");
+    navigate("/billing/payment-process/invoice", { state: { bill } });
   };
 
   const filterAppointments = (appointments) => {
     return appointments.filter((appointment) => {
-      const matchesSearchQuery = appointment.doctorName
-        .toLowerCase()
-        .includes(searchQuery.toLowerCase());
+      const matchesSearchQuery =
+        appointment.doctorName
+          .toLowerCase()
+          .includes(searchQuery.toLowerCase());
       const matchesFilter =
         filter === "All" || appointment.appointmentType === filter;
       return matchesSearchQuery && matchesFilter;
@@ -331,9 +306,7 @@ const Dashboard = () => {
             <div className="container-fluid">
               <div className="row align-items-center">
                 <div className="col-md-6 col-12 mb-lg-0 mb-3 mobile-screen">
-                  <h3 className="user-name mb-0">
-                    Good Morning ! Martin
-                  </h3>
+                  <h3 className="user-name mb-0">Good Morning ! {dashbordnm ? dashbordnm : "Martin"}</h3>
                   <p className="content">Hope you have a good day</p>
                 </div>
                 <div className="col-md-6 col-12 d-lg-flex d-block justify-content-lg-end">
@@ -373,10 +346,7 @@ const Dashboard = () => {
                   </div>
                   <div className="d-lg-none d-flex align-items-center justify-content-between">
                     <nav className="breadcrumb-container d-block d-lg-none p-0">
-                      <button
-                        className="btn btn-primary"
-                        onClick={toggleSidebar}
-                      >
+                      <button className="btn btn-primary" onClick={toggleSidebar}>
                         <i className="bi bi-text-left"></i>
                       </button>
                     </nav>
@@ -393,9 +363,7 @@ const Dashboard = () => {
                           type="text"
                           className="form-control"
                           placeholder="Quick Search"
-                          style={{
-                            display: isSearchVisible ? "block" : "none",
-                          }}
+                          style={{ display: isSearchVisible ? "block" : "none" }}
                         />
                       )}
                       <Dropdown className="notification-dropdown mx-3">
@@ -413,12 +381,7 @@ const Dashboard = () => {
                         <Dropdown.Menu className="notification-menu">
                           <div className="notification-header d-flex justify-content-between align-items-center">
                             <span>Notification</span>
-                            <button
-                              className="close-btn"
-                              onClick={clearNotifications}
-                            >
-                              &times;
-                            </button>
+                            <button className="close-btn" onClick={clearNotifications}>&times;</button>
                           </div>
                           {notifications.length > 0 ? (
                             notifications.map((notification) => (
@@ -460,7 +423,7 @@ const Dashboard = () => {
                               className="profile-pic img-fluid"
                             />
                             <div className="d-none text-start">
-                              <h3 className="user-name mb-0">Martin</h3>
+                              <h3 className="user-name mb-0">{dashbordnm ? dashbordnm : "Martin"}</h3>
                               <span className="user-role">Admin</span>
                             </div>
                           </NavLink>
@@ -484,12 +447,7 @@ const Dashboard = () => {
                       <Dropdown.Menu className="notification-menu">
                         <div className="notification-header d-flex justify-content-between align-items-center">
                           <span>Notification</span>
-                          <button
-                            className="close-btn"
-                            onClick={clearNotifications}
-                          >
-                            &times;
-                          </button>
+                          <button className="close-btn" onClick={clearNotifications}>&times;</button>
                         </div>
                         {notifications.length > 0 ? (
                           notifications.map((notification) => (
@@ -531,7 +489,7 @@ const Dashboard = () => {
                             className="profile-pic img-fluid"
                           />
                           <div className="d-block text-start">
-                            <h3 className="user-name mb-0">Martin</h3>
+                            <h3 className="user-name mb-0">{dashbordnm ? dashbordnm : "Martin"}</h3>
                             <span className="user-role">Admin</span>
                           </div>
                         </NavLink>
@@ -663,10 +621,7 @@ const Dashboard = () => {
                     <div className="col-xl-5 mt-lg-0 mt-4">
                       <div className="d-flex align-items-center justify-content-between mb-4">
                         <h3 className="billing-title">Billing & Payments</h3>
-                        <button
-                          className="create-btn"
-                          onClick={handleCreateBill}
-                        >
+                        <button className="create-btn" onClick={handleCreateBill}>
                           <img
                             src="./assets/images/add.svg"
                             alt="add"
@@ -677,9 +632,7 @@ const Dashboard = () => {
                       </div>
                       <div className="d-flex align-items-center mb-3">
                         <span className="circle"></span>
-                        <p className="pending-text">
-                          Pending Bills: {pendingBills}
-                        </p>
+                        <p className="pending-text">Pending Bills: {pendingBills}</p>
                       </div>
                       <div className="table-responsive">
                         <table className="table">
@@ -693,41 +646,37 @@ const Dashboard = () => {
                             </tr>
                           </thead>
                           <tbody className="text-center">
-                            {bills.map((bill, index) => (
-                              <tr key={index} className="border-b">
-                                <td className="bill-no py-3">
-                                  {bill.BillNumber || "N/A"}
-                                </td>
-                                <td className="patient-name py-3">
-                                  {patientNames[bill.patient_name] ||
-                                    "Loading..."}
-                                </td>
-                                <td className="disease-name py-3">
-                                  {bill.disease_name || "N/A"}
-                                </td>
-                                <td
-                                  className={`status-btn py-3 ${
-                                    bill.status === "Paid"
-                                      ? "paid-btn"
-                                      : "unpaid-btn"
-                                  }`}
-                                >
-                                  <span>
-                                    {bill.status === "Paid"
-                                      ? "Paid"
-                                      : "Pending"}
-                                  </span>
-                                </td>
-                                <td className="action-btn py-3">
-                                  <img
-                                    src="./assets/images/eye-blue.svg"
-                                    alt="eye-blue"
-                                    className="img-fluid"
-                                  />
-                                </td>
-                              </tr>
-                            ))}
-                          </tbody>
+  {bills.map((bill, index) => {
+    return (
+      <tr key={index} className="border-b">
+        <td className="bill-no py-3">{bill.BillNumber || 'N/A'}</td>
+        <td className="patient-name py-3">
+          {bill.patient_name || 'Unknown Patient'}
+        </td>
+        <td className="patient-name py-3">
+          {bill.disease_name || 'N/A'}
+        </td>
+        <td className={`status-btn py-3 ${bill.status === "Paid" ? "paid-btn" : "unpaid-btn"}`}>
+          <span>{bill.status === "Paid" ? "Paid" : "Pending"}</span>
+        </td>
+        <td className="action-btn py-3">
+          <button
+            className="bg-transparent mx-md-3 mx-0 my-md-0 my-3"
+            onClick={() => handleInvoice(bill)}
+            style={{ border: "none", background: "transparent", cursor: "pointer" }}
+          >
+            <img
+              src="/assets/images/view-icon-box.svg"
+              alt="view-icon-box"
+              className="img-fluid"
+            />
+          </button>
+        </td>
+      </tr>
+    );
+  })}
+</tbody>
+
                         </table>
                       </div>
                     </div>
@@ -738,11 +687,7 @@ const Dashboard = () => {
                         <h5 className="billing-title">
                           Today's Appointments List
                         </h5>
-                        <button
-                          className="view-btn"
-                          type="button"
-                          onClick={handleTodayAppList}
-                        >
+                        <button className="view-btn" type="button" onClick={handleTodayAppList}>
                           View All
                         </button>
                       </div>
@@ -852,11 +797,15 @@ const Dashboard = () => {
                                 <th>Gender</th>
                                 <th>Qualification</th>
                                 <th>Specialty</th>
-                                <th className="text-center">Working Time</th>
+                                <th className="text-center">
+                                  Working Time
+                                </th>
                                 <th className="text-center">
                                   Patient Check Up Time
                                 </th>
-                                <th className="text-center">Break Time</th>
+                                <th className="text-center">
+                                  Break Time
+                                </th>
                                 <th className="text-center">Action</th>
                               </tr>
                             </thead>
@@ -878,18 +827,16 @@ const Dashboard = () => {
                                         />
                                         {appointment.doctorName}
                                       </td>
-                                      <td>
-                                        <img
-                                          src={`./assets/images/${appointment.gender}`}
-                                          alt={appointment.doctorName}
-                                          style={{
-                                            width: "30px",
-                                            height: "30px",
-                                            marginRight: "10px",
-                                          }}
-                                          className="img-fluid"
-                                        />
-                                      </td>
+                                      <td><img
+                                        src={`./assets/images/${appointment.gender}`}
+                                        alt={appointment.doctorName}
+                                        style={{
+                                          width: "30px",
+                                          height: "30px",
+                                          marginRight: "10px",
+                                        }}
+                                        className="img-fluid"
+                                      /></td>
                                       <td>{appointment.qualification}</td>
                                       <td>{appointment.specialty}</td>
                                       <td className="text-center appo-time">
@@ -954,7 +901,7 @@ const Dashboard = () => {
                                           }}
                                           className="img-fluid"
                                         />
-                                        {appointment.patientName}
+                                        {appointment.patient_Name}
                                       </td>
                                       <td>{appointment.patientIssue}</td>
                                       <td>{appointment.doctorName}</td>
@@ -964,12 +911,11 @@ const Dashboard = () => {
                                       </td>
                                       <td className="text-center appo-badge">
                                         <span
-                                          className={`badge badge-${
-                                            appointment.appointmentType ===
+                                          className={`badge badge-${appointment.appointmentType ===
                                             "Onsite"
-                                              ? "primary"
-                                              : "warning"
-                                          }`}
+                                            ? "primary"
+                                            : "warning"
+                                            }`}
                                         >
                                           {appointment.appointmentType}
                                         </span>
@@ -1008,11 +954,15 @@ const Dashboard = () => {
                                 <th>Gender</th>
                                 <th>Qualification</th>
                                 <th>Specialty</th>
-                                <th className="text-center">Working Time</th>
+                                <th className="text-center">
+                                  Working Time
+                                </th>
                                 <th className="text-center">
                                   Patient Check Up Time
                                 </th>
-                                <th className="text-center">Break Time</th>
+                                <th className="text-center">
+                                  Break Time
+                                </th>
                                 <th className="text-center">Action</th>
                               </tr>
                             </thead>
@@ -1034,18 +984,16 @@ const Dashboard = () => {
                                         />
                                         {appointment.doctorName}
                                       </td>
-                                      <td>
-                                        <img
-                                          src={`./assets/images/${appointment.gender}`}
-                                          alt={appointment.doctorName}
-                                          style={{
-                                            width: "30px",
-                                            height: "30px",
-                                            marginRight: "10px",
-                                          }}
-                                          className="img-fluid"
-                                        />
-                                      </td>
+                                      <td><img
+                                        src={`./assets/images/${appointment.gender}`}
+                                        alt={appointment.doctorName}
+                                        style={{
+                                          width: "30px",
+                                          height: "30px",
+                                          marginRight: "10px",
+                                        }}
+                                        className="img-fluid"
+                                      /></td>
                                       <td>{appointment.qualification}</td>
                                       <td>{appointment.specialty}</td>
                                       <td className="text-center appo-time">
@@ -1126,12 +1074,11 @@ const Dashboard = () => {
                                       </td>
                                       <td className="text-center appo-badge">
                                         <span
-                                          className={`badge badge-${
-                                            appointment.appointmentType ===
+                                          className={`badge badge-${appointment.appointmentType ===
                                             "Onsite"
-                                              ? "primary"
-                                              : "warning"
-                                          }`}
+                                            ? "primary"
+                                            : "warning"
+                                            }`}
                                         >
                                           {appointment.appointmentType}
                                         </span>
@@ -1167,4 +1114,4 @@ const Dashboard = () => {
   );
 };
 
-export default Dashboard;
+export default Dashboard;
