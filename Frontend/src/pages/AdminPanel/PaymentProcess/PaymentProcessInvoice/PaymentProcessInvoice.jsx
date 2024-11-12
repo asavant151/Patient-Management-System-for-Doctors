@@ -202,7 +202,7 @@ const PaymentProcessInvoice = () => {
                     <Dropdown>
                       <Dropdown.Toggle variant="link" id="dropdown-user">
                         <NavLink
-                          to={"/adminPanel"}
+                          to={"/adminProfile"}
                           className="d-flex align-items-center"
                         >
                           <img
@@ -276,7 +276,7 @@ const PaymentProcessInvoice = () => {
                   <Dropdown>
                     <Dropdown.Toggle variant="link" id="dropdown-user">
                       <NavLink
-                        to={"/adminPanel"}
+                        to={"/adminProfile"}
                         className="d-flex align-items-center"
                       >
                         <img
