@@ -1,7 +1,7 @@
 import React, { useEffect, useRef, useState } from "react";
 import { Dropdown, Modal, Button } from "react-bootstrap";
 import Sidebar from "../../../components/Sidebar/Sidebar";
-import { useLocation, useNavigate } from "react-router-dom";
+import { NavLink, useLocation, useNavigate } from "react-router-dom";
 import "./PaymentProcess.scss";
 import axios from "axios";
 const PaymentProcess = () => {
@@ -19,13 +19,11 @@ const PaymentProcess = () => {
       status: "Paid",
       date: "2 Jan, 2022",
       time: "4:30 PM",
-    }
-    
+    },
+
     // Add more data as needed
   ]);
   const [notifications, setNotifications] = useState([
-    
-    
     {
       id: 4,
       title: "Payment Cancelled",
@@ -36,7 +34,6 @@ const PaymentProcess = () => {
   ]);
   const [showModal, setShowModal] = useState(false);
   const [searchTerm, setSearchTerm] = useState("");
-
 
   const sidebarRef = useRef(null);
   const location = useLocation();
@@ -177,9 +174,9 @@ const PaymentProcess = () => {
                   />
                 </button>
                 <button
-  className="bg-transparent mx-md-3 mx-0 my-md-0 my-3"
-  onClick={() => handleInvoice(bill)}
->
+                  className="bg-transparent mx-md-3 mx-0 my-md-0 my-3"
+                  onClick={() => handleInvoice(bill)}
+                >
                   <img
                     src="/assets/images/view-icon-box.svg"
                     alt="view-icon-box"
@@ -200,9 +197,6 @@ const PaymentProcess = () => {
       </table>
     </div>
   );
-
- 
-
 
   const renderNoDataFound = () => (
     <div className="text-center py-5">
@@ -348,7 +342,10 @@ const PaymentProcess = () => {
                     </Dropdown>
                     <Dropdown>
                       <Dropdown.Toggle variant="link" id="dropdown-user">
-                        <div className="d-flex align-items-center">
+                        <NavLink
+                          to={"/adminPanel"}
+                          className="d-flex align-items-center"
+                        >
                           <img
                             src="/assets/images/profile.png"
                             alt="Lincoln Philips"
@@ -358,15 +355,8 @@ const PaymentProcess = () => {
                             <h3 className="user-name mb-0">Lincoln Philips</h3>
                             <span className="user-role">Admin</span>
                           </div>
-                        </div>
+                        </NavLink>
                       </Dropdown.Toggle>
-                      <Dropdown.Menu>
-                        <Dropdown.Item href="#/profile">Profile</Dropdown.Item>
-                        <Dropdown.Item href="#/settings">
-                          Settings
-                        </Dropdown.Item>
-                        <Dropdown.Item href="#/logout">Logout</Dropdown.Item>
-                      </Dropdown.Menu>
                     </Dropdown>
                   </div>
                 </div>
@@ -426,7 +416,10 @@ const PaymentProcess = () => {
                   </Dropdown>
                   <Dropdown>
                     <Dropdown.Toggle variant="link" id="dropdown-user">
-                      <div className="d-flex align-items-center">
+                      <NavLink
+                        to={"/adminPanel"}
+                        className="d-flex align-items-center"
+                      >
                         <img
                           src="/assets/images/profile.png"
                           alt="Lincoln Philips"
@@ -436,13 +429,8 @@ const PaymentProcess = () => {
                           <h3 className="user-name mb-0">Lincoln Philips</h3>
                           <span className="user-role">Admin</span>
                         </div>
-                      </div>
+                      </NavLink>
                     </Dropdown.Toggle>
-                    <Dropdown.Menu>
-                      <Dropdown.Item href="#/profile">Profile</Dropdown.Item>
-                      <Dropdown.Item href="#/settings">Settings</Dropdown.Item>
-                      <Dropdown.Item href="#/logout">Logout</Dropdown.Item>
-                    </Dropdown.Menu>
                   </Dropdown>
                 </div>
               </div>
@@ -520,4 +508,4 @@ const PaymentProcess = () => {
   );
 };
 
-export default PaymentProcess;
+export default PaymentProcess;

@@ -9,145 +9,10 @@ const MonitorBilling = () => {
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
   const [isSearchVisible, setIsSearchVisible] = useState(false);
   const [billingData, setBillingData] = useState([
-    // {
-    //   billNumber: "5654",
-    //   patientName: "Alfredo Vaccaro",
-    //   diseaseName: "Colds and Flu",
-    //   phoneNumber: "89564 25462",
-    //   status: "Paid",
-    //   date: "2 Jan, 2022",
-    //   time: "4:30 PM",
-    // },
-    // {
-    //   billNumber: "5654",
-    //   patientName: "Talan Press",
-    //   diseaseName: "Conjunctivitis",
-    //   phoneNumber: "89564 25462",
-    //   status: "Unpaid",
-    //   date: "25 Jan, 2022",
-    //   time: "4:30 PM",
-    // },
-    // {
-    //   billNumber: "5654",
-    //   patientName: "Alfredo Vaccaro",
-    //   diseaseName: "Allergies",
-    //   phoneNumber: "89564 25462",
-    //   status: "Paid",
-    //   date: "5 Jan, 2022",
-    //   time: "4:30 PM",
-    // },
-    // {
-    //   billNumber: "5654",
-    //   patientName: "Giana Press",
-    //   diseaseName: "Colds and Flu",
-    //   phoneNumber: "89564 25462",
-    //   status: "Unpaid",
-    //   date: "2 Jan, 2022",
-    //   time: "4:30 PM",
-    // },
-    // {
-    //   billNumber: "5654",
-    //   patientName: "Nolan Botosh",
-    //   diseaseName: "Diarrhea",
-    //   phoneNumber: "89564 25462",
-    //   status: "Paid",
-    //   date: "6 Jan, 2022",
-    //   time: "4:30 PM",
-    // },
-    // {
-    //   billNumber: "5654",
-    //   patientName: "Alfredo Vaccaro",
-    //   diseaseName: "Colds and Flu",
-    //   phoneNumber: "89564 25462",
-    //   status: "Unpaid",
-    //   date: "20 Jan, 2022",
-    //   time: "4:30 PM",
-    // },
-    // {
-    //   billNumber: "5654",
-    //   patientName: "Rayna Rosser",
-    //   diseaseName: "Mononucleosis",
-    //   phoneNumber: "89564 25462",
-    //   status: "Paid",
-    //   date: "2 Jun, 2022",
-    //   time: "4:30 PM",
-    // },
-    // {
-    //   billNumber: "5654",
-    //   patientName: "Alfredo Vaccaro",
-    //   diseaseName: "Colds and Flu",
-    //   phoneNumber: "89564 25462",
-    //   status: "Paid",
-    //   date: "11 Jan, 2022",
-    //   time: "4:30 PM",
-    // },
-    // {
-    //   billNumber: "5654",
-    //   patientName: "Alfredo Vaccaro",
-    //   diseaseName: "Stomach Aches",
-    //   phoneNumber: "89564 25462",
-    //   status: "Unpaid",
-    //   date: "2 Jan, 2022",
-    //   time: "4:30 PM",
-    // },
-    // {
-    //   billNumber: "5654",
-    //   patientName: "Alfredo Vaccaro",
-    //   diseaseName: "Stomach Aches",
-    //   phoneNumber: "89564 25462",
-    //   status: "Paid",
-    //   date: "2 Jan, 2022",
-    //   time: "4:30 PM",
-    // },
-    // {
-    //   billNumber: "5654",
-    //   patientName: "Rayna Rosser",
-    //   diseaseName: "Mononucleosis",
-    //   phoneNumber: "89564 25462",
-    //   status: "Paid",
-    //   date: "2 Jun, 2022",
-    //   time: "4:30 PM",
-    // },
-    // {
-    //   billNumber: "5654",
-    //   patientName: "Alfredo Vaccaro",
-    //   diseaseName: "Colds and Flu",
-    //   phoneNumber: "89564 25462",
-    //   status: "Paid",
-    //   date: "20 Jan, 2022",
-    //   time: "4:30 PM",
-    // },
-    // Add more data as needed
+
   ]);
   const [notifications, setNotifications] = useState([
-    {
-      id: 1,
-      title: "Change Invoice Theme",
-      description: "Lincoln Philips changed the Invoice Theme.",
-      time: "5 min ago",
-      icon: "theme-icon.svg",
-    },
-    {
-      id: 2,
-      title: "Dr.Bharat",
-      description: "Created a bill by Dr. Bharat.",
-      time: "5 min ago",
-      icon: "theme-icon.svg",
-    },
-    {
-      id: 3,
-      title: "Payment Received",
-      description: "24,668 is the payment done of Miracle Canter.",
-      time: "1:52PM",
-      icon: "payment-received-icon.svg",
-    },
-    {
-      id: 4,
-      title: "Payment Cancelled",
-      description: "24,668 is the payment cancelled of Miracle Canter.",
-      time: "1:52PM",
-      icon: "payment-cancelled-icon.svg",
-    },
+    
   ]);
 
   const noNotificationImage = "/assets/images/no-notification.png";
@@ -160,36 +25,26 @@ const MonitorBilling = () => {
   const [filteredData, setFilteredData] = useState(billingData);
 
   const [error, setError] = useState(null);
-
+  const [bills, setBills] = useState([]);
+  const handleInvoice = (bill) => {
+    navigate("/billing/payment-process/invoice", { state: { bill } });
+  };
   const sidebarRef = useRef(null);
   const location = useLocation();
   const navigate = useNavigate();
   // const [error, setError] = useState(null); // Add this line to your component state
 
-
-  const fetchBillingData = async () => {
-    try {
-        const response = await axios.get('https://live-bakend.onrender.com/v1/bill/list-bill');
-        console.log(response.data, "response");
-
-        // Check if the response was successful and contains billing data
-        if (response.data && response.data.success && response.data.data.length > 0) {
-            setBillingData(response.data.data); // Set billing data
-            setFilteredData(response.data.data); // Initialize filtered data
-        } else {
-            setBillingData([]); // Handle no data scenario
-            setFilteredData([]);
-        }
-    } catch (error) {
-        console.error('Error fetching billing data:', error);
-        setError(error.message); // Handle error scenario
-    }
-};
-
-
   useEffect(() => {
-    fetchBillingData();
+    axios.get('https://live-bakend.onrender.com/v1/bill//list-bill-view')
+      .then(response => {
+        console.log("Fetched data:", response.data); // Log the fetched data
+        setBills(response.data.data ); // Set the bills data
+      })
+      .catch(error => {
+        console.error("There was an error fetching the bills!", error);
+      });
   }, []);
+
 
   useEffect(() => {
     const results = billingData.filter((bill) =>
@@ -235,10 +90,7 @@ const MonitorBilling = () => {
     setSearchTerm(event.target.value);
   };
 
-  const handleInvoice = () => {
-    navigate("/billing/monitor-billing/invoice");
-  }
-
+  
   const handleCreateBill = () => {
     navigate("/billing/monitor-billing/createBill");
   }
@@ -264,21 +116,21 @@ const MonitorBilling = () => {
           </tr>
         </thead>
         <tbody>
-          {filteredData.map((bill, index) => (
+          {bills.map((bill, index) => (
             <tr key={index}>
               <td>{bill.BillNumber}</td>
+              <td>{bill.patient_name}</td>
               <td>{bill.disease_name}</td>
-              <td>{bill.phoneNumber}</td>
               <td>{bill.phoneNumber}</td>
               <td>
                 <span className={`badge ${bill.status === "Paid" ? "bg-success" : "bg-danger"}`}>
                   {bill.status}
                 </span>
               </td>
-              <td>{bill.date}</td>
-              <td>{bill.time}</td>
+              <td>{new Date(bill.BillDate).toLocaleDateString()}</td>
+              <td>{new Date(bill.BillTime).toLocaleTimeString()}</td>
               <td>
-                <button className="bg-transparent" onClick={handleInvoice}>
+                <button className="bg-transparent"  onClick={() => handleInvoice(bill)}>
                   <img src="/assets/images/view-icon-box.svg" alt="view-icon-box" className="img-fluid" />
                 </button>
               </td>
@@ -333,7 +185,7 @@ const MonitorBilling = () => {
                   </ol>
                 </nav>
               </div>
-              <div className="col-md-6 col-12 d-lg-flex d-block justify-content-lg-end header-width">
+              <div className="col-md-6 col-12 d-lg-flex d-block justify-content-lg-end">
                 <div className="d-lg-flex d-none search-container me-3 mt-lg-0 mt-3">
                   <input
                     type="text"
@@ -428,7 +280,7 @@ const MonitorBilling = () => {
                     </Dropdown>
                     <Dropdown>
                       <Dropdown.Toggle variant="link" id="dropdown-user">
-                        <NavLink to={"/adminProfile"} className="d-flex align-items-center">
+                        <NavLink to={"/adminPanel"} className="d-flex align-items-center">
                           <img
                             src="/assets/images/profile.png"
                             alt="Lincoln Philips"
@@ -494,7 +346,7 @@ const MonitorBilling = () => {
                   </Dropdown>
                   <Dropdown>
                     <Dropdown.Toggle variant="link" id="dropdown-user">
-                      <NavLink to={"/adminProfile"} className="d-flex align-items-center">
+                      <NavLink to={"/adminPanel"} className="d-flex align-items-center">
                         <img
                           src="/assets/images/profile.png"
                           alt="Lincoln Philips"
@@ -542,13 +394,17 @@ const MonitorBilling = () => {
           </div>
           <div className="row">
             <div className="col-12">
-             {filteredData.length > 0 ? renderTable() : renderNoDataFound()}
+            {renderTable()}
             </div>
           </div>
         </div>
       </div>
     </div>
+   
+    
+   
+ 
   );
 };
 
-export default MonitorBilling;
+export default MonitorBilling;
