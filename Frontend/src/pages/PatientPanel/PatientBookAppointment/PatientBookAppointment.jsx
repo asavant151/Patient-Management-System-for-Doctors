@@ -4,8 +4,16 @@ import { Form, Button, Modal, Dropdown } from "react-bootstrap";
 import doctors from "../../../Data/doctorData";
 import "./PatientBookAppointment.scss";
 import PatientSidebar from "../../../components/PatientSidebar/PatientSidebar";
-
+import axios from "axios";
 const PatientBookAppointment = () => {
+  const [selectedCountry, setSelectedCountry] = useState("");
+  const [selectedState, setSelectedState] = useState("");
+  const [selectedCity, setSelectedCity] = useState("");
+  const [selectedHospital, setSelectedHospital] = useState("");
+
+  const [loading, setLoading] = useState(true); // Loading state
+  const [error, setError] = useState(null); // Error state
+
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
   const [isSearchVisible, setIsSearchVisible] = useState(false);
   const [selectedDoctor, setSelectedDoctor] = useState(null);
@@ -14,10 +22,54 @@ const PatientBookAppointment = () => {
   const [showModal, setShowModal] = useState(false);
   const [selectedDate, setSelectedDate] = useState("");
   const [selectedTime, setSelectedTime] = useState("");
-
+  const [countries, setCountries] = useState([]);
+  const [states, setStates] = useState([]);
+  const [cities, setCities] = useState([]);
+  const [hospitals, setHospitals] = useState([]);
   const navigate = useNavigate();
   const sidebarRef = useRef(null);
   const location = useLocation();
+  const [selectedSpecialty, setSelectedSpecialty] = useState("");
+  const [selectedAppointmentType, setSelectedAppointmentType] = useState("");
+  const [appointmentType, setAppointmentType] = useState("");
+  const [formData, setFormData] = useState({
+    country: "",
+    state: "",
+    city: "",
+    hospital: "",
+  });
+  const patientdata = JSON.parse(localStorage.getItem("patient"));
+  console.log(patientdata.data, "patient");
+  const patientinfo = patientdata.data;
+  const patientId = patientinfo._id;
+  const handleInputChange = (e) => {
+    const { name, value } = e.target;
+    setFormData((prevData) => ({
+      ...prevData,
+      [name]: value,
+    }));
+
+    if (name === "country") {
+      const selectedCountry = countries.find(
+        (country) => country.name === value
+      );
+      setStates(selectedCountry?.states || []);
+      setFormData((prevData) => ({
+        ...prevData,
+        state: "",
+        city: "",
+      }));
+      setCities([]);
+    }
+
+    if (name === "state") {
+      fetchCities(formData.country, value);
+      setFormData((prevData) => ({
+        ...prevData,
+        city: "",
+      }));
+    }
+  };
 
   const timeSlots = [
     "08 AM",
@@ -31,10 +83,71 @@ const PatientBookAppointment = () => {
     "04 PM",
     "05 PM",
   ];
+  const appointmentTypes = ["General Checkup", "Gynecology", "Pediatrics"];
+  const specialties = ["Cardiology", "Oncology", "Dermatology"];
 
   useEffect(() => {
     updateWeekDays();
   }, [currentDate]);
+
+  useEffect(() => {
+    fetchCountriesAndStates();
+    fetchHospitals();
+    fetchDoctors();
+  }, []);
+  const [doctors, setDoctors] = useState([]);
+
+  const fetchDoctors = async () => {
+    try {
+      const response = await axios.get(
+        "https://live-bakend.onrender.com/v1/doctor/getAlldoctors"
+      );
+      setDoctors(response.data.data); // Store fetched doctor list
+    } catch (error) {
+      console.error("Error fetching doctors:", error);
+    }
+  };
+  const fetchCountriesAndStates = async () => {
+    try {
+      const response = await axios.get(
+        "https://countriesnow.space/api/v0.1/countries/states"
+      );
+      const countryList = response.data.data.map((country) => ({
+        name: country.name,
+        iso3: country.iso3,
+        states: country.states,
+      }));
+      setCountries(countryList);
+    } catch (error) {
+      console.error("Error fetching countries and states:", error);
+    }
+  };
+
+  const fetchCities = async (countryName, stateName) => {
+    try {
+      const response = await axios.post(
+        "https://countriesnow.space/api/v0.1/countries/state/cities",
+        {
+          country: countryName,
+          state: stateName,
+        }
+      );
+      setCities(response.data.data);
+    } catch (error) {
+      console.error("Error fetching cities:", error);
+    }
+  };
+
+  const fetchHospitals = async () => {
+    try {
+      const response = await axios.get(
+        "https://live-bakend.onrender.com/v1/hospital/get-hospitals"
+      );
+      setHospitals(response.data.data);
+    } catch (error) {
+      console.error("Error fetching hospitals:", error);
+    }
+  };
 
   const updateWeekDays = () => {
     const days = [];
@@ -90,8 +203,39 @@ const PatientBookAppointment = () => {
   };
 
   const handleBookAppointment = () => {
-    handleCloseModal();
-    navigate("/invoice");
+    const formatDate = (date) => {
+      const options = { year: "numeric", month: "short", day: "2-digit" };
+      const formattedDate = new Date(date).toLocaleDateString("en-GB", options);
+      return formattedDate.replace(",", "").toLowerCase();
+    };
+    const formattedDate = formatDate(selectedDate);
+
+    const data = {
+      appointmentType, // Ensure appointmentType is set somewhere
+      country: selectedCountry,
+      state: selectedState,
+      city: selectedCity,
+      diseas_name: "Cancer", // Replace with actual input value
+      patient_issue: "Blood cancer", // Replace with actual input value
+      hospitalId: selectedHospital,
+      doctorId: selectedDoctor?._id || "", // Assuming selectedDoctor is set
+      patientId: patientId, // Replace with actual patient ID
+      app_time: selectedTime,
+      app_date: formattedDate,
+      specialist: selectedSpecialty,
+    };
+
+    axios
+      .post(
+        "https://live-bakend.onrender.com/v1/bookappointment/create-appointment-book",
+        data
+      )
+      .then((response) => {
+        alert("Appointment booked successfully!");
+        console.log("Appointment response:", response.data);
+        navigate("/invoice", { state: { appointmentData: data } });
+      })
+      .catch((error) => console.error("Error booking appointment:", error));
   };
 
   const toggleSidebar = () => {
@@ -125,27 +269,6 @@ const PatientBookAppointment = () => {
   }, [isSidebarOpen]);
 
   const [notifications, setNotifications] = useState([
-    {
-      id: 1,
-      title: "Change Invoice Theme",
-      description: "Lincoln Philips changed the Invoice Theme.",
-      time: "5 min ago",
-      icon: "theme-icon.svg",
-    },
-    {
-      id: 2,
-      title: "Dr.Bharat",
-      description: "Created a bill by Dr. Bharat.",
-      time: "5 min ago",
-      icon: "theme-icon.svg",
-    },
-    {
-      id: 3,
-      title: "Payment Received",
-      description: "24,668 is the payment done of Miracle Canter.",
-      time: "1:52PM",
-      icon: "payment-received-icon.svg",
-    },
     {
       id: 4,
       title: "Payment Cancelled",
@@ -191,7 +314,7 @@ const PatientBookAppointment = () => {
                   </ol>
                 </nav>
               </div>
-              <div className="col-md-6 col-12 d-lg-flex d-block justify-content-lg-end header-width">
+              <div className="col-md-6 col-12 d-lg-flex d-block justify-content-lg-end">
                 <div className="d-lg-flex d-none search-container me-3 mt-lg-0 mt-3">
                   <input
                     type="text"
@@ -251,7 +374,12 @@ const PatientBookAppointment = () => {
                       <Dropdown.Menu className="notification-menu">
                         <div className="notification-header d-flex justify-content-between align-items-center">
                           <span>Notification</span>
-                          <button className="close-btn" onClick={clearNotifications}>&times;</button>
+                          <button
+                            className="close-btn"
+                            onClick={clearNotifications}
+                          >
+                            &times;
+                          </button>
                         </div>
                         {notifications.length > 0 ? (
                           notifications.map((notification) => (
@@ -286,7 +414,10 @@ const PatientBookAppointment = () => {
                     </Dropdown>
                     <Dropdown>
                       <Dropdown.Toggle variant="link" id="dropdown-user">
-                        <NavLink to={"/adminProfile"} className="d-flex align-items-center">
+                        <NavLink
+                          to={"/adminProfile"}
+                          className="d-flex align-items-center"
+                        >
                           <img
                             src="/assets/images/profile.png"
                             alt="Lincoln Philips"
@@ -317,7 +448,12 @@ const PatientBookAppointment = () => {
                     <Dropdown.Menu className="notification-menu">
                       <div className="notification-header d-flex justify-content-between align-items-center">
                         <span>Notification</span>
-                        <button className="close-btn" onClick={clearNotifications}>&times;</button>
+                        <button
+                          className="close-btn"
+                          onClick={clearNotifications}
+                        >
+                          &times;
+                        </button>
                       </div>
                       {notifications.length > 0 ? (
                         notifications.map((notification) => (
@@ -352,7 +488,10 @@ const PatientBookAppointment = () => {
                   </Dropdown>
                   <Dropdown>
                     <Dropdown.Toggle variant="link" id="dropdown-user">
-                      <NavLink to={"/adminProfile"} className="d-flex align-items-center">
+                      <NavLink
+                        to={"/adminProfile"}
+                        className="d-flex align-items-center"
+                      >
                         <img
                           src="/assets/images/profile.png"
                           alt="Lincoln Philips"
@@ -374,43 +513,124 @@ const PatientBookAppointment = () => {
           <h4 className="appointment-book-title">Appointment Booking</h4>
           <div className="row mb-4">
             <div className="col-lg-4 col-md-6 mb-3">
-              <select className="form-select">
+              <select
+                className="form-select"
+                onChange={(e) => setSelectedSpecialty(e.target.value)}
+              >
                 <option>Select Specialty</option>
+                {specialties.map((specialty, index) => (
+                  <option key={index} value={specialty}>
+                    {specialty}
+                  </option>
+                ))}
               </select>
             </div>
-            <div className="col-lg-4 col-md-6 mb-3">
-              <select className="form-select">
-                <option>Select Country</option>
+            <div className="col-md-4 mb-3">
+              <select
+                id="country"
+                name="country"
+                className="form-select"
+                value={selectedCountry}
+                onChange={(e) => {
+                  const selectedCountry = e.target.value;
+                  setSelectedCountry(selectedCountry);
+
+                  // Update the states dropdown based on the selected country
+                  const selectedCountryObj = countries.find(
+                    (country) => country.name === selectedCountry
+                  );
+                  setStates(selectedCountryObj?.states || []); // Set states based on selected country
+                  setSelectedState(""); // Reset state when country changes
+                  setSelectedCity(""); // Reset city when country changes
+                }}
+              >
+                <option value="">Select Country</option>
+                {countries.map((country) => (
+                  <option key={country.iso3} value={country.name}>
+                    {country.name}
+                  </option>
+                ))}
               </select>
             </div>
-            <div className="col-lg-4 col-md-6 mb-3">
-              <select className="form-select">
-                <option>Select State</option>
+            <div className="col-md-4 mb-3">
+              <select
+                id="state"
+                name="state"
+                className="form-select"
+                value={selectedState}
+                onChange={(e) => {
+                  const selectedState = e.target.value;
+                  setSelectedState(selectedState);
+                  fetchCities(selectedCountry, selectedState); // Fetch cities based on selected country and state
+                }}
+              >
+                <option value="">Select State</option>
+                {states.map((state) => (
+                  <option key={state.state_code} value={state.name}>
+                    {state.name}
+                  </option>
+                ))}
               </select>
             </div>
-            <div className="col-lg-4 col-md-6 mb-3">
-              <select className="form-select">
-                <option>Select City</option>
+            <div className="col-md-4 mb-3">
+              <select
+                id="city"
+                name="city"
+                className="form-select"
+                value={selectedCity}
+                onChange={(e) => setSelectedCity(e.target.value)}
+              >
+                <option value="">Select City</option>
+                {cities.map((city, index) => (
+                  <option key={index} value={city}>
+                    {city}
+                  </option>
+                ))}
               </select>
             </div>
-            <div className="col-lg-4 col-md-6 mb-3">
-              <select className="form-select">
-                <option>Select Hospital</option>
-              </select>
-            </div>
-            <div className="col-lg-4 col-md-6 mb-3">
-              <select className="form-select" onChange={handleDoctorSelect}>
-                <option>Select Doctor</option>
-                {doctors.map((doc) => (
-                  <option key={doc.id} value={doc.id}>
-                    {doc.name}
+
+            <div className="mb-3">
+              <select
+                id="hospital"
+                name="hospital"
+                className="form-select"
+                value={selectedHospital}
+                onChange={(e) => setSelectedHospital(e.target.value)}
+              >
+                <option value="">Select Hospital</option>
+                {hospitals.map((hospital) => (
+                  <option key={hospital._id} value={hospital._id}>
+                    {hospital.hospital_name || "Unnamed Hospital"}
                   </option>
                 ))}
               </select>
             </div>
             <div className="col-lg-4 col-md-6 mb-3">
-              <select className="form-select">
-                <option>Select Appointment Type</option>
+              <select
+                className="form-select"
+                onChange={(e) =>
+                  setSelectedDoctor(
+                    doctors.find((doctor) => doctor._id === e.target.value)
+                  )
+                }
+              >
+                <option value="">Select a Doctor</option>
+                {doctors.map((doctor) => (
+                  <option key={doctor._id} value={doctor._id}>
+                    {doctor.firstName} - {doctor.specialistType}
+                  </option>
+                ))}
+              </select>
+            </div>
+            <div className="col-lg-4 col-md-6 mb-3">
+              <select
+                className="form-select"
+                value={appointmentType} // Bind value to the state
+                onChange={(e) => setAppointmentType(e.target.value)} // Update state on change
+              >
+                <option value="">Select Appointment Type</option>
+                <option value="Online">Online</option>
+                <option value="Offline">Offline</option>
               </select>
             </div>
           </div>
@@ -587,7 +807,12 @@ const PatientBookAppointment = () => {
         </div>
       </div>
       {/* Appointment Modal */}
-      <Modal centered show={showModal} onHide={handleCloseModal} className="patient-appo-modal">
+      <Modal
+        centered
+        show={showModal}
+        onHide={handleCloseModal}
+        className="patient-appo-modal"
+      >
         <Modal.Header>
           <Modal.Title>Appointment</Modal.Title>
         </Modal.Header>
@@ -615,7 +840,15 @@ const PatientBookAppointment = () => {
               <Form.Label>Appointment Date</Form.Label>
               <Form.Control
                 type="text"
-                value={selectedDate ? selectedDate.toLocaleDateString("en-GB", { day: 'numeric', month: 'long', year: 'numeric' }) : ""}
+                value={
+                  selectedDate
+                    ? selectedDate.toLocaleDateString("en-GB", {
+                        day: "numeric",
+                        month: "long",
+                        year: "numeric",
+                      })
+                    : ""
+                }
                 readOnly
                 className="modal-form-control"
               />

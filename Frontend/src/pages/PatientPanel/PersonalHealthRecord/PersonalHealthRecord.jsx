@@ -3,7 +3,7 @@ import { Link, NavLink, useLocation, useNavigate } from "react-router-dom";
 import { Dropdown } from "react-bootstrap";
 import PatientSidebar from "../../../components/PatientSidebar/PatientSidebar";
 import "./PersonalHealthRecord.scss";
-
+import axios from "axios";
 const PersonalHealthRecord = () => {
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
   const [isSearchVisible, setIsSearchVisible] = useState(false);
@@ -33,7 +33,37 @@ const PersonalHealthRecord = () => {
       closeSidebar();
     }
   };
+  const patientdata = JSON.parse(localStorage.getItem("patient"));
+  console.log( patientdata.data, "patient");
+  const patientinfo= patientdata.data;
+  const patientId = patientinfo._id; 
+  
+  const [medicalHistory, setMedicalHistory] = useState([]);
+ 
 
+  
+ 
+    useEffect(() => {
+      // API call to fetch data
+      const fetchMedicalHistory = async () => {
+        try {
+          const response = await axios.post(
+           ` https://live-bakend.onrender.com/v1/patient-flow-personal-health-record/personal-details-list-medical-prescriptions-views`,
+            { patientId } // Data to be sent in the request body
+          );
+          setMedicalHistory(response.data); 
+          console.log("Medical History:", response.data);
+          // Update state with API response
+        } catch (error) {
+          console.error("Error fetching medical history:", error);
+        }
+      };
+
+      fetchMedicalHistory();
+    }, [patientId]);  
+
+
+  
   useEffect(() => {
     document.addEventListener("mousedown", handleClickOutside);
 
@@ -321,62 +351,62 @@ const PersonalHealthRecord = () => {
                       <div className="row patient-details-box">
                         <div className="col-md-3 col-6 mb-2">
                           <p>
-                            <strong>Name</strong> Marcus Philips
+                            <strong>Name</strong> {patientinfo.first_name + " " + patientinfo.last_name}
                           </p>
                         </div>
                         <div className="col-md-3 col-6 mb-2">
                           <p>
-                            <strong>Number</strong> 99130 44537
+                            <strong>Number</strong> {patientinfo.phone_number}
                           </p>
                         </div>
                         <div className="col-md-3 col-6 mb-2">
                           <p>
-                            <strong>Email</strong> john@gmail.com
+                            <strong>Email</strong> {patientinfo.email}
                           </p>
                         </div>
                         <div className="col-md-3 col-6 mb-2">
                           <p>
-                            <strong>Gender</strong> Male
+                            <strong>Gender</strong> {patientinfo.gender}
                           </p>
                         </div>
                         <div className="col-md-3 col-6 mb-2">
                           <p>
-                            <strong>DOB</strong> 2 Jan, 2022
+                            <strong>DOB</strong> {patientinfo.dob}
                           </p>
                         </div>
                         <div className="col-md-3 col-6 mb-2">
                           <p>
-                            <strong>Age</strong> 20 Years
+                            <strong>Age</strong> {patientinfo.age} Years
                           </p>
                         </div>
                         <div className="col-md-3 col-6 mb-2">
                           <p>
-                            <strong>Blood Group</strong> B+
+                            <strong>Blood Group</strong> {patientinfo.blood_group}
                           </p>
                         </div>
                         <div className="col-md-3 col-6 mb-2">
                           <p>
-                            <strong>Height (cm)</strong> 160
+                            <strong>Height (cm)</strong> {patientinfo.height}
                           </p>
                         </div>
                         <div className="col-md-3 col-6 mb-2">
                           <p>
-                            <strong>Weight (kg)</strong> 50
+                            <strong>Weight (kg)</strong> {patientinfo.weight}
                           </p>
                         </div>
                         <div className="col-md-3 col-6 mb-2">
                           <p>
-                            <strong>Country</strong> India
+                            <strong>Country</strong> {patientinfo.country}
                           </p>
                         </div>
                         <div className="col-md-3 col-6 mb-2">
                           <p>
-                            <strong>State</strong> Gujarat
+                            <strong>State</strong> {patientinfo.state}
                           </p>
                         </div>
                         <div className="col-md-3 col-6 mb-2">
                           <p>
-                            <strong>City</strong> Ahmedabad
+                            <strong>City</strong> {patientinfo.city}
                           </p>
                         </div>
                       </div>
@@ -391,38 +421,41 @@ const PersonalHealthRecord = () => {
             <div className="col-md-6 mb-4">
               <div className="card medical-history-card">
                 <div className="card-body">
-                  <div className="d-flex justify-content-between align-items-center mb-3 border-bottom">
-                    <h5 className="card-title">Medical History</h5>
-                    <Link to={"/personalHealthMedicalHistory"} className="record-link">
-                      View All History
-                    </Link>
+      <div className="d-flex justify-content-between align-items-center mb-3 border-bottom">
+        <h5 className="card-title">Medical History</h5>
+        <Link to="/personalHealthMedicalHistory" className="record-link">
+          View All History
+        </Link>
+      </div>
+      <div className="row">
+        {medicalHistory.length > 0 ? (
+          medicalHistory.map((record, index) => (
+            <div key={index} className="col-md-4 mb-3">
+              <div className="card">
+                <div className="card-body">
+                  <div className="medical-history-header">
+                    <h6 className="card-subtitle">{record.doctorName || "Unknown Doctor"}</h6>
+                    <p className="card-text">
+                      {record.app_date
+                        ? new Date(record.app_date).toLocaleDateString()
+                        : "No Date Available"}
+                    </p>
                   </div>
-                  <div className="row">
-                    {[
-                      "Dulce Schleifer",
-                      "Dulce Workman",
-                      "Miracle Septimus",
-                    ].map((doctor, index) => (
-                      <div key={index} className="col-md-4 mb-3">
-                        <div className="card">
-                          <div className="card-body">
-                            <div className="medical-history-header">
-                              <h6 className="card-subtitle">{doctor}</h6>
-                              <p className="card-text">2 Jan, 2022</p>
-                            </div>
-                            <div className="meidcal-history-content-box">
-                              <p className="card-content-text">Patient Issue</p>
-                              <small className="card-content-disc">
-                                Lorem ipsum dolor sit amet, consectetur
-                                adipiscing elit.
-                              </small>
-                            </div>
-                          </div>
-                        </div>
-                      </div>
-                    ))}
+                  <div className="meidcal-history-content-box">
+                    <p className="card-content-text">{record.disease_name || "No Disease Info"}</p>
+                    <small className="card-content-disc">
+                      {record.additional_notes || "No additional notes"}
+                    </small>
                   </div>
                 </div>
+              </div>
+            </div>
+          ))
+        ) : (
+          <p>No medical history available</p>
+        )}
+      </div>
+    </div>
               </div>
             </div>
 
