@@ -1,9 +1,10 @@
 import React, { useState, useEffect } from "react";
 import AuthSlider from "../../../components/auth-slider/AuthSlider";
 import { Formik, Form, Field, ErrorMessage } from "formik";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
 import "./PatientRegister.scss";
+import toast from "react-hot-toast";
 
 const PatientRegister = () => {
   const [showPassword, setShowPassword] = useState(false);
@@ -13,6 +14,8 @@ const PatientRegister = () => {
   const [states, setStates] = useState([]);
   const [cities, setCities] = useState([]);
   const [hospitals, setHospitals] = useState([]);
+
+  const navigate = useNavigate();
 
   const togglePasswordVisibility = () => setShowPassword(!showPassword);
   const toggleConfirmPasswordVisibility = () =>
@@ -35,6 +38,7 @@ const PatientRegister = () => {
     height: "",
     weight: "",
     birthdate: "",
+    patient_address: "",
     patientAddress: "",
   };
 
@@ -55,6 +59,7 @@ const PatientRegister = () => {
       dob: values.birthdate,
       blood_group: values.bloodgroup,
       weight: values.weight,
+      patient_address: values.patient_address,
       height: values.height,
     };
     console.log(payload);
@@ -65,7 +70,8 @@ const PatientRegister = () => {
         "https://live-bakend.onrender.com/v1/patient/create-patient",
         payload
       );
-      // Optionally, you can redirect or show a success message
+      toast.success("Patient Registration successfull");
+      navigate("/login");
     } catch (error) {
       console.error(
         "Registration error:",
@@ -451,6 +457,25 @@ const PatientRegister = () => {
                       </Field>
                       <ErrorMessage
                         name="hospitalId" // Updated to hospitalId
+                        component="div"
+                        className="invalid-feedback"
+                      />
+                    </div>
+
+                    <div className="form-floating mb-3">
+                      <Field
+                        type="text"
+                        name="patient_address"
+                        className={`form-control ${
+                          errors.patient_address && touched.patient_address
+                            ? "is-invalid"
+                            : ""
+                        }`}
+                        placeholder="Enter Address"
+                      />
+                      <label htmlFor="email">Address</label>
+                      <ErrorMessage
+                        name="patient_address"
                         component="div"
                         className="invalid-feedback"
                       />
