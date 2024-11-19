@@ -127,7 +127,7 @@ const PatientSidebar = ({ isOpen, sidebarRef, activeLink }) => {
               src="/assets/images/calendar-white.svg"
               alt="calendar-white"
               className="img-fluid"
-            />{" "}
+            />
             Appointment
           </button>
         </div>

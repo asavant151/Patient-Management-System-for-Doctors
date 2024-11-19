@@ -539,8 +539,8 @@ const PatientRegister = () => {
                         className="form-check-label"
                         htmlFor="agreeToTerms"
                       >
-                        I agree to the{" "}
-                        <span style={{ color: "blue" }}>Terms</span> and{" "}
+                        I agree to the
+                        <span style={{ color: "blue" }}>Terms</span> and
                         <span style={{ color: "blue" }}>Privacy Policy</span>
                       </label>
                       <ErrorMessage
@@ -556,7 +556,7 @@ const PatientRegister = () => {
                     </button>
 
                     <div className="text-center account-text mt-3">
-                      Already have an account?{" "}
+                      Already have an account?
                       <Link to={"/patient-login"} className="main-link ms-1">
                         Login
                       </Link>

@@ -305,7 +305,7 @@ const PersonalHealthRecord = () => {
                         src="/assets/images/edit.svg"
                         alt="edit"
                         className="img-fluid me-md-2 me-0"
-                      />{" "}
+                      />
                       <span>Edit Profile</span>
                     </button>
                   </div>

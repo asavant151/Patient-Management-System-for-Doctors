@@ -138,8 +138,8 @@ const PatientLogin = () => {
                       Login
                     </button>
                     <div className="text-center account-text mt-3">
-                      Don't have an account?{" "}
-                      <Link to={"patient-register"} className="main-link ms-1">
+                      Don't have an account?
+                      <Link to={"/patient-register"} className="main-link ms-1">
                         Registration
                       </Link>
                     </div>

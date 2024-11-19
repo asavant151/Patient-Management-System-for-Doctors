@@ -375,7 +375,7 @@ const PatientTeleconsultation = () => {
               src="/assets/images/calendar-remove.svg"
               alt="calendar-remove"
               className="img-fluid me-2"
-            />{" "}
+            />
             Cancel
           </button>
 
@@ -388,7 +388,7 @@ const PatientTeleconsultation = () => {
               src="/assets/images/call-calling.svg"
               alt="call-calling"
               className="img-fluid me-2"
-            />{" "}
+            />
             Join Call
           </button>
         </div>
@@ -551,7 +551,7 @@ const PatientTeleconsultation = () => {
               src="/assets/images/calendar-remove.svg"
               alt="calendar-remove"
               className="img-fluid me-2"
-            />{" "}
+            />
             Cancel
           </button>
 
@@ -564,7 +564,7 @@ const PatientTeleconsultation = () => {
               src="/assets/images/call-calling.svg"
               alt="call-calling"
               className="img-fluid me-2"
-            />{" "}
+            />
             Join Call
           </button>
         </div>
@@ -918,7 +918,7 @@ const PatientTeleconsultation = () => {
               src="/assets/images/appointment-yellow.svg"
               alt="appointment-yellow"
               className="img-fluyid me-2"
-            />{" "}
+            />
             This patient wants to meet you
           </div>
           <div className="row mb-2">

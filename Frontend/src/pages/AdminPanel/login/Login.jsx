@@ -129,7 +129,7 @@ const Login = () => {
                         className="invalid-feedback"
                       />
                     </div>
-                    {error && <p className="text-danger">{error}</p>}{" "}
+                    {error && <p className="text-danger">{error}</p>}
                     {/* Show error */}
                     <div className="d-flex align-items-center justify-content-between">
                       <div className="mb-3 form-check">
@@ -156,7 +156,7 @@ const Login = () => {
                       Login
                     </button>
                     <div className="text-center account-text mt-3">
-                      Don't have an account?{" "}
+                      Don't have an account?
                       <Link to={"/register"} className="main-link ms-1">
                         Registration
                       </Link>

@@ -385,7 +385,7 @@ const PendingBills = () => {
                     <div className="bill-card">
                       <div className="bill-status">
                         <span className="bill-number">
-                          Bill No:{" "}
+                          Bill No:
                           <span className="bill-count">{bill.billNumber}</span>
                         </span>
                         <button

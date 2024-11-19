@@ -463,7 +463,7 @@ const PersonalHealthRecordPrescription = () => {
               </div>
               <div className="col-md-6">
                 <p>
-                  <strong>Prescription Date:</strong>{" "}
+                  <strong>Prescription Date:</strong>
                   {new Date().toLocaleDateString()}
                 </p>
                 <p>
@@ -529,7 +529,7 @@ const PersonalHealthRecordPrescription = () => {
             <p>
               Lorem Ipsum is simply dummy text of the printing and typesetting
               industry. Lorem Ipsum has been the industry's standard dummy text
-              ever since the{" "}
+              ever since the
             </p>
           </div>
           <div className="d-flex justify-content-between align-items-center">

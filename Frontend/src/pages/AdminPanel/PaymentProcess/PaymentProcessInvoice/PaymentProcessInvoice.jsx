@@ -326,12 +326,12 @@ const PaymentProcessInvoice = () => {
                   </p>
                   <p className="doctor-info-contentbox">
                     <strong className="doctor-info-title">Bill Date</strong>
-                    <span className="doctor-info-dot">:</span> {bill.date}{" "}
+                    <span className="doctor-info-dot">:</span> {bill.date}
                     {formattedBillDate}
                   </p>
                   <p className="doctor-info-contentbox">
                     <strong className="doctor-info-title">Bill Time</strong>
-                    <span className="doctor-info-dot">:</span> {bill.time}{" "}
+                    <span className="doctor-info-dot">:</span> {bill.time}
                     {formattedBillTime}
                   </p>
                 </div>
@@ -343,7 +343,7 @@ const PaymentProcessInvoice = () => {
                 <div className="col-md-6">
                   <p className="invoice-details-contentbox">
                     <strong className="invoice-details-title">Name</strong>
-                    <span className="invoice-details-dot">:</span>{" "}
+                    <span className="invoice-details-dot">:</span>
                     {bill.patientName} {billData.patient_name}
                   </p>
                   <p className="invoice-details-contentbox">
@@ -365,21 +365,21 @@ const PaymentProcessInvoice = () => {
                     <strong className="invoice-details-title">
                       Disease Name
                     </strong>
-                    <span className="invoice-details-dot">:</span>{" "}
+                    <span className="invoice-details-dot">:</span>
                     {bill.diseaseName} {billData.disease_name}
                   </p>
                   <p className="invoice-details-contentbox">
                     <strong className="invoice-details-title">
                       Phone Number
                     </strong>
-                    <span className="invoice-details-dot">:</span>{" "}
+                    <span className="invoice-details-dot">:</span>
                     {bill.phoneNumber}
                   </p>
                   <p className="invoice-details-contentbox">
                     <strong className="invoice-details-title">
                       Payment Type
                     </strong>
-                    <span className="invoice-details-dot">:</span>{" "}
+                    <span className="invoice-details-dot">:</span>
                     <span className="text-blue">Online</span>
                   </p>
                 </div>

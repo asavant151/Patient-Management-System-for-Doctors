@@ -418,7 +418,7 @@ const PersonalHealthTestReports = () => {
                     src="/assets/images/telecop.png"
                     alt="telecop"
                     className="me-2 img-fluid"
-                  />{" "}
+                  />
                   <small>Accurate | Caring | Instant</small>
                 </p>
               </div>
@@ -429,7 +429,7 @@ const PersonalHealthTestReports = () => {
                   src="/assets/images/phone-icon.png"
                   alt="phone-icon"
                   className="img-fluid test-icon"
-                />{" "}
+                />
                 <small>01234567890 | 09123456789</small>
               </p>
               <p className="mb-0">
@@ -437,7 +437,7 @@ const PersonalHealthTestReports = () => {
                   src="/assets/images/email-icon.png"
                   alt="email-icon"
                   className="img-fluid test-icon"
-                />{" "}
+                />
                 <small>drlogypathlab@drlogy.com</small>
               </p>
             </div>

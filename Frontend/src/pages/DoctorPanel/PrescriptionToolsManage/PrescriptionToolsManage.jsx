@@ -521,7 +521,7 @@ const PrescriptionToolsManage = () => {
                         </td>
                         <td>{patient.date}</td>
                         <td>
-                          {" "}
+                          
                           <span className="badge-time">{patient.time}</span>
                         </td>
                         <td>{patient.age} Years</td>
@@ -602,7 +602,7 @@ const PrescriptionToolsManage = () => {
             </div>
             <div className="col-md-6">
               <p>
-                <strong>Prescription Date:</strong>{" "}
+                <strong>Prescription Date:</strong>
                 {new Date().toLocaleDateString()}
               </p>
               <p>
@@ -668,7 +668,7 @@ const PrescriptionToolsManage = () => {
           <p>
             Lorem Ipsum is simply dummy text of the printing and typesetting
             industry. Lorem Ipsum has been the industry's standard dummy text
-            ever since the{" "}
+            ever since the
           </p>
         </div>
         <div className="d-flex justify-content-between align-items-end">

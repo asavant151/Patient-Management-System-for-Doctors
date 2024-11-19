@@ -460,7 +460,7 @@ const PrescriptionTools = () => {
                 onChange={(date) => setSelectedDate(date)}
                 customInput={
                   <button type="button">
-                    <CalendarDays size={20} />{" "}
+                    <CalendarDays size={20} />
                     {selectedDate.toLocaleDateString("en-US", {
                       day: "numeric",
                       month: "long",

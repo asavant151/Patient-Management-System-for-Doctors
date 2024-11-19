@@ -89,7 +89,7 @@ const Otp_screen = () => {
                           className="img-fluid me-2"
                         />
                         <h6 className="otp-time mb-0">
-                          {`00:${timeLeft < 10 ? `0${timeLeft}` : timeLeft}`}{" "}
+                          {`00:${timeLeft < 10 ? `0${timeLeft}` : timeLeft}`}
                           sec
                         </h6>
                       </div>

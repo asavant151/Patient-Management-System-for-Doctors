@@ -387,7 +387,7 @@ const InvoicePage = () => {
                     <strong className="invoice-details-title">
                       Payment Type
                     </strong>
-                    <span className="invoice-details-dot">:</span>{" "}
+                    <span className="invoice-details-dot">:</span>
                     <span className="text-blue">Insurance</span>
                   </p>
                 </div>

@@ -566,7 +566,7 @@ const CreatePrescription = () => {
                   </div>
                   <div className="col-md-6">
                     <p>
-                      <strong>Prescription Date:</strong>{" "}
+                      <strong>Prescription Date:</strong>
                       {new Date().toLocaleDateString()}
                     </p>
                     <p>

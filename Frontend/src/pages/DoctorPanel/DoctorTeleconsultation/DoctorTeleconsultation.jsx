@@ -387,7 +387,7 @@ const DoctorTeleconsultation = () => {
               src="/assets/images/call-calling.svg"
               alt="call-calling"
               className="img-fluid me-2"
-            />{" "}
+            />
             Join Call
           </button>
           <button
@@ -399,7 +399,7 @@ const DoctorTeleconsultation = () => {
               src="/assets/images/Reschedule.svg"
               alt="Reschedule"
               className="img-fluid me-2"
-            />{" "}
+            />
             Reschedule
           </button>
         </div>
@@ -429,7 +429,7 @@ const DoctorTeleconsultation = () => {
               src="/assets/images/appointment-yellow.svg"
               alt="appointment-yellow"
               className="img-fluyid me-2"
-            />{" "}
+            />
             This patient wants to meet you
           </div>
           <div className="row mb-2">

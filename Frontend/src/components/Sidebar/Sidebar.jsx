@@ -95,7 +95,7 @@ const Sidebar = ({ isOpen, sidebarRef, activeLink }) => {
                   <div className="active-indicator">
                     <span className="dot"></span>
                     <span className="line"></span>
-                  </div>{" "}
+                  </div>
                   Monitor Billing
                 </Link>
               </li>
@@ -112,7 +112,7 @@ const Sidebar = ({ isOpen, sidebarRef, activeLink }) => {
                   <div className="active-indicator">
                     <span className="dot"></span>
                     <span className="line"></span>
-                  </div>{" "}
+                  </div>
                   Insurance Claims
                 </Link>
               </li>
@@ -130,7 +130,7 @@ const Sidebar = ({ isOpen, sidebarRef, activeLink }) => {
                   <div className="active-indicator">
                     <span className="dot"></span>
                     <span className="line"></span>
-                  </div>{" "}
+                  </div>
                   Payment Process
                 </Link>
               </li>
