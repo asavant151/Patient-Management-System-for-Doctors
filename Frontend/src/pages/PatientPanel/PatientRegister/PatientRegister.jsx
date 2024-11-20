@@ -582,7 +582,7 @@ const PatientRegister = () => {
 
                     <div className="text-center account-text mt-3">
                       Already have an account?
-                      <Link to={"/patient-login"} className="main-link ms-1">
+                      <Link to={"/"} className="main-link ms-1">
                         Login
                       </Link>
                     </div>
