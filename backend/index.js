@@ -29,7 +29,9 @@ app.use(cors());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 app.use(express.static(path.resolve(__dirname, `./src/public`)));
+
 app.use("/v1", routes);
+
 app.use("/public/adminImg", express.static(path.join(__dirname, "./src/public/adminImg")));
 
 // Error handler middleware
@@ -56,7 +58,6 @@ io.on('connection', (socket) => {
     console.log('User disconnected:', socket.id);
   });
 });
-
 
 // Start the server
 server.listen(config.port, () => {

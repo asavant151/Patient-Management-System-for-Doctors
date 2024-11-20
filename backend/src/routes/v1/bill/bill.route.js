@@ -13,7 +13,7 @@ const { singleFileUpload } = require("../../../helpers/upload");
 
 
 /* -------------------------- CREATE/SIGNUP DOCTOR ----------- */
-router.post("/create-bill",authenticAdmin, billCreateController.createBill);
+router.post("/create-bill", billCreateController.createBill);
 
 router.get("/list-bill", authenticAdmin,billCreateController.monitorBill);
 router.get("/list-bill-search-patient", authenticAdmin,billCreateController.searchPatient);

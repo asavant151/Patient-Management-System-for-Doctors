@@ -1,0 +1,4628 @@
+{
+	"info": {
+		"_postman_id": "694ca801-c65d-479f-9672-f8d8a30bf3b4",
+		"name": "patient-management-app-system",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "28824899"
+	},
+	"item": [
+		{
+			"name": "hospital",
+			"item": [
+				{
+					"name": "create-hospital-admin-side",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"hospital_name\":\"krishna-hospital\",\r\n    \"hospital_adress\":\"23/B, xyz scoiety near zoo\",\r\n    \"country\":\"india\",\r\n    \"state\":\"gujrat\",\r\n    \"city\":\"surat\",\r\n    \"zip_code\":\"BDS395006\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:9500/v1/hospital/create-hospital",
+							"host": [
+								"localhost"
+							],
+							"port": "9500",
+							"path": [
+								"v1",
+								"hospital",
+								"create-hospital"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "admin",
+			"item": [
+				{
+					"name": "dashboard",
+					"item": [
+						{
+							"name": "appointment",
+							"item": [
+								{
+									"name": "pending-not undersatndsearch appointment",
+									"item": [
+										{
+											"name": "appointment-today-search",
+											"protocolProfileBehavior": {
+												"disableBodyPruning": true
+											},
+											"request": {
+												"method": "GET",
+												"header": [],
+												"body": {
+													"mode": "raw",
+													"raw": "{\r\n    \"adminId\":\"670e1d74fcad8422baf7df43\"\r\n}",
+													"options": {
+														"raw": {
+															"language": "json"
+														}
+													}
+												},
+												"url": {
+													"raw": "localhost:9500/v1/dashboard-adminFlow/appointement-today-search?doctorName=charlie",
+													"host": [
+														"localhost"
+													],
+													"port": "9500",
+													"path": [
+														"v1",
+														"dashboard-adminFlow",
+														"appointement-today-search"
+													],
+													"query": [
+														{
+															"key": "patientName",
+															"value": "indrjit",
+															"disabled": true
+														},
+														{
+															"key": "doctorName",
+															"value": "charlie"
+														}
+													]
+												}
+											},
+											"response": []
+										},
+										{
+											"name": "upcomming-appointment Copy",
+											"protocolProfileBehavior": {
+												"disableBodyPruning": true
+											},
+											"request": {
+												"method": "GET",
+												"header": [],
+												"body": {
+													"mode": "raw",
+													"raw": "{\r\n    \"adminId\":\"670e1d74fcad8422baf7df43\"\r\n}",
+													"options": {
+														"raw": {
+															"language": "json"
+														}
+													}
+												},
+												"url": {
+													"raw": "localhost:9500/v1/dashboard-adminFlow/appointement-upcomming",
+													"host": [
+														"localhost"
+													],
+													"port": "9500",
+													"path": [
+														"v1",
+														"dashboard-adminFlow",
+														"appointement-upcomming"
+													]
+												}
+											},
+											"response": []
+										},
+										{
+											"name": "previous appointment Copy",
+											"protocolProfileBehavior": {
+												"disableBodyPruning": true
+											},
+											"request": {
+												"method": "GET",
+												"header": [],
+												"body": {
+													"mode": "raw",
+													"raw": "{\r\n    \"adminId\":\"670e1d74fcad8422baf7df43\"\r\n}",
+													"options": {
+														"raw": {
+															"language": "json"
+														}
+													}
+												},
+												"url": {
+													"raw": "localhost:9500/v1/dashboard-adminFlow/appointement-previous",
+													"host": [
+														"localhost"
+													],
+													"port": "9500",
+													"path": [
+														"v1",
+														"dashboard-adminFlow",
+														"appointement-previous"
+													]
+												}
+											},
+											"response": []
+										},
+										{
+											"name": "cancel-appointment Copy",
+											"protocolProfileBehavior": {
+												"disableBodyPruning": true
+											},
+											"request": {
+												"method": "GET",
+												"header": [],
+												"body": {
+													"mode": "raw",
+													"raw": "{\r\n    \"adminId\":\"670e1d74fcad8422baf7df43\"\r\n}",
+													"options": {
+														"raw": {
+															"language": "json"
+														}
+													}
+												},
+												"url": {
+													"raw": "localhost:9500/v1/dashboard-adminFlow/appointement-cancel",
+													"host": [
+														"localhost"
+													],
+													"port": "9500",
+													"path": [
+														"v1",
+														"dashboard-adminFlow",
+														"appointement-cancel"
+													]
+												}
+											},
+											"response": []
+										}
+									]
+								},
+								{
+									"name": "appointment-today",
+									"protocolProfileBehavior": {
+										"disableBodyPruning": true
+									},
+									"request": {
+										"method": "GET",
+										"header": [],
+										"body": {
+											"mode": "raw",
+											"raw": "{\r\n    \"adminId\":\"670e1d74fcad8422baf7df43\"\r\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "localhost:9500/v1/dashboard-adminFlow/appointement-today?adminId=670e1d74fcad8422baf7df43",
+											"host": [
+												"localhost"
+											],
+											"port": "9500",
+											"path": [
+												"v1",
+												"dashboard-adminFlow",
+												"appointement-today"
+											],
+											"query": [
+												{
+													"key": "adminId",
+													"value": "670e1d74fcad8422baf7df43"
+												}
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "upcomming-appointment",
+									"protocolProfileBehavior": {
+										"disableBodyPruning": true
+									},
+									"request": {
+										"method": "GET",
+										"header": [],
+										"body": {
+											"mode": "raw",
+											"raw": "{\r\n    \"adminId\":\"670e1d74fcad8422baf7df43\"\r\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "localhost:9500/v1/dashboard-adminFlow/appointement-upcomming",
+											"host": [
+												"localhost"
+											],
+											"port": "9500",
+											"path": [
+												"v1",
+												"dashboard-adminFlow",
+												"appointement-upcomming"
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "previous appointment",
+									"protocolProfileBehavior": {
+										"disableBodyPruning": true
+									},
+									"request": {
+										"method": "GET",
+										"header": [],
+										"body": {
+											"mode": "raw",
+											"raw": "{\r\n    \"adminId\":\"670e1d74fcad8422baf7df43\"\r\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "localhost:9500/v1/dashboard-adminFlow/appointement-previous",
+											"host": [
+												"localhost"
+											],
+											"port": "9500",
+											"path": [
+												"v1",
+												"dashboard-adminFlow",
+												"appointement-previous"
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "cancel-appointment",
+									"protocolProfileBehavior": {
+										"disableBodyPruning": true
+									},
+									"request": {
+										"method": "GET",
+										"header": [],
+										"body": {
+											"mode": "raw",
+											"raw": "{\r\n    \"adminId\":\"670e1d74fcad8422baf7df43\"\r\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "localhost:9500/v1/dashboard-adminFlow/appointement-cancel",
+											"host": [
+												"localhost"
+											],
+											"port": "9500",
+											"path": [
+												"v1",
+												"dashboard-adminFlow",
+												"appointement-cancel"
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "appointement-patient-detail",
+									"protocolProfileBehavior": {
+										"disableBodyPruning": true
+									},
+									"request": {
+										"method": "GET",
+										"header": [],
+										"body": {
+											"mode": "raw",
+											"raw": "{\r\n    \"appointmentId\":\"67128a0c39ee053642e3cbf6\"\r\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "localhost:9500/v1/dashboard-adminFlow/appointement-wise-patient-detail-id",
+											"host": [
+												"localhost"
+											],
+											"port": "9500",
+											"path": [
+												"v1",
+												"dashboard-adminFlow",
+												"appointement-wise-patient-detail-id"
+											]
+										}
+									},
+									"response": []
+								}
+							]
+						},
+						{
+							"name": "doctor-management",
+							"item": [
+								{
+									"name": "search-docotor-and-patient-list",
+									"request": {
+										"auth": {
+											"type": "bearer",
+											"bearer": [
+												{
+													"key": "token",
+													"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NmZlYmJlYTZmODE3MGQ0NWFjMGU0MzYiLCJlbWFpbCI6InJhZGhlQDMyMWdtYWlsLmNvbSIsImlhdCI6MTcyODA2MTg0OCwiZXhwIjoxNzI4MDYyNzQ4fQ.VBMpNnEnUyUtTxuN6D0kXcKKe3mWeLsmmdZUwRQfvcY",
+													"type": "string"
+												}
+											]
+										},
+										"method": "GET",
+										"header": [],
+										"url": {
+											"raw": "localhost:9500/v1/dashboard-admin/search-doctor-and-patient-list?query=ch",
+											"host": [
+												"localhost"
+											],
+											"port": "9500",
+											"path": [
+												"v1",
+												"dashboard-admin",
+												"search-doctor-and-patient-list"
+											],
+											"query": [
+												{
+													"key": "query",
+													"value": "ch"
+												}
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "search doctor by admin",
+									"request": {
+										"method": "GET",
+										"header": [],
+										"url": {
+											"raw": "localhost:9500/v1/dashboard-adminFlow/doctor-list-search-doctor?query=ch",
+											"host": [
+												"localhost"
+											],
+											"port": "9500",
+											"path": [
+												"v1",
+												"dashboard-adminFlow",
+												"doctor-list-search-doctor"
+											],
+											"query": [
+												{
+													"key": "query",
+													"value": "ch"
+												}
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "doctor own details",
+									"protocolProfileBehavior": {
+										"disableBodyPruning": true
+									},
+									"request": {
+										"method": "GET",
+										"header": [],
+										"body": {
+											"mode": "raw",
+											"raw": "{\r\n    \"adminId\":\"670e1d74fcad8422baf7df43\",\r\n    \"doctorId\":\"670e212bfcad8422baf7df4a\"\r\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "localhost:9500/v1/dashboard-adminFlow/doctor-list-id",
+											"host": [
+												"localhost"
+											],
+											"port": "9500",
+											"path": [
+												"v1",
+												"dashboard-adminFlow",
+												"doctor-list-id"
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "delete-doctor-by-admin",
+									"request": {
+										"method": "DELETE",
+										"header": [],
+										"body": {
+											"mode": "raw",
+											"raw": "{\r\n    \"adminId\":\"670e1d74fcad8422baf7df43\",\r\n    \"doctorId\":\"6712c12f79298b0012082325\"\r\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "localhost:9500/v1/dashboard-adminFlow/doctor-list-delete",
+											"host": [
+												"localhost"
+											],
+											"port": "9500",
+											"path": [
+												"v1",
+												"dashboard-adminFlow",
+												"doctor-list-delete"
+											]
+										}
+									},
+									"response": []
+								}
+							]
+						},
+						{
+							"name": "count",
+							"item": [
+								{
+									"name": "patint count",
+									"request": {
+										"method": "GET",
+										"header": [],
+										"url": {
+											"raw": "localhost:9500/v1/dashboard-adminFlow/dashboard-patient-count-month-week",
+											"host": [
+												"localhost"
+											],
+											"port": "9500",
+											"path": [
+												"v1",
+												"dashboard-adminFlow",
+												"dashboard-patient-count-month-week"
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "patint count new-old-total",
+									"request": {
+										"method": "GET",
+										"header": [],
+										"url": {
+											"raw": "localhost:9500/v1/dashboard-adminFlow/dashboard-patient-count-new-old",
+											"host": [
+												"localhost"
+											],
+											"port": "9500",
+											"path": [
+												"v1",
+												"dashboard-adminFlow",
+												"dashboard-patient-count-new-old"
+											]
+										}
+									},
+									"response": []
+								}
+							]
+						},
+						{
+							"name": "main-count",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "localhost:9500/v1/dashboard-adminFlow/dashboard-main-count",
+									"host": [
+										"localhost"
+									],
+									"port": "9500",
+									"path": [
+										"v1",
+										"dashboard-adminFlow",
+										"dashboard-main-count"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "create-admin",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"first_name\":\"ram\",\r\n    \"last_name\":\"raghukul\",\r\n    \"phone_number\":\"9825094224\",\r\n    \"country\":\"india\",\r\n    \"state\":\"gujrat\",\r\n    \"city\":\"surat\",\r\n    \"email\":\"sheladiyavibha0667@gmail.com\",\r\n    \"password\":\"1234@Radhe\",\r\n    \"confirmPassword\":\"1234@Radhe\",\r\n    \"hospitalId\":\"670e1d52fcad8422baf7df40\",\r\n    \"agree\":true\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:9500/v1/admin/create-admin",
+							"host": [
+								"localhost"
+							],
+							"port": "9500",
+							"path": [
+								"v1",
+								"admin",
+								"create-admin"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "login-admin",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InNoZWxhZGl5YXZpYmhhMDY2N0BnbWFpbC5jb20iLCJleHAiOjE3MjkwNjQ2OTIsImlhdCI6MTcyODk3ODI5Mn0.bQ2CwnaIYM4tWNf_a8Z8jXfE6m_dbuybyCbhmEgQSIg",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \r\n    \"identifier\":\"sheladiyavibha0667@gmail.com\",\r\n        \"password\":\"1234@Radhe\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:9500/v1/admin/admin-login",
+							"host": [
+								"localhost"
+							],
+							"port": "9500",
+							"path": [
+								"v1",
+								"admin",
+								"admin-login"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "forgot-password-admin",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"email\":\"sheladiyavibha0667@gmail.com\",\r\n    // \"phone_number\":9067706336,\r\n    \"first_name\":\"radhe\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:9500/v1/admin/forgot-pass",
+							"host": [
+								"localhost"
+							],
+							"port": "9500",
+							"path": [
+								"v1",
+								"admin",
+								"forgot-pass"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "otp-verify",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n     \"email\":\"sheladiyavibha0667@gmail.com\",\r\n    //  \"phone_number\":9078654332,\r\n     \"otp\":\"342974\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:9500/v1/admin/verify-otp",
+							"host": [
+								"localhost"
+							],
+							"port": "9500",
+							"path": [
+								"v1",
+								"admin",
+								"verify-otp"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "reset-password",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"adminId\":\"6706e44c042b9446bd14b340\",\r\n    \"newPassword\":\"321@Radhe\",\r\n    \"confirmPassword\":\"321@Radhe\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:9500/v1/admin/reset-password",
+							"host": [
+								"localhost"
+							],
+							"port": "9500",
+							"path": [
+								"v1",
+								"admin",
+								"reset-password"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "change-password",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NmZkOWVlODA4ZGRlZGIxNzdmOTc2MDMiLCJlbWFpbCI6InNoZWxhZGl5YXZpYmhhMDY2N0BnbWFpbC5jb20iLCJpYXQiOjE3Mjc5MDQ1NjksImV4cCI6MTcyNzkwNDYyOX0.0sQ0t1ypdk_dL_y1ZendSHsjz0GV-aj7TIPAFaZnCJE",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"oldpass\":\"1234\",\r\n    \"newpass\":\"1234\",\r\n    \"confirmpass\":\"1234\",\r\n    \"adminId\":\"66fd9ee808ddedb177f97603\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:9500/v1/admin/change-password",
+							"host": [
+								"localhost"
+							],
+							"port": "9500",
+							"path": [
+								"v1",
+								"admin",
+								"change-password"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "update-admin",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NmZlYmJlYTZmODE3MGQ0NWFjMGU0MzYiLCJlbWFpbCI6InJhZGhlQDMyMWdtYWlsLmNvbSIsImlhdCI6MTcyNzk4Mzc1OSwiZXhwIjoxNzI3OTgzODE5fQ.psa9Kxr4AfovZZkOIfm8FkomBxZ5fz_OBEetPEVsDmQ",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "first_name",
+									"value": "krishan",
+									"type": "text"
+								},
+								{
+									"key": "last_name",
+									"value": "gokul",
+									"type": "text"
+								},
+								{
+									"key": "email",
+									"value": "gopi@321gmail.com",
+									"type": "text"
+								},
+								{
+									"key": "phone_number",
+									"value": " 9067706336",
+									"type": "text"
+								},
+								{
+									"key": "country",
+									"value": "india",
+									"type": "text"
+								},
+								{
+									"key": "state",
+									"value": "maharshtra",
+									"type": "text"
+								},
+								{
+									"key": "city",
+									"value": "mathura",
+									"type": "text"
+								},
+								{
+									"key": "hospitalId",
+									"value": "66fd9e04273ad5a4a3b57cbc",
+									"type": "text"
+								},
+								{
+									"key": "gender",
+									"value": "1",
+									"type": "text"
+								},
+								{
+									"key": "image",
+									"type": "file",
+									"src": "/C:/Users/Admin/Desktop/vibhu/VIBHUADHARCARD.jpg"
+								},
+								{
+									"key": "adminId",
+									"value": "66ff033124ab159437066000",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "localhost:9500/v1/admin/update-admin-profile",
+							"host": [
+								"localhost"
+							],
+							"port": "9500",
+							"path": [
+								"v1",
+								"admin",
+								"update-admin-profile"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "delete-doctor-by-admin",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NmZlYmJlYTZmODE3MGQ0NWFjMGU0MzYiLCJlbWFpbCI6InJhZGhlQDMyMWdtYWlsLmNvbSIsImlhdCI6MTcyNzk3OTU0OCwiZXhwIjoxNzI3OTc5NjA4fQ.Yot973EESbA4imyyRjbV4mgsbsukU2Miv-zsfO-yW_A",
+									"type": "string"
+								}
+							]
+						},
+						"method": "DELETE",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"adminid\":\"66fd9ee808ddedb177f97603\",\r\n    \"doctorId\":\"66ff0f0e8a35bd5839458120\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:9500/v1/admin/delete-doc-by-admin",
+							"host": [
+								"localhost"
+							],
+							"port": "9500",
+							"path": [
+								"v1",
+								"admin",
+								"delete-doc-by-admin"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "update-doctor-by-admin",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "adminId",
+									"value": "66febbea6f8170d45ac0e436",
+									"type": "text"
+								},
+								{
+									"key": "specialistType",
+									"value": "dayabities",
+									"type": "text"
+								},
+								{
+									"key": "doctorId",
+									"value": "66ff0fc396dfcfd8e2085c25",
+									"type": "text"
+								},
+								{
+									"key": "image",
+									"type": "file",
+									"src": "/C:/Users/Admin/Desktop/vibhu/self pick.jpeg"
+								},
+								{
+									"key": "signatureImage",
+									"type": "file",
+									"src": "/C:/Users/Admin/Desktop/vibhu/EAadhaar_0000007433347520210525000633_2107202416027_page-0001 (1).jpg"
+								}
+							]
+						},
+						"url": {
+							"raw": "localhost:9500/v1/admin/update-doctor-by-admin",
+							"host": [
+								"localhost"
+							],
+							"port": "9500",
+							"path": [
+								"v1",
+								"admin",
+								"update-doctor-by-admin"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "doctor",
+			"item": [
+				{
+					"name": "add-doctor-by-admin",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InNoZWxhZGl5YXZpYmhhMDY2N0BnbWFpbC5jb20iLCJleHAiOjE3MzAwNTI0NzQsImlhdCI6MTcyOTk2NjA3NH0.g_sh1kZQRHa8B_4pE85dY3e0YnW3B7EeInuYXKHQocs",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "adminId",
+									"value": "671d2ffa912b7ab696bac2f7",
+									"type": "text"
+								},
+								{
+									"key": "firstName",
+									"value": "charlie",
+									"type": "text"
+								},
+								{
+									"key": "specialistType",
+									"value": "eyes and hears",
+									"type": "text"
+								},
+								{
+									"key": "country",
+									"value": "india",
+									"type": "text"
+								},
+								{
+									"key": "state",
+									"value": "gujrat",
+									"type": "text"
+								},
+								{
+									"key": "email",
+									"value": "yashkishan3721@gmail.com",
+									"type": "text"
+								},
+								{
+									"key": "password",
+									"value": "1234",
+									"type": "text"
+								},
+								{
+									"key": "phoneNumber",
+									"value": "9876543210",
+									"type": "text"
+								},
+								{
+									"key": "gender",
+									"value": "1",
+									"type": "text"
+								},
+								{
+									"key": "age",
+									"value": "43",
+									"type": "text"
+								},
+								{
+									"key": "city",
+									"value": "surat",
+									"type": "text"
+								},
+								{
+									"key": "doctorAddress",
+									"value": "nikol near gaushala",
+									"type": "text"
+								},
+								{
+									"key": "qualification",
+									"value": "mbbs",
+									"type": "text"
+								},
+								{
+									"key": "experience",
+									"value": "6 years",
+									"type": "text"
+								},
+								{
+									"key": "workingTime",
+									"value": "6 hours",
+									"type": "text"
+								},
+								{
+									"key": "workOn",
+									"value": "onsite",
+									"type": "text"
+								},
+								{
+									"key": "breakTime",
+									"value": "1 hours",
+									"type": "text"
+								},
+								{
+									"key": "patientCheckUpTime",
+									"value": "2 hours",
+									"type": "text"
+								},
+								{
+									"key": "description",
+									"value": " Dr. Patel has honed her skills in providing...",
+									"type": "text"
+								},
+								{
+									"key": "onlineConsultationRate",
+									"value": "1,000",
+									"type": "text"
+								},
+								{
+									"key": "image",
+									"type": "file",
+									"src": "/C:/Users/01/Downloads/woman5.jpg"
+								},
+								{
+									"key": "signatureImage",
+									"type": "file",
+									"src": "/C:/Users/01/Pictures/Saved Pictures/lion1.jpg"
+								},
+								{
+									"key": "hospitalName",
+									"value": "skflskbfkfkfsfks",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "localhost:9500/v1/admin/add-doctor-by-admin",
+							"host": [
+								"localhost"
+							],
+							"port": "9500",
+							"path": [
+								"v1",
+								"admin",
+								"add-doctor-by-admin"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "list-doctor-by-admin",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InNoZWxhZGl5YXZpYmhhMDY2N0BnbWFpbC5jb20iLCJleHAiOjE3MjkwNjQ2OTIsImlhdCI6MTcyODk3ODI5Mn0.bQ2CwnaIYM4tWNf_a8Z8jXfE6m_dbuybyCbhmEgQSIg",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:9500/v1/admin/list-docotr/670e1d74fcad8422baf7df43",
+							"host": [
+								"localhost"
+							],
+							"port": "9500",
+							"path": [
+								"v1",
+								"admin",
+								"list-docotr",
+								"670e1d74fcad8422baf7df43"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "search-doctor-by-admin",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NzBlMWQ3NGZjYWQ4NDIyYmFmN2RmNDMiLCJlbWFpbCI6InNoZWxhZGl5YXZpYmhhMDY2N0BnbWFpbC5jb20iLCJpYXQiOjE3Mjg5ODc2MDcsImV4cCI6MTcyODk4ODUwN30.ZdbP3rFKi6J6CuCEWMTc6fBHQte5nhcS4MFffTKdPXo",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"adminId\":\"670e1d74fcad8422baf7df43\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:9500/v1/admin/search-docotr-by-admin?query=eyes",
+							"host": [
+								"localhost"
+							],
+							"port": "9500",
+							"path": [
+								"v1",
+								"admin",
+								"search-docotr-by-admin"
+							],
+							"query": [
+								{
+									"key": "query",
+									"value": "charlie",
+									"disabled": true
+								},
+								{
+									"key": "query",
+									"value": "eyes"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "all-feld-doctor-list",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"adminId\":\"66fd9ee808ddedb177f97603\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:9500/v1/admin/list-all-docotr-by-admin",
+							"host": [
+								"localhost"
+							],
+							"port": "9500",
+							"path": [
+								"v1",
+								"admin",
+								"list-all-docotr-by-admin"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "login-doctor",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"password\":\"1234\",\r\n    \"identifier\":\"yashkishan321@gmail.com\"\r\n\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:9500/v1/doctor/doctor-login",
+							"host": [
+								"localhost"
+							],
+							"port": "9500",
+							"path": [
+								"v1",
+								"doctor",
+								"doctor-login"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "forgot-password",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n       \"email\":\"sheladiyavibha0667@gmail.com\",\r\n    // \"phoneNumber\":9876543210,\r\n    \"name\":\"charlie\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:9500/v1/doctor/forgot-pass",
+							"host": [
+								"localhost"
+							],
+							"port": "9500",
+							"path": [
+								"v1",
+								"doctor",
+								"forgot-pass"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "otp-verify",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    //  \"email\":\"sheladiyavibha0667@gmail.com\",\r\n     \"phoneNumber\":9876543210,\r\n     \"otp\":\"885907\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:9500/v1/doctor/verify-otp",
+							"host": [
+								"localhost"
+							],
+							"port": "9500",
+							"path": [
+								"v1",
+								"doctor",
+								"verify-otp"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "change-password",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NmZlYmJlYTZmODE3MGQ0NWFjMGU0MzYiLCJlbWFpbCI6InJhZGhlQDMyMWdtYWlsLmNvbSIsImlhdCI6MTcyODA2MDg5MywiZXhwIjoxNzI4MDYwOTUzfQ.awUjbHNha1grW1iIB3BduBitPsRpzDhdPVA7HESS7gs",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"oldpass\":\"1234\",\r\n    \"newpass\":\"1234\",\r\n    \"confirmpass\":\"1234\",\r\n    \"doctorId\":\"66ff0fc396dfcfd8e2085c25\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:9500/v1/doctor/change-password",
+							"host": [
+								"localhost"
+							],
+							"port": "9500",
+							"path": [
+								"v1",
+								"doctor",
+								"change-password"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "reset-password",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"doctorId\":\"66ff0fc396dfcfd8e2085c25\",\r\n    \"newPassword\":\"321\",\r\n    \"confirmPassword\":\"321\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:9500/v1/doctor/reset-password",
+							"host": [
+								"localhost"
+							],
+							"port": "9500",
+							"path": [
+								"v1",
+								"doctor",
+								"reset-password"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "add-doctor",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NmZmMGZjMzk2ZGZjZmQ4ZTIwODVjMjUiLCJlbWFpbCI6InNoZWxhZGl5YXZpYmhhMDY2N0BnbWFpbC5jb20iLCJpYXQiOjE3Mjc5OTc4MjksImV4cCI6MTcyNzk5Nzg4OX0.uaRm4gpxHcTsjr1VhEK_3o2_pwI8azzfJPDpo5mu7Yk",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "firstName",
+									"value": "radhe",
+									"type": "text"
+								},
+								{
+									"key": "lastName",
+									"value": "lukhi",
+									"type": "text"
+								},
+								{
+									"key": "email",
+									"value": "radhikalukhi321@gmail.com",
+									"type": "text"
+								},
+								{
+									"key": "phoneNumber",
+									"value": "9876543210",
+									"type": "text"
+								},
+								{
+									"key": "hospitalName",
+									"value": "xyu",
+									"type": "text"
+								},
+								{
+									"key": "gender",
+									"value": "2",
+									"type": "text"
+								},
+								{
+									"key": "country",
+									"value": "india",
+									"type": "text"
+								},
+								{
+									"key": "state",
+									"value": "gujrat",
+									"type": "text"
+								},
+								{
+									"key": "city",
+									"value": "ahemdavad",
+									"type": "text"
+								},
+								{
+									"key": "image",
+									"type": "file",
+									"src": "/C:/Users/Admin/Desktop/vibhu/pancard.jpeg"
+								},
+								{
+									"key": "doctorId",
+									"value": "66ff0fc396dfcfd8e2085c25",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "localhost:9500/v1/doctor/update-doctor",
+							"host": [
+								"localhost"
+							],
+							"port": "9500",
+							"path": [
+								"v1",
+								"doctor",
+								"update-doctor"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "create-time-slot",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"timeslot\":\"10:00AM - 11:00PM\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:9500/v1/doctor/create-time-slot",
+							"host": [
+								"localhost"
+							],
+							"port": "9500",
+							"path": [
+								"v1",
+								"doctor",
+								"create-time-slot"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "patient",
+			"item": [
+				{
+					"name": "dashboard",
+					"item": [
+						{
+							"name": "peronal healthcare record",
+							"item": [
+								{
+									"name": "personal-details",
+									"protocolProfileBehavior": {
+										"disableBodyPruning": true
+									},
+									"request": {
+										"method": "GET",
+										"header": [],
+										"body": {
+											"mode": "raw",
+											"raw": "{\r\n    \"patientIds\":\"66ffb3b47674387563693790\"\r\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "localhost:9500/v1/patient-flow-personal-health-record/personal-details-list",
+											"host": [
+												"localhost"
+											],
+											"port": "9500",
+											"path": [
+												"v1",
+												"patient-flow-personal-health-record",
+												"personal-details-list"
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "medical-history-peronal-details",
+									"protocolProfileBehavior": {
+										"disableBodyPruning": true
+									},
+									"request": {
+										"method": "GET",
+										"header": [],
+										"body": {
+											"mode": "raw",
+											"raw": "{\r\n    \"patientId\":\"6700fdd04966ebf8655e5c67\"\r\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "localhost:9500/v1/patient-flow-personal-health-record/personal-details-list-medical-prescriptions-views",
+											"host": [
+												"localhost"
+											],
+											"port": "9500",
+											"path": [
+												"v1",
+												"patient-flow-personal-health-record",
+												"personal-details-list-medical-prescriptions-views"
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "medical-history-patient-details",
+									"protocolProfileBehavior": {
+										"disableBodyPruning": true
+									},
+									"request": {
+										"method": "GET",
+										"header": [],
+										"body": {
+											"mode": "raw",
+											"raw": "{\r\n    \"patientId\":\"6700fdd04966ebf8655e5c67\"\r\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "localhost:9500/v1/patient-flow-personal-health-record/personal-details-list-medical",
+											"host": [
+												"localhost"
+											],
+											"port": "9500",
+											"path": [
+												"v1",
+												"patient-flow-personal-health-record",
+												"personal-details-list-medical"
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "all-details-medical",
+									"protocolProfileBehavior": {
+										"disableBodyPruning": true
+									},
+									"request": {
+										"method": "GET",
+										"header": [],
+										"body": {
+											"mode": "raw",
+											"raw": "{\r\n    \"patientId\":\"6700fdd04966ebf8655e5c67\"\r\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "localhost:9500/v1/patient-flow-personal-health-record/personal-details-list-medical-persnoal",
+											"host": [
+												"localhost"
+											],
+											"port": "9500",
+											"path": [
+												"v1",
+												"patient-flow-personal-health-record",
+												"personal-details-list-medical-persnoal"
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "report test view",
+									"protocolProfileBehavior": {
+										"disableBodyPruning": true
+									},
+									"request": {
+										"method": "GET",
+										"header": [],
+										"body": {
+											"mode": "raw",
+											"raw": "{\r\n    \"patientId\":\"64bcf0bf6fd8e1a2c9f7e9b3\"\r\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "localhost:9500/v1/patient-flow-personal-health-record/test-report-views",
+											"host": [
+												"localhost"
+											],
+											"port": "9500",
+											"path": [
+												"v1",
+												"patient-flow-personal-health-record",
+												"test-report-views"
+											]
+										}
+									},
+									"response": []
+								}
+							]
+						}
+					]
+				},
+				{
+					"name": "create-patient",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n       \"first_name\":\"indrjit\",\r\n      \"last_name\":\"sheladiya\",\r\n      \"password\":\"123\",\r\n      \"confirmPassword\":\"123\",\r\n      \"email\":\"indrjit4321@gmail.com\",\r\n      \"phone_number\":\"9065606778\",\r\n      \"country\":\"india\",\r\n      \"state\":\"gujrat\",\r\n      \"city\":\"vadodra\",\r\n      \"age\":\"34\",\r\n      \"patient_address\":\"32/5 ytu society near nikol ,nikol ahemdavad\",\r\n      \"gender\":\"2\",\r\n      \"dob\":\"23 Jan 2022\",\r\n      \"blood_group\":\"a+\",\r\n      \"weight\":\"54\",\r\n      \"height\":\"5'4\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:9500/v1/patient/create-patient",
+							"host": [
+								"localhost"
+							],
+							"port": "9500",
+							"path": [
+								"v1",
+								"patient",
+								"create-patient"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "patient-login",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n \"identifier\":\"indrjit4321@gmail.com\",   \r\n    //   \"identifier\":\"9065606778\",\r\n    \"password\":\"123\"\r\n   \r\n     \r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:9500/v1/patient/patient-login",
+							"host": [
+								"localhost"
+							],
+							"port": "9500",
+							"path": [
+								"v1",
+								"patient",
+								"patient-login"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "forgot-pass",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "\r\n {\r\n    // \"email\":\"sheladiyavibha0667@gmail.com\",\r\n    \"phone_number\":\"9065606778\",\r\n    \"first_name\":\"radhe\"\r\n}   \r\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:9500/v1/patient/forgot-pass",
+							"host": [
+								"localhost"
+							],
+							"port": "9500",
+							"path": [
+								"v1",
+								"patient",
+								"forgot-pass"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "verify-otp",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"otp\":\"967300\",\r\n      \"identifier\":\"9065606778\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:9500/v1/patient/verify-otp",
+							"host": [
+								"localhost"
+							],
+							"port": "9500",
+							"path": [
+								"v1",
+								"patient",
+								"verify-otp"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "reset-password",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"patientId\":\"66ffb3b47674387563693790\",\r\n    \"newPassword\":\"321\",\r\n    \"confirmPassword\":\"321\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:9500/v1/patient/reset-password",
+							"host": [
+								"localhost"
+							],
+							"port": "9500",
+							"path": [
+								"v1",
+								"patient",
+								"reset-password"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "change-password",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NmZmYjNiNDc2NzQzODc1NjM2OTM3OTAiLCJlbWFpbCI6InNoZWxhZGl5YXZpYmhhMDY2N0BnbWFpbC5jb20iLCJpYXQiOjE3MjgwMzg1ODEsImV4cCI6MTcyODAzODg4MX0.6oYWTsaXhqcMllY518tCyMhkxxruerQcI04nZ0PRO4Y",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"oldpass\":\"123\",\r\n    \"newpass\":\"1234\",\r\n    \"confirmpass\":\"1234\",\r\n    \"patientId\":\"66ffb3b47674387563693790\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:9500/v1/patient/change-password",
+							"host": [
+								"localhost"
+							],
+							"port": "9500",
+							"path": [
+								"v1",
+								"patient",
+								"change-password"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "update-patient",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NzBlMmRjZjMzNmJkYWZlMWMxNGZmMjYiLCJlbWFpbCI6ImluZHJqaXQ0MzIxQGdtYWlsLmNvbSIsImlhdCI6MTcyODk4MjUzMywiZXhwIjoxNzI4OTgyNTkzfQ.GdyvDv56kvipcCrSehUM7p921xxLzVHp0VCI10C6WhY",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "first_name",
+									"value": "vibhu",
+									"type": "text"
+								},
+								{
+									"key": "phone_number",
+									"value": "9065606778",
+									"type": "text"
+								},
+								{
+									"key": "email",
+									"value": "sheladiyavibha0667@gmail.com",
+									"type": "text"
+								},
+								{
+									"key": "gender",
+									"value": "1",
+									"type": "text"
+								},
+								{
+									"key": "dob",
+									"value": "27 feb 2024",
+									"type": "text"
+								},
+								{
+									"key": "blood_group",
+									"value": "0-",
+									"type": "text"
+								},
+								{
+									"key": "age",
+									"value": "45",
+									"type": "text"
+								},
+								{
+									"key": "weight",
+									"value": "54",
+									"type": "text"
+								},
+								{
+									"key": "height",
+									"value": "5.9",
+									"type": "text"
+								},
+								{
+									"key": "country",
+									"value": "usa",
+									"type": "text"
+								},
+								{
+									"key": "state",
+									"value": "naroida",
+									"type": "text"
+								},
+								{
+									"key": "city",
+									"value": "kimi",
+									"type": "text"
+								},
+								{
+									"key": "patient_address",
+									"value": "324113,b near kimi near kobra water fall",
+									"type": "text"
+								},
+								{
+									"key": "image",
+									"type": "file",
+									"src": "/C:/Users/Admin/Desktop/vibhu/adress proof.jpeg"
+								},
+								{
+									"key": "patientId",
+									"value": "66ffb3b47674387563693790",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "localhost:9500/v1/patient/update-patient-profile",
+							"host": [
+								"localhost"
+							],
+							"port": "9500",
+							"path": [
+								"v1",
+								"patient",
+								"update-patient-profile"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "bookappointment",
+			"item": [
+				{
+					"name": "doctor",
+					"item": [
+						{
+							"name": "dashboard",
+							"item": [
+								{
+									"name": "appointment management dashboard",
+									"item": [
+										{
+											"name": "previous appointment",
+											"request": {
+												"method": "GET",
+												"header": [],
+												"url": {
+													"raw": "localhost:9500/v1/bookappointment/doctorflow-previous-appointmentbook-date",
+													"host": [
+														"localhost"
+													],
+													"port": "9500",
+													"path": [
+														"v1",
+														"bookappointment",
+														"doctorflow-previous-appointmentbook-date"
+													]
+												}
+											},
+											"response": []
+										},
+										{
+											"name": "upcomming appointment",
+											"request": {
+												"method": "GET",
+												"header": [],
+												"url": {
+													"raw": "localhost:9500/v1/bookappointment/doctorflow-upcoming-appointmentbook-date",
+													"host": [
+														"localhost"
+													],
+													"port": "9500",
+													"path": [
+														"v1",
+														"bookappointment",
+														"doctorflow-upcoming-appointmentbook-date"
+													]
+												}
+											},
+											"response": []
+										},
+										{
+											"name": "doctorflow-today-appointmentbook-date",
+											"request": {
+												"method": "GET",
+												"header": [],
+												"url": {
+													"raw": "localhost:9500/v1/bookappointment/doctorflow-today-appointmentbook-date",
+													"host": [
+														"localhost"
+													],
+													"port": "9500",
+													"path": [
+														"v1",
+														"bookappointment",
+														"doctorflow-today-appointmentbook-date"
+													]
+												}
+											},
+											"response": []
+										},
+										{
+											"name": "cancel appointment",
+											"request": {
+												"method": "GET",
+												"header": [],
+												"url": {
+													"raw": "localhost:9500/v1/bookappointment/doctorflow-cancel-appointmentbook-date",
+													"host": [
+														"localhost"
+													],
+													"port": "9500",
+													"path": [
+														"v1",
+														"bookappointment",
+														"doctorflow-cancel-appointmentbook-date"
+													]
+												}
+											},
+											"response": []
+										},
+										{
+											"name": "cancel-create-appointment",
+											"request": {
+												"method": "POST",
+												"header": [],
+												"body": {
+													"mode": "raw",
+													"raw": "{\r\n    \"appointmentId\":\"670043659e1ee9122b160937\"\r\n}",
+													"options": {
+														"raw": {
+															"language": "json"
+														}
+													}
+												},
+												"url": {
+													"raw": "localhost:9500/v1/bookappointment/create-cancel-appointment",
+													"host": [
+														"localhost"
+													],
+													"port": "9500",
+													"path": [
+														"v1",
+														"bookappointment",
+														"create-cancel-appointment"
+													]
+												}
+											},
+											"response": []
+										},
+										{
+											"name": "delete-appointment-date-time-slot",
+											"request": {
+												"method": "DELETE",
+												"header": [],
+												"body": {
+													"mode": "raw",
+													"raw": "{\r\n\"appointmentId\":\"67018d7a467f3a8ce02991b5\"\r\n}",
+													"options": {
+														"raw": {
+															"language": "json"
+														}
+													}
+												},
+												"url": {
+													"raw": "localhost:9500/v1/bookappointment/doctorflow-delete-appointment-timeslot",
+													"host": [
+														"localhost"
+													],
+													"port": "9500",
+													"path": [
+														"v1",
+														"bookappointment",
+														"doctorflow-delete-appointment-timeslot"
+													]
+												}
+											},
+											"response": []
+										},
+										{
+											"name": "update-appointment-timeslot-date",
+											"request": {
+												"method": "PUT",
+												"header": [],
+												"body": {
+													"mode": "raw",
+													"raw": "{\r\n    \"appointmentId\":\"67018d7a467f3a8ce02991b5\",\r\n    \"app_date\":\"11 Nov 2024\",\r\n    // \"doctorTimeSlot\":\"670109177956bc53fcd20583\",\r\n    \"app_time\":\"7:00 PM - 8:00 PM\",\r\n    \"add_notes\":\"dfdgfidvsk\"\r\n}",
+													"options": {
+														"raw": {
+															"language": "json"
+														}
+													}
+												},
+												"url": {
+													"raw": "localhost:9500/v1/bookappointment/doctorflow-update-appointment-timeslot-date",
+													"host": [
+														"localhost"
+													],
+													"port": "9500",
+													"path": [
+														"v1",
+														"bookappointment",
+														"doctorflow-update-appointment-timeslot-date"
+													]
+												}
+											},
+											"response": []
+										},
+										{
+											"name": "searching-fromdate-todate",
+											"request": {
+												"method": "GET",
+												"header": [],
+												"url": {
+													"raw": "localhost:9500/v1/bookappointment/searching-fromdate-todate-doctor?fromDate=10-11-2024&toDate=20-11-2024",
+													"host": [
+														"localhost"
+													],
+													"port": "9500",
+													"path": [
+														"v1",
+														"bookappointment",
+														"searching-fromdate-todate-doctor"
+													],
+													"query": [
+														{
+															"key": "fromDate",
+															"value": "10-11-2024"
+														},
+														{
+															"key": "toDate",
+															"value": "20-11-2024"
+														}
+													]
+												}
+											},
+											"response": []
+										},
+										{
+											"name": "carete-note-date-time",
+											"request": {
+												"method": "POST",
+												"header": [],
+												"body": {
+													"mode": "raw",
+													"raw": "{\r\n    \"app_date\":\"20 jul 2024\",\r\n    \"app_time\":\"9:00 PM-10:00 PM\",\r\n    \"appointmentId\":\"6701957335fea2ae9140d079\",\r\n    \"add_notes\":\"kajgsalfsalfla\"\r\n}",
+													"options": {
+														"raw": {
+															"language": "json"
+														}
+													}
+												},
+												"url": {
+													"raw": "localhost:9500/v1/bookappointment/create-notes-date-time",
+													"host": [
+														"localhost"
+													],
+													"port": "9500",
+													"path": [
+														"v1",
+														"bookappointment",
+														"create-notes-date-time"
+													]
+												}
+											},
+											"response": []
+										}
+									]
+								},
+								{
+									"name": "patient acess record",
+									"item": [
+										{
+											"name": "extra",
+											"item": [
+												{
+													"name": "all-appointment-patient",
+													"request": {
+														"method": "GET",
+														"header": [],
+														"url": {
+															"raw": "localhost:9500/v1/bookappointment/all-appointment-of-patient",
+															"host": [
+																"localhost"
+															],
+															"port": "9500",
+															"path": [
+																"v1",
+																"bookappointment",
+																"all-appointment-of-patient"
+															]
+														}
+													},
+													"response": []
+												},
+												{
+													"name": "detail-patient",
+													"protocolProfileBehavior": {
+														"disableBodyPruning": true
+													},
+													"request": {
+														"method": "GET",
+														"header": [],
+														"body": {
+															"mode": "raw",
+															"raw": "{\r\n    // \"patientId\":\"6700fdd04966ebf8655e5c67\"\r\n}",
+															"options": {
+																"raw": {
+																	"language": "json"
+																}
+															}
+														},
+														"url": {
+															"raw": "localhost:9500/v1/bookappointment/details-of-patient",
+															"host": [
+																"localhost"
+															],
+															"port": "9500",
+															"path": [
+																"v1",
+																"bookappointment",
+																"details-of-patient"
+															]
+														}
+													},
+													"response": []
+												}
+											]
+										},
+										{
+											"name": "patient-detail-lastdate-lasttime-record-access",
+											"protocolProfileBehavior": {
+												"disableBodyPruning": true
+											},
+											"request": {
+												"method": "GET",
+												"header": [],
+												"body": {
+													"mode": "raw",
+													"raw": "{\r\n    \"doctorId\":\"66ff0fc396dfcfd8e2085c25\"\r\n}",
+													"options": {
+														"raw": {
+															"language": "json"
+														}
+													}
+												},
+												"url": {
+													"raw": "localhost:9500/v1/bookappointment/patient-record-access",
+													"host": [
+														"localhost"
+													],
+													"port": "9500",
+													"path": [
+														"v1",
+														"bookappointment",
+														"patient-record-access"
+													]
+												}
+											},
+											"response": []
+										},
+										{
+											"name": "all-patient-appointement-record-doctorflow-doctorid",
+											"protocolProfileBehavior": {
+												"disableBodyPruning": true
+											},
+											"request": {
+												"method": "GET",
+												"header": [],
+												"body": {
+													"mode": "raw",
+													"raw": "{\r\n    \"patientId\":\"6700fdd04966ebf8655e5c67\"\r\n}",
+													"options": {
+														"raw": {
+															"language": "json"
+														}
+													}
+												},
+												"url": {
+													"raw": "localhost:9500/v1/bookappointment/patient-id-their-all-appointment-list",
+													"host": [
+														"localhost"
+													],
+													"port": "9500",
+													"path": [
+														"v1",
+														"bookappointment",
+														"patient-id-their-all-appointment-list"
+													]
+												}
+											},
+											"response": []
+										},
+										{
+											"name": "doctorid-patient-appointment-doctorflow-patient-record-acess",
+											"protocolProfileBehavior": {
+												"disableBodyPruning": true
+											},
+											"request": {
+												"method": "GET",
+												"header": [],
+												"body": {
+													"mode": "raw",
+													"raw": "{\r\n    \"doctorId\":\"66ff0fc396dfcfd8e2085c25\",\r\n    \"patientId\":\"6700fdd04966ebf8655e5c67\"\r\n}",
+													"options": {
+														"raw": {
+															"language": "json"
+														}
+													}
+												},
+												"url": {
+													"raw": "localhost:9500/v1/bookappointment/patient-record-access-doctor-id",
+													"host": [
+														"localhost"
+													],
+													"port": "9500",
+													"path": [
+														"v1",
+														"bookappointment",
+														"patient-record-access-doctor-id"
+													]
+												}
+											},
+											"response": []
+										},
+										{
+											"name": "seraching-month-patient-record-access",
+											"protocolProfileBehavior": {
+												"disableBodyPruning": true
+											},
+											"request": {
+												"method": "GET",
+												"header": [],
+												"body": {
+													"mode": "raw",
+													"raw": "{\r\n    \"doctorId\":\"66ff0fc396dfcfd8e2085c25\",\r\n     \"periodType\": \"month\"\r\n//   \"periodValue\": 11\r\n\r\n}",
+													"options": {
+														"raw": {
+															"language": "json"
+														}
+													}
+												},
+												"url": {
+													"raw": "localhost:9500/v1/bookappointment/patient-record-access-seraching-month",
+													"host": [
+														"localhost"
+													],
+													"port": "9500",
+													"path": [
+														"v1",
+														"bookappointment",
+														"patient-record-access-seraching-month"
+													]
+												}
+											},
+											"response": []
+										}
+									]
+								},
+								{
+									"name": "telecommunications",
+									"item": [
+										{
+											"name": "appointment-today-telecomuniction",
+											"request": {
+												"method": "GET",
+												"header": [],
+												"url": {
+													"raw": "localhost:9500/v1/telecomunication/telecom-today-appointment",
+													"host": [
+														"localhost"
+													],
+													"port": "9500",
+													"path": [
+														"v1",
+														"telecomunication",
+														"telecom-today-appointment"
+													]
+												}
+											},
+											"response": []
+										},
+										{
+											"name": "upcomming-appointment-telecomm",
+											"protocolProfileBehavior": {
+												"disableBodyPruning": true
+											},
+											"request": {
+												"method": "GET",
+												"header": [],
+												"body": {
+													"mode": "raw",
+													"raw": "{\r\n    \"fromDate\":\"2 dec 2024\",\r\n    \"toDate\":\"20 dec 2024\"\r\n}",
+													"options": {
+														"raw": {
+															"language": "json"
+														}
+													}
+												},
+												"url": {
+													"raw": "localhost:9500/v1/telecomunication/telecom-upcomming-appointment",
+													"host": [
+														"localhost"
+													],
+													"port": "9500",
+													"path": [
+														"v1",
+														"telecomunication",
+														"telecom-upcomming-appointment"
+													]
+												}
+											},
+											"response": []
+										},
+										{
+											"name": "serach-patient-name-upcoming-appointment",
+											"protocolProfileBehavior": {
+												"disableBodyPruning": true
+											},
+											"request": {
+												"method": "GET",
+												"header": [],
+												"body": {
+													"mode": "raw",
+													"raw": "{\r\n    \"patientName\":\"ch\"\r\n}",
+													"options": {
+														"raw": {
+															"language": "json"
+														}
+													}
+												},
+												"url": {
+													"raw": "localhost:9500/v1/telecomunication/telecom-upcomming-appointment-search-patient-name",
+													"host": [
+														"localhost"
+													],
+													"port": "9500",
+													"path": [
+														"v1",
+														"telecomunication",
+														"telecom-upcomming-appointment-search-patient-name"
+													]
+												}
+											},
+											"response": []
+										},
+										{
+											"name": "previous-appointment-telecom",
+											"request": {
+												"method": "GET",
+												"header": [],
+												"url": {
+													"raw": "localhost:9500/v1/telecomunication/telecom-previous-appointment",
+													"host": [
+														"localhost"
+													],
+													"port": "9500",
+													"path": [
+														"v1",
+														"telecomunication",
+														"telecom-previous-appointment"
+													]
+												}
+											},
+											"response": []
+										},
+										{
+											"name": "previous-appointment-telecom",
+											"protocolProfileBehavior": {
+												"disableBodyPruning": true
+											},
+											"request": {
+												"method": "GET",
+												"header": [],
+												"body": {
+													"mode": "raw",
+													"raw": "{\r\n    \"patientName\":\"ch\"\r\n}",
+													"options": {
+														"raw": {
+															"language": "json"
+														}
+													}
+												},
+												"url": {
+													"raw": "localhost:9500/v1/telecomunication/telecom-previous-appointment-search-patient-name",
+													"host": [
+														"localhost"
+													],
+													"port": "9500",
+													"path": [
+														"v1",
+														"telecomunication",
+														"telecom-previous-appointment-search-patient-name"
+													]
+												}
+											},
+											"response": []
+										},
+										{
+											"name": "cancel-appointement-telecom",
+											"request": {
+												"method": "GET",
+												"header": [],
+												"url": {
+													"raw": "localhost:9500/v1/telecomunication/telecom-cancel-appointment",
+													"host": [
+														"localhost"
+													],
+													"port": "9500",
+													"path": [
+														"v1",
+														"telecomunication",
+														"telecom-cancel-appointment"
+													]
+												}
+											},
+											"response": []
+										},
+										{
+											"name": "cancel-appointment-search-telecom",
+											"request": {
+												"method": "GET",
+												"header": [],
+												"url": {
+													"raw": "localhost:9500/v1/telecomunication/telecom-cancel-appointment-search-patient-name",
+													"host": [
+														"localhost"
+													],
+													"port": "9500",
+													"path": [
+														"v1",
+														"telecomunication",
+														"telecom-cancel-appointment-search-patient-name"
+													]
+												}
+											},
+											"response": []
+										},
+										{
+											"name": "update-join-call-appointment",
+											"request": {
+												"method": "PUT",
+												"header": [],
+												"body": {
+													"mode": "raw",
+													"raw": "{\r\n    \"appointmentId\":\"6701957335fea2ae9140d079\"\r\n}",
+													"options": {
+														"raw": {
+															"language": "json"
+														}
+													}
+												},
+												"url": {
+													"raw": "localhost:9500/v1/telecomunication/telecom-create-call",
+													"host": [
+														"localhost"
+													],
+													"port": "9500",
+													"path": [
+														"v1",
+														"telecomunication",
+														"telecom-create-call"
+													]
+												}
+											},
+											"response": []
+										},
+										{
+											"name": "after-join-call-list-appointment-reminder",
+											"protocolProfileBehavior": {
+												"disableBodyPruning": true
+											},
+											"request": {
+												"method": "GET",
+												"header": [],
+												"body": {
+													"mode": "raw",
+													"raw": "{\r\n    \"appointmentId\":\"6701957335fea2ae9140d079\"\r\n}",
+													"options": {
+														"raw": {
+															"language": "json"
+														}
+													}
+												},
+												"url": {
+													"raw": "localhost:9500/v1/telecomunication/telecom-after-join-call-appointment-reminder",
+													"host": [
+														"localhost"
+													],
+													"port": "9500",
+													"path": [
+														"v1",
+														"telecomunication",
+														"telecom-after-join-call-appointment-reminder"
+													]
+												}
+											},
+											"response": []
+										},
+										{
+											"name": "patient-details-after-join-call-reminder-next",
+											"protocolProfileBehavior": {
+												"disableBodyPruning": true
+											},
+											"request": {
+												"method": "GET",
+												"header": [],
+												"body": {
+													"mode": "raw",
+													"raw": "{\r\n    \"appointmentId\":\"670e2262fcad8422baf7df57\"\r\n}",
+													"options": {
+														"raw": {
+															"language": "json"
+														}
+													}
+												},
+												"url": {
+													"raw": "localhost:9500/v1/telecomunication/telecom-after-join-call-appointment-reminder-patient-details",
+													"host": [
+														"localhost"
+													],
+													"port": "9500",
+													"path": [
+														"v1",
+														"telecomunication",
+														"telecom-after-join-call-appointment-reminder-patient-details"
+													]
+												}
+											},
+											"response": []
+										}
+									]
+								},
+								{
+									"name": "appointementbook-patientflow",
+									"item": [
+										{
+											"name": "appointment-list-patient-flow",
+											"protocolProfileBehavior": {
+												"disableBodyPruning": true
+											},
+											"request": {
+												"method": "GET",
+												"header": [],
+												"body": {
+													"mode": "raw",
+													"raw": "{\r\n    \"patientId\":\"670e21cafcad8422baf7df53\"\r\n}",
+													"options": {
+														"raw": {
+															"language": "json"
+														}
+													}
+												},
+												"url": {
+													"raw": "localhost:9500/v1/bookappointment-patientFlow/bookappointement-today-list-appointement-book",
+													"host": [
+														"localhost"
+													],
+													"port": "9500",
+													"path": [
+														"v1",
+														"bookappointment-patientFlow",
+														"bookappointement-today-list-appointement-book"
+													]
+												}
+											},
+											"response": []
+										},
+										{
+											"name": "searching-bookappointement-today-list-appointement-book",
+											"protocolProfileBehavior": {
+												"disableBodyPruning": true
+											},
+											"request": {
+												"method": "GET",
+												"header": [],
+												"body": {
+													"mode": "raw",
+													"raw": "{\r\n    \"patientId\":\"6700fdd04966ebf8655e5c67\",\r\n    \"fromDate\":\"05 nov 2024\",\r\n    \"toDate\":\"20 nov 2024\"\r\n}",
+													"options": {
+														"raw": {
+															"language": "json"
+														}
+													}
+												},
+												"url": {
+													"raw": "localhost:9500/v1/bookappointment-patientFlow/searching-bookappointement-today-list-appointement-book",
+													"host": [
+														"localhost"
+													],
+													"port": "9500",
+													"path": [
+														"v1",
+														"bookappointment-patientFlow",
+														"searching-bookappointement-today-list-appointement-book"
+													]
+												}
+											},
+											"response": []
+										},
+										{
+											"name": "bookappointement-today-appointement-doctor-details-list",
+											"protocolProfileBehavior": {
+												"disableBodyPruning": true
+											},
+											"request": {
+												"method": "GET",
+												"header": [],
+												"body": {
+													"mode": "raw",
+													"raw": "{\r\n\r\n    \"doctorId\":\"66ff0fc396dfcfd8e2085c25\"\r\n}",
+													"options": {
+														"raw": {
+															"language": "json"
+														}
+													}
+												},
+												"url": {
+													"raw": "localhost:9500/v1/bookappointment-patientFlow/bookappointement-today-appointement-doctor-details-list",
+													"host": [
+														"localhost"
+													],
+													"port": "9500",
+													"path": [
+														"v1",
+														"bookappointment-patientFlow",
+														"bookappointement-today-appointement-doctor-details-list"
+													]
+												}
+											},
+											"response": []
+										},
+										{
+											"name": "getPreviousAppointmentsForPatient",
+											"protocolProfileBehavior": {
+												"disableBodyPruning": true
+											},
+											"request": {
+												"method": "GET",
+												"header": [],
+												"body": {
+													"mode": "raw",
+													"raw": "{\r\n    \"patientId\":\"6700fdd04966ebf8655e5c67\"\r\n}",
+													"options": {
+														"raw": {
+															"language": "json"
+														}
+													}
+												},
+												"url": {
+													"raw": "localhost:9500/v1/bookappointment-patientFlow/bookappointement-previous-list-appointement-book",
+													"host": [
+														"localhost"
+													],
+													"port": "9500",
+													"path": [
+														"v1",
+														"bookappointment-patientFlow",
+														"bookappointement-previous-list-appointement-book"
+													]
+												}
+											},
+											"response": []
+										},
+										{
+											"name": "getPreviousAppointmentsForPatientInRange",
+											"protocolProfileBehavior": {
+												"disableBodyPruning": true
+											},
+											"request": {
+												"method": "GET",
+												"header": [],
+												"body": {
+													"mode": "raw",
+													"raw": "{\r\n    \"patientId\":\"6700fdd04966ebf8655e5c67\",\r\n    \"fromDate\":\"09 september 2024\",\r\n    \"toDate\":\"21 september 2024\"\r\n}",
+													"options": {
+														"raw": {
+															"language": "json"
+														}
+													}
+												},
+												"url": {
+													"raw": "localhost:9500/v1/bookappointment-patientFlow/searching-bookappointement-previous-list-appointement-book",
+													"host": [
+														"localhost"
+													],
+													"port": "9500",
+													"path": [
+														"v1",
+														"bookappointment-patientFlow",
+														"searching-bookappointement-previous-list-appointement-book"
+													]
+												}
+											},
+											"response": []
+										},
+										{
+											"name": "getPatientAppointmentsWithDoctorPrevious",
+											"protocolProfileBehavior": {
+												"disableBodyPruning": true
+											},
+											"request": {
+												"method": "GET",
+												"header": [],
+												"body": {
+													"mode": "raw",
+													"raw": "{\r\n\r\n    \"doctorId\":\"66ff0fc396dfcfd8e2085c25\"\r\n}",
+													"options": {
+														"raw": {
+															"language": "json"
+														}
+													}
+												},
+												"url": {
+													"raw": "localhost:9500/v1/bookappointment-patientFlow/bookappointement-previous-appointement-doctor-details-list",
+													"host": [
+														"localhost"
+													],
+													"port": "9500",
+													"path": [
+														"v1",
+														"bookappointment-patientFlow",
+														"bookappointement-previous-appointement-doctor-details-list"
+													]
+												}
+											},
+											"response": []
+										},
+										{
+											"name": "cancel-appointment",
+											"request": {
+												"method": "GET",
+												"header": []
+											},
+											"response": []
+										},
+										{
+											"name": "getCanceledAppointments",
+											"protocolProfileBehavior": {
+												"disableBodyPruning": true
+											},
+											"request": {
+												"method": "GET",
+												"header": [],
+												"body": {
+													"mode": "raw",
+													"raw": "{\r\n    \"patientId\":\"670e21cafcad8422baf7df53\"\r\n}",
+													"options": {
+														"raw": {
+															"language": "json"
+														}
+													}
+												},
+												"url": {
+													"raw": "localhost:9500/v1/bookappointment-patientFlow/bookappointement-cancel-list-appointement-book",
+													"host": [
+														"localhost"
+													],
+													"port": "9500",
+													"path": [
+														"v1",
+														"bookappointment-patientFlow",
+														"bookappointement-cancel-list-appointement-book"
+													]
+												}
+											},
+											"response": []
+										},
+										{
+											"name": "getCanceledAppointmentsInRange",
+											"protocolProfileBehavior": {
+												"disableBodyPruning": true
+											},
+											"request": {
+												"method": "GET",
+												"header": [],
+												"body": {
+													"mode": "raw",
+													"raw": "{\r\n    \"patientId\":\"6700fdd04966ebf8655e5c67\",\r\n    \"fromDate\":\"05 oct 2024\",\r\n    \"toDate\":\"20 oct 2024\"\r\n}",
+													"options": {
+														"raw": {
+															"language": "json"
+														}
+													}
+												},
+												"url": {
+													"raw": "localhost:9500/v1/bookappointment-patientFlow/searching-bookappointement-cancel-list-appointement-book",
+													"host": [
+														"localhost"
+													],
+													"port": "9500",
+													"path": [
+														"v1",
+														"bookappointment-patientFlow",
+														"searching-bookappointement-cancel-list-appointement-book"
+													]
+												}
+											},
+											"response": []
+										},
+										{
+											"name": "getPendingAppointments",
+											"protocolProfileBehavior": {
+												"disableBodyPruning": true
+											},
+											"request": {
+												"method": "GET",
+												"header": [],
+												"body": {
+													"mode": "raw",
+													"raw": "",
+													"options": {
+														"raw": {
+															"language": "json"
+														}
+													}
+												},
+												"url": {
+													"raw": "localhost:9500/v1/bookappointment-patientFlow/bookappointement-pending-list-appointement-book",
+													"host": [
+														"localhost"
+													],
+													"port": "9500",
+													"path": [
+														"v1",
+														"bookappointment-patientFlow",
+														"bookappointement-pending-list-appointement-book"
+													]
+												}
+											},
+											"response": []
+										},
+										{
+											"name": "getPatientAppointmentsWithDoctorPending",
+											"protocolProfileBehavior": {
+												"disableBodyPruning": true
+											},
+											"request": {
+												"method": "GET",
+												"header": [],
+												"body": {
+													"mode": "raw",
+													"raw": "{\r\n\r\n    \"doctorId\":\"66ff0fc396dfcfd8e2085c25\"\r\n}",
+													"options": {
+														"raw": {
+															"language": "json"
+														}
+													}
+												},
+												"url": {
+													"raw": "localhost:9500/v1/bookappointment-patientFlow/bookappointement-pending-appointement-doctor-details-list",
+													"host": [
+														"localhost"
+													],
+													"port": "9500",
+													"path": [
+														"v1",
+														"bookappointment-patientFlow",
+														"bookappointement-pending-appointement-doctor-details-list"
+													]
+												}
+											},
+											"response": []
+										},
+										{
+											"name": "getPendingAppointmentsInRange",
+											"protocolProfileBehavior": {
+												"disableBodyPruning": true
+											},
+											"request": {
+												"method": "GET",
+												"header": [],
+												"body": {
+													"mode": "raw",
+													"raw": "{\r\n    \"patientId\":\"670e21cafcad8422baf7df53\",\r\n    \"fromDate\":\"05 nov 2024\",\r\n    \"toDate\":\"20 nov 2024\"\r\n}",
+													"options": {
+														"raw": {
+															"language": "json"
+														}
+													}
+												},
+												"url": {
+													"raw": "localhost:9500/v1/bookappointment-patientFlow/searching-bookappointement-pending-list-appointement-book",
+													"host": [
+														"localhost"
+													],
+													"port": "9500",
+													"path": [
+														"v1",
+														"bookappointment-patientFlow",
+														"searching-bookappointement-pending-list-appointement-book"
+													]
+												}
+											},
+											"response": []
+										},
+										{
+											"name": "cancel-appointment",
+											"request": {
+												"method": "POST",
+												"header": [],
+												"body": {
+													"mode": "raw",
+													"raw": "{\r\n    \"appointmentId\":\"67128c3484ad5470109be332\"\r\n}",
+													"options": {
+														"raw": {
+															"language": "json"
+														}
+													}
+												},
+												"url": {
+													"raw": "localhost:9500/v1/bookappointment-patientFlow/bookappointement-cancel",
+													"host": [
+														"localhost"
+													],
+													"port": "9500",
+													"path": [
+														"v1",
+														"bookappointment-patientFlow",
+														"bookappointement-cancel"
+													]
+												}
+											},
+											"response": []
+										}
+									]
+								}
+							]
+						}
+					]
+				},
+				{
+					"name": "create-appointment",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"appointmentType\":\"gaynec\",\r\n    \"country\":\"india\",\r\n    \"state\":\"gujrat\",\r\n    \"city\":\"surat\",\r\n    \"diseas_name\":\"hdgd\",\r\n    \"patient_issue\":\"vhgu\",\r\n    \"hospitalId\":\"670e1d52fcad8422baf7df40\",\r\n    \"doctorId\":\"670e212bfcad8422baf7df4a\",\r\n    \"patientId\":\"670e21cafcad8422baf7df53\",\r\n    // \"doctorTimeSlot\": \"670108eb7956bc53fcd2057f\",\r\n    \"app_time\":\"9:00 PM - 10:00 PM\",\r\n    \"app_date\": \"15 oct 2024\",\r\n    \"specialist\":\"hears\"\r\n\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:9500/v1/bookappointment/create-appointment-book",
+							"host": [
+								"localhost"
+							],
+							"port": "9500",
+							"path": [
+								"v1",
+								"bookappointment",
+								"create-appointment-book"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "doctor-list-by-id",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"doctorId\":\"66ff0fc396dfcfd8e2085c25\",\r\n    \"patientId\":\"66ffb3b47674387563693790\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:9500/v1/bookappointment/docotr-list-by-id",
+							"host": [
+								"localhost"
+							],
+							"port": "9500",
+							"path": [
+								"v1",
+								"bookappointment",
+								"docotr-list-by-id"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "appointment-previously",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"appointmentId\":\"67004cea2a0197d25530ec65\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:9500/v1/bookappointment/appointment-previous",
+							"host": [
+								"localhost"
+							],
+							"port": "9500",
+							"path": [
+								"v1",
+								"bookappointment",
+								"appointment-previous"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "bookappointment-list-status-wise",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"patientId\":\"66ffb3b47674387563693790\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:9500/v1/bookappointment/appointment-list-cancel-date",
+							"host": [
+								"localhost"
+							],
+							"port": "9500",
+							"path": [
+								"v1",
+								"bookappointment",
+								"appointment-list-cancel-date"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "prescription",
+			"item": [
+				{
+					"name": "prescription record access admin flow",
+					"item": [
+						{
+							"name": "getPrescriptionsByPatientId",
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"method": "GET",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"patientId\":\"670e21cafcad8422baf7df53\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "localhost:9500/v1/prescription/prescriptions-patient-id-list",
+									"host": [
+										"localhost"
+									],
+									"port": "9500",
+									"path": [
+										"v1",
+										"prescription",
+										"prescriptions-patient-id-list"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "dashboard-doctor-list",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "localhost:9500/v1/dashboard-adminFlow/doctor-list",
+									"host": [
+										"localhost"
+									],
+									"port": "9500",
+									"path": [
+										"v1",
+										"dashboard-adminFlow",
+										"doctor-list"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "doctor flow",
+					"item": [
+						{
+							"name": "prescription tools",
+							"item": [
+								{
+									"name": "add-prescription",
+									"request": {
+										"method": "POST",
+										"header": [],
+										"body": {
+											"mode": "raw",
+											"raw": "//     {\r\n//   \"patientId\": \"670e2dcf336bdafe1c14ff26\",\r\n//   \"doctorId\": \"670e212bfcad8422baf7df4a\",\r\n//   \"mdecinename\": [\"dolo\", \"zeffil\"],\r\n//   \"strength\": [\"500mg\", \"250mg\"],\r\n//   \"dose\": [\"1 tablet\", \"2 tablets\"],\r\n//   \"duration\": [\"5 days\", \"10 days\"],\r\n//   \"when_to_take\": [\"Morning\", \"Evening\"],\r\n//   \"appointmentId\": \"670e2bf43d0650b52bfc2226\",\r\n//   \"additional_notes\": \"Take with water\",\r\n//   \"description\": \"Prescribed medications\",\r\n//   \"medicinePrices\": [\r\n//     { \"medicineName\": \"dolo\", \"price\": 20 },\r\n//     { \"medicineName\": \"zeffil\", \"price\": 20 }\r\n//   ],\r\n//   \"insuranceCompany\": \"Insurance Co\",\r\n//   \"insurancePlan\": \"Basic Plan\"\r\n// //   \"claimAmount\": 50,\r\n// //   \"claimedAmount\": 30\r\n// }\r\n{\r\n  \"medicinePrices\": [\r\n    { \"medicineName\": \"Paracetamol\", \"price\": 20, \"quantity\": 2 },\r\n    { \"medicineName\": \"Ibuprofen\", \"price\": 25, \"quantity\": 1 }\r\n  ],\r\n  \"patientId\": \"670e21cafcad8422baf7df53\",\r\n  \"doctorId\": \"64bcf0bf6fd8e1a2c9f7e9b4\",\r\n  \"mdecinename\": [\"Paracetamol\", \"Ibuprofen\"],\r\n  \"strength\": [\"500mg\", \"200mg\"],\r\n  \"dose\": [\"1 tablet\", \"2 tablets\"],\r\n  \"duration\": [\"5 days\", \"3 days\"],\r\n  \"when_to_take\": [\"Morning\", \"Afternoon\"],\r\n  \"appointmentId\": \"64bcf0bf6fd8e1a2c9f7e9b2\",\r\n  \"additional_notes\": \"Take after food\",\r\n  \"description\": \"Pain relief prescription\",\r\n  \"insuranceCompany\": \"XYZ Health\",\r\n  \"insurancePlan\": \"Premium\",\r\n  \"report\":\"bloodtest\"\r\n\r\n}\r\n\r\n\r\n",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "localhost:9500/v1/prescription/create-prescription",
+											"host": [
+												"localhost"
+											],
+											"port": "9500",
+											"path": [
+												"v1",
+												"prescription",
+												"create-prescription"
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "old-prescription-list-patient-id",
+									"protocolProfileBehavior": {
+										"disableBodyPruning": true
+									},
+									"request": {
+										"method": "GET",
+										"header": [],
+										"body": {
+											"mode": "raw",
+											"raw": "",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "localhost:9500/v1/prescription/list-patient-id-prescription-old",
+											"host": [
+												"localhost"
+											],
+											"port": "9500",
+											"path": [
+												"v1",
+												"prescription",
+												"list-patient-id-prescription-old"
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "all-view-prescription-prescriptiontool-doctorflow",
+									"protocolProfileBehavior": {
+										"disableBodyPruning": true
+									},
+									"request": {
+										"method": "GET",
+										"header": [],
+										"body": {
+											"mode": "raw",
+											"raw": "{\r\n    \"prescriptionId\":\"670e2329fcad8422baf7df59\"\r\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "localhost:9500/v1/prescription/all-view-prescription",
+											"host": [
+												"localhost"
+											],
+											"port": "9500",
+											"path": [
+												"v1",
+												"prescription",
+												"all-view-prescription"
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "seraching-fromdate-todate-all-patient",
+									"request": {
+										"method": "GET",
+										"header": [],
+										"url": {
+											"raw": "localhost:9500/v1/prescription/list-patient-all-appointment-searchinf-fromdate-todate?fromDate=11-11-2024&toDate=15-11-2024",
+											"host": [
+												"localhost"
+											],
+											"port": "9500",
+											"path": [
+												"v1",
+												"prescription",
+												"list-patient-all-appointment-searchinf-fromdate-todate"
+											],
+											"query": [
+												{
+													"key": "fromDate",
+													"value": "11-11-2024"
+												},
+												{
+													"key": "toDate",
+													"value": "15-11-2024"
+												}
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "today-prescription-patient-id",
+									"protocolProfileBehavior": {
+										"disableBodyPruning": true
+									},
+									"request": {
+										"method": "GET",
+										"header": [],
+										"body": {
+											"mode": "raw",
+											"raw": "",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "localhost:9500/v1/prescription/list-patient-all-appointment",
+											"host": [
+												"localhost"
+											],
+											"port": "9500",
+											"path": [
+												"v1",
+												"prescription",
+												"list-patient-all-appointment"
+											]
+										}
+									},
+									"response": []
+								}
+							]
+						},
+						{
+							"name": "upload file by doctor",
+							"item": [
+								{
+									"name": "prescription-image-upload-by-doctor",
+									"request": {
+										"method": "POST",
+										"header": [],
+										"body": {
+											"mode": "formdata",
+											"formdata": [
+												{
+													"key": "image",
+													"type": "file",
+													"src": "/C:/Users/01/Pictures/Saved Pictures/nature2.jpg"
+												},
+												{
+													"key": "description",
+													"value": "this is prescription upload files",
+													"type": "text"
+												},
+												{
+													"key": "prescriptionId",
+													"value": "670e2329fcad8422baf7df59",
+													"type": "text"
+												}
+											]
+										},
+										"url": {
+											"raw": "localhost:9500/v1/prescription/create-prescription-file-upload",
+											"host": [
+												"localhost"
+											],
+											"port": "9500",
+											"path": [
+												"v1",
+												"prescription",
+												"create-prescription-file-upload"
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "view-prection-image-by-doctor",
+									"protocolProfileBehavior": {
+										"disableBodyPruning": true
+									},
+									"request": {
+										"method": "GET",
+										"header": [],
+										"body": {
+											"mode": "raw",
+											"raw": "{\r\n    \"prescriptionId\":\"670e2329fcad8422baf7df59\"\r\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "localhost:9500/v1/prescription/view-prescription-file-upload",
+											"host": [
+												"localhost"
+											],
+											"port": "9500",
+											"path": [
+												"v1",
+												"prescription",
+												"view-prescription-file-upload"
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "prescription-overview-upload-file",
+									"protocolProfileBehavior": {
+										"disableBodyPruning": true
+									},
+									"request": {
+										"method": "GET",
+										"header": [],
+										"body": {
+											"mode": "raw",
+											"raw": "{\r\n    \"prescriptionId\":\"670e2329fcad8422baf7df59\"\r\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "localhost:9500/v1/prescription/over-view-prescription-file-upload",
+											"host": [
+												"localhost"
+											],
+											"port": "9500",
+											"path": [
+												"v1",
+												"prescription",
+												"over-view-prescription-file-upload"
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "only-description-view-prescription-file-upload-page",
+									"protocolProfileBehavior": {
+										"disableBodyPruning": true
+									},
+									"request": {
+										"method": "GET",
+										"header": [],
+										"body": {
+											"mode": "raw",
+											"raw": "{\r\n    \"prescriptionId\":\"670e2329fcad8422baf7df59\"\r\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "localhost:9500/v1/prescription/description-view-prescription",
+											"host": [
+												"localhost"
+											],
+											"port": "9500",
+											"path": [
+												"v1",
+												"prescription",
+												"description-view-prescription"
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "full-view-prescription-upload-file",
+									"protocolProfileBehavior": {
+										"disableBodyPruning": true
+									},
+									"request": {
+										"method": "GET",
+										"header": [],
+										"body": {
+											"mode": "raw",
+											"raw": "{\r\n    \"prescriptionId\":\"670e2329fcad8422baf7df59\"\r\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "localhost:9500/v1/prescription/full-view-prescription",
+											"host": [
+												"localhost"
+											],
+											"port": "9500",
+											"path": [
+												"v1",
+												"prescription",
+												"full-view-prescription"
+											]
+										}
+									},
+									"response": []
+								}
+							]
+						}
+					]
+				},
+				{
+					"name": "patient flow",
+					"item": [
+						{
+							"name": "prescription access",
+							"item": [
+								{
+									"name": "getPrescriptionsByPatientId Copy",
+									"protocolProfileBehavior": {
+										"disableBodyPruning": true
+									},
+									"request": {
+										"method": "GET",
+										"header": [],
+										"body": {
+											"mode": "raw",
+											"raw": "{\r\n    \"patientId\":\"670e21cafcad8422baf7df53\"\r\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "localhost:9500/v1/prescription/prescriptions-patient-id-list",
+											"host": [
+												"localhost"
+											],
+											"port": "9500",
+											"path": [
+												"v1",
+												"prescription",
+												"prescriptions-patient-id-list"
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "view patient prescription",
+									"protocolProfileBehavior": {
+										"disableBodyPruning": true
+									},
+									"request": {
+										"method": "GET",
+										"header": [],
+										"body": {
+											"mode": "raw",
+											"raw": "{\r\n    \"prescriptionId\":\"670e2329fcad8422baf7df59\"\r\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "localhost:9500/v1/prescription/patient-flow-all-view-prescription",
+											"host": [
+												"localhost"
+											],
+											"port": "9500",
+											"path": [
+												"v1",
+												"prescription",
+												"patient-flow-all-view-prescription"
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "searching-prescriptions-patient-id-list",
+									"protocolProfileBehavior": {
+										"disableBodyPruning": true
+									},
+									"request": {
+										"method": "GET",
+										"header": [],
+										"body": {
+											"mode": "raw",
+											"raw": "{\r\n    \"fromDate\":\"11 oct 2024\",\r\n    \"toDate\":\"17 oct 2024\"\r\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "localhost:9500/v1/prescription/searching-prescriptions-patient-id-list",
+											"host": [
+												"localhost"
+											],
+											"port": "9500",
+											"path": [
+												"v1",
+												"prescription",
+												"searching-prescriptions-patient-id-list"
+											]
+										}
+									},
+									"response": []
+								}
+							]
+						}
+					]
+				},
+				{
+					"name": "patient-detail-lastdate-lasttime-record-access Copy",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"doctorId\":\"670e212bfcad8422baf7df4a\",\r\n    \"patientId\":\"670e21cafcad8422baf7df53\"\r\n\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:9500/v1/prescription/list-patient-id",
+							"host": [
+								"localhost"
+							],
+							"port": "9500",
+							"path": [
+								"v1",
+								"prescription",
+								"list-patient-id"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "get-patient-prescription-id",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"patientId\":\"670e21cafcad8422baf7df53\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:9500/v1/prescription/prescriptions-patient-id",
+							"host": [
+								"localhost"
+							],
+							"port": "9500",
+							"path": [
+								"v1",
+								"prescription",
+								"prescriptions-patient-id"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "list-patient-id-prescription",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:9500/v1/prescription/list-patient-id-prescription",
+							"host": [
+								"localhost"
+							],
+							"port": "9500",
+							"path": [
+								"v1",
+								"prescription",
+								"list-patient-id-prescription"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "telecommunications patient",
+			"item": [
+				{
+					"name": "appointment-schedule-telecomuniction",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:9500/v1/telecomunication-patient/telecom-today-appointment-patient",
+							"host": [
+								"localhost"
+							],
+							"port": "9500",
+							"path": [
+								"v1",
+								"telecomunication-patient",
+								"telecom-today-appointment-patient"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "searching-schedule-appointment-telecommunication",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"fromDate\":\"2 dec 2024\",\r\n    \"toDate\":\"20 dec 2024\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:9500/v1/telecomunication-patient/telecom-schedule-appointment-patient-search?fromDate=2024-10-11&toDate=2024-10-16",
+							"host": [
+								"localhost"
+							],
+							"port": "9500",
+							"path": [
+								"v1",
+								"telecomunication-patient",
+								"telecom-schedule-appointment-patient-search"
+							],
+							"query": [
+								{
+									"key": "fromDate",
+									"value": "2024-10-11"
+								},
+								{
+									"key": "toDate",
+									"value": "2024-10-16"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "serach-patient-name-upcoming-appointment",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"patientName\":\"ch\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:9500/v1/telecomunication-patient/telecom-upcomming-appointment-search-patient-name",
+							"host": [
+								"localhost"
+							],
+							"port": "9500",
+							"path": [
+								"v1",
+								"telecomunication-patient",
+								"telecom-upcomming-appointment-search-patient-name"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "previous-appointment-telecom",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:9500/v1/telecomunication-patient/telecom-previous-appointment-patient",
+							"host": [
+								"localhost"
+							],
+							"port": "9500",
+							"path": [
+								"v1",
+								"telecomunication-patient",
+								"telecom-previous-appointment-patient"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "previous-appointment-telecom",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"patientName\":\"IN\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:9500/v1/telecomunication-patient/telecom-previous-appointment-search-patient-name-patient-flow",
+							"host": [
+								"localhost"
+							],
+							"port": "9500",
+							"path": [
+								"v1",
+								"telecomunication-patient",
+								"telecom-previous-appointment-search-patient-name-patient-flow"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "cancel-appointement-telecom",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"appointmentId\":\"67128c3484ad5470109be332\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:9500/v1/telecomunication-patient/telecom-cancel-appointment-patient",
+							"host": [
+								"localhost"
+							],
+							"port": "9500",
+							"path": [
+								"v1",
+								"telecomunication-patient",
+								"telecom-cancel-appointment-patient"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "cancel-appointment-search-telecom",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:9500/v1/telecomunication-patient/telecom-cancel-appointment-search-patient-name",
+							"host": [
+								"localhost"
+							],
+							"port": "9500",
+							"path": [
+								"v1",
+								"telecomunication-patient",
+								"telecom-cancel-appointment-search-patient-name"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "update-join-call-appointment",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"appointmentId\":\"67128c3484ad5470109be332\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:9500/v1/telecomunication-patient/telecom-create-call-patient",
+							"host": [
+								"localhost"
+							],
+							"port": "9500",
+							"path": [
+								"v1",
+								"telecomunication-patient",
+								"telecom-create-call-patient"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "after-join-call-list-appointment-reminder",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"appointmentId\":\"67128af09a4ad1e175882fee\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:9500/v1/telecomunication-patient/telecom-after-join-call-appointment-reminder-patient",
+							"host": [
+								"localhost"
+							],
+							"port": "9500",
+							"path": [
+								"v1",
+								"telecomunication-patient",
+								"telecom-after-join-call-appointment-reminder-patient"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "patient-details-after-join-call-reminder-next",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "// {\r\n//     \"appointmentId\":\"670e2262fcad8422baf7df57\"\r\n// }",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:9500/v1/telecomunication-patient/telecom-after-join-call-appointment-reminder-patient-details/670e2262fcad8422baf7df57",
+							"host": [
+								"localhost"
+							],
+							"port": "9500",
+							"path": [
+								"v1",
+								"telecomunication-patient",
+								"telecom-after-join-call-appointment-reminder-patient-details",
+								"670e2262fcad8422baf7df57"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "video call",
+			"item": [
+				{
+					"name": "genertae-token",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"userID\":\"670e2329fcad8422baf7df59\",\r\n    \"roomID\": \"room456\",\r\n  \"action\": \"startCall\"  ,\r\n  \"userName\":\"fhrfhf\" \r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:9500/v1/video/getZegoToken",
+							"host": [
+								"localhost"
+							],
+							"port": "9500",
+							"path": [
+								"v1",
+								"video",
+								"getZegoToken"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "chat",
+			"item": [
+				{
+					"name": "chat -crteate",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"message\": \"Sure,\",\r\n  \"doctorId\": \"670e212bfcad8422baf7df4a\" ,  // Use an actual doctorId from your database\r\n  \"patientId\": \"670e21cafcad8422baf7df53\" ,\r\n  \"senderId\":\"670e21cafcad8422baf7df53\" // Use an actual patientId from your database\r\n}\r\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:9500/v1/chat/get-all",
+							"host": [
+								"localhost"
+							],
+							"port": "9500",
+							"path": [
+								"v1",
+								"chat",
+								"get-all"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "get all chat",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:9500/v1/chat/get-all-sms?patientId=670e21cafcad8422baf7df53&doctorId=670e212bfcad8422baf7df4a",
+							"host": [
+								"localhost"
+							],
+							"port": "9500",
+							"path": [
+								"v1",
+								"chat",
+								"get-all-sms"
+							],
+							"query": [
+								{
+									"key": "patientId",
+									"value": "670e21cafcad8422baf7df53"
+								},
+								{
+									"key": "doctorId",
+									"value": "670e212bfcad8422baf7df4a"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "get all chat latest not correct",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:9500/v1/chat/get-all-sms-latest?patientId=670e21cafcad8422baf7df53&doctorId=670e212bfcad8422baf7df4a",
+							"host": [
+								"localhost"
+							],
+							"port": "9500",
+							"path": [
+								"v1",
+								"chat",
+								"get-all-sms-latest"
+							],
+							"query": [
+								{
+									"key": "patientId",
+									"value": "670e21cafcad8422baf7df53"
+								},
+								{
+									"key": "doctorId",
+									"value": "670e212bfcad8422baf7df4a"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "update chat",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NzBlMjEyYmZjYWQ4NDIyYmFmN2RmNGEiLCJlbWFpbCI6Inlhc2hraXNoYW4zMjFAZ21haWwuY29tIiwiaWF0IjoxNzI5MjAxOTI5LCJleHAiOjE3MjkyMDE5ODl9.9Z52Yq24EepJmnyc5WWdVauQ9479xsGPuvFMRLZM_Tw",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "chatId",
+									"value": "67118076ce2ae7f849a78a01",
+									"type": "text"
+								},
+								{
+									"key": "image",
+									"type": "file",
+									"src": "/C:/Users/01/Pictures/Saved Pictures/woman1.jpg"
+								}
+							]
+						},
+						"url": {
+							"raw": "localhost:9500/v1/chat/update-image",
+							"host": [
+								"localhost"
+							],
+							"port": "9500",
+							"path": [
+								"v1",
+								"chat",
+								"update-image"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "update chat pdf",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NzBlMjEyYmZjYWQ4NDIyYmFmN2RmNGEiLCJlbWFpbCI6Inlhc2hraXNoYW4zMjFAZ21haWwuY29tIiwiaWF0IjoxNzI5MjAxOTI5LCJleHAiOjE3MjkyMDE5ODl9.9Z52Yq24EepJmnyc5WWdVauQ9479xsGPuvFMRLZM_Tw",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "chatId",
+									"value": "67118042ce2ae7f849a789ff",
+									"type": "text"
+								},
+								{
+									"key": "pdf",
+									"type": "file",
+									"src": "/C:/Users/01/Downloads/lion1.pdf"
+								}
+							]
+						},
+						"url": {
+							"raw": "localhost:9500/v1/chat/update-image-pdf",
+							"host": [
+								"localhost"
+							],
+							"port": "9500",
+							"path": [
+								"v1",
+								"chat",
+								"update-image-pdf"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "bill",
+			"item": [
+				{
+					"name": "patient-flow-bill",
+					"item": [
+						{
+							"name": "patientflow-unpaid",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "localhost:9500/v1/bill/list-bill-view-unpaid",
+									"host": [
+										"localhost"
+									],
+									"port": "9500",
+									"path": [
+										"v1",
+										"bill",
+										"list-bill-view-unpaid"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "patientflow-bill-paid",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "localhost:9500/v1/bill/list-bill-view-paid",
+									"host": [
+										"localhost"
+									],
+									"port": "9500",
+									"path": [
+										"v1",
+										"bill",
+										"list-bill-view-paid"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "create-bill-by-admin",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"patient_name\":\"670e2dcf336bdafe1c14ff26\",\r\n    \"doctor_name\":\"670e212bfcad8422baf7df4a\",\r\n    \"desription\":\"radhe krishana\",\r\n    \"payment_type\":\"online\",\r\n    \"patient_adress\":\"501,shmrudh avenue\",\r\n    \"phoneNumber\":9913028830,\r\n    \"gender\":\"male\",\r\n    \"age\":\"23\",\r\n    \"disease_name\":\"menigogocoal\",\r\n    \"BillDate\":\"2 oct 2024\",\r\n    \"BillTime\":\"12:19 Pm\",\r\n    \"BillNumber\":102,\r\n    \"discount\":10,\r\n    \"tax\":256,\r\n    \"amount\":2520,\r\n    \"TotalAmount\":2520,\r\n    \"insuranceCompany\":\"acorn craft\",\r\n    \"insurancePlan\":\"health\",\r\n    \"claimAmount\":2050,\r\n    \"claimedAmount\":2050,\r\n    \"prescriptionId\":\"6717e6914461e586ff6a9ffc\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:9500/v1/bill/create-bill",
+							"host": [
+								"localhost"
+							],
+							"port": "9500",
+							"path": [
+								"v1",
+								"bill",
+								"create-bill"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "bill list all",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:9500/v1/bill/list-bill",
+							"host": [
+								"localhost"
+							],
+							"port": "9500",
+							"path": [
+								"v1",
+								"bill",
+								"list-bill"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "search-bill-patient",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:9500/v1/bill/list-bill-search-patient?query=dinesh",
+							"host": [
+								"localhost"
+							],
+							"port": "9500",
+							"path": [
+								"v1",
+								"bill",
+								"list-bill-search-patient"
+							],
+							"query": [
+								{
+									"key": "query",
+									"value": "dinesh"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "update-bill-hospital",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "hospitalId",
+									"value": "670e1d52fcad8422baf7df40",
+									"type": "text"
+								},
+								{
+									"key": "hospital[hospital_adress]",
+									"value": "23/B xyz society near zoo",
+									"type": "text"
+								},
+								{
+									"key": "hospital[phoneNumber]",
+									"value": "986523467",
+									"type": "text"
+								},
+								{
+									"key": "hospital[email]",
+									"value": "krushnamhospital231@gmail.com",
+									"type": "text"
+								},
+								{
+									"key": "billId",
+									"value": "6712e7609242d027c52df605",
+									"type": "text"
+								},
+								{
+									"key": "bill[patient_name]",
+									"value": "ram",
+									"type": "text"
+								},
+								{
+									"key": "bill[doctor_name]",
+									"value": "sita",
+									"type": "text"
+								},
+								{
+									"key": "bill[description]",
+									"value": "ram sita",
+									"type": "text"
+								},
+								{
+									"key": "bill[patient_adress]",
+									"value": "501,shmrudh avenue",
+									"type": "text"
+								},
+								{
+									"key": "bill[payment_type]",
+									"value": "online",
+									"type": "text"
+								},
+								{
+									"key": "bill[gender]",
+									"value": "male",
+									"type": "text"
+								},
+								{
+									"key": "bill[age]",
+									"value": "25",
+									"type": "text"
+								},
+								{
+									"key": "bill[disease_name]",
+									"value": "migration",
+									"type": "text"
+								},
+								{
+									"key": "bill[discount]",
+									"value": "10",
+									"type": "text"
+								},
+								{
+									"key": "bill[tax]",
+									"value": "259",
+									"type": "text"
+								},
+								{
+									"key": "bill[amount]",
+									"value": "2520",
+									"type": "text"
+								},
+								{
+									"key": "bill[TotalAmount]",
+									"value": "2520",
+									"type": "text"
+								},
+								{
+									"key": "bill[hospital_logo]",
+									"type": "file",
+									"src": "/C:/Users/01/Pictures/Saved Pictures/woman3.jpg"
+								}
+							]
+						},
+						"url": {
+							"raw": "localhost:9500/v1/bill/hospital-bill-update",
+							"host": [
+								"localhost"
+							],
+							"port": "9500",
+							"path": [
+								"v1",
+								"bill",
+								"hospital-bill-update"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "bill views",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:9500/v1/bill/list-bill-view",
+							"host": [
+								"localhost"
+							],
+							"port": "9500",
+							"path": [
+								"v1",
+								"bill",
+								"list-bill-view"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "payment",
+			"item": [
+				{
+					"name": "create payment",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"billId\":\"671fbe20ed9b130c98e31ea4\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:9500/v1/payment/pay/671fbe20ed9b130c98e31ea4",
+							"host": [
+								"localhost"
+							],
+							"port": "9500",
+							"path": [
+								"v1",
+								"payment",
+								"pay",
+								"671fbe20ed9b130c98e31ea4"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "show list",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"orderId\":\"6HF93797GM6045310\",\r\n    \"billId\":\"671fbe20ed9b130c98e31ea4\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:9500/v1/payment/capture",
+							"host": [
+								"localhost"
+							],
+							"port": "9500",
+							"path": [
+								"v1",
+								"payment",
+								"capture"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}
