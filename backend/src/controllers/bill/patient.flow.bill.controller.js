@@ -160,7 +160,6 @@ module.exports = {
   billViewOfUnpaid,
     monitorBill,
     searchPatient,billViewOfPaid
-    
     // updateBill,updateHospital,updateHospitalLogo
     // updateHospitalAndBill
   };
