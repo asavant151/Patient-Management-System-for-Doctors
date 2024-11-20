@@ -11,7 +11,7 @@ const PatientSidebar = ({ isOpen, sidebarRef, activeLink }) => {
 
   const logout = () => {
     localStorage.removeItem("token");
-    navigate("/patient-login");
+    navigate("/");
   };
   return (
     <>

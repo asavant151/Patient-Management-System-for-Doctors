@@ -124,7 +124,7 @@ function App() {
             }
           />
           <Route
-            path="/"
+            path="/admin-dashboard"
             element={
               <PrivateRoute>
                 <Dashboard />
@@ -430,7 +430,7 @@ function App() {
           />
           {/* Patient */}
           <Route path="/patient-register" element={<PatientRegister />} />
-          <Route path="/patient-login" element={<PatientLogin />} />
+          <Route path="/" element={<PatientLogin />} />
           <Route
             path="/patient-forgot-password"
             element={<PatientForgotPassword />}

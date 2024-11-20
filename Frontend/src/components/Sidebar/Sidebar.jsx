@@ -24,7 +24,7 @@ const Sidebar = ({ isOpen, sidebarRef, activeLink }) => {
         <ul className="nav flex-column">
           <li className="nav-item">
             <Link
-              to={"/"}
+              to={"/admin-dashboard"}
               className={`nav-link nav-links-1 ${
                 activeLink === "/" || activeLink === "/adminProfile"
                   ? "active"
