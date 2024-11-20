@@ -1,6 +1,6 @@
 import React, { useEffect, useRef, useState } from "react";
 import { Dropdown } from "react-bootstrap";
-import { useLocation, useNavigate, useParams } from "react-router-dom";
+import { NavLink, useLocation, useNavigate, useParams } from "react-router-dom";
 import Sidebar from "../../../components/Sidebar/Sidebar";
 import "./EditDoctor.scss";
 import axios from "axios";
@@ -118,7 +118,7 @@ const EditDoctor = () => {
       const adminId = localStorage.getItem("adminId");
       try {
         const response = await axios.post(
-          `http://localhost:9500/v1/dashboard-adminFlow/doctor-list-id`,
+          `https://live-bakend.onrender.com/v1/dashboard-adminFlow/doctor-list-id`,
           {
             adminId: adminId,
             doctorId: doctorId,
@@ -174,7 +174,7 @@ const EditDoctor = () => {
         formData.append("signatureImage", signatureFile);
       }
       const response = await axios.put(
-        "http://localhost:9500/v1/admin/update-doctor-by-admin",
+        "https://live-bakend.onrender.com/v1/admin/update-doctor-by-admin",
         formData,
         {
           headers: {
@@ -230,7 +230,7 @@ const EditDoctor = () => {
                   </ol>
                 </nav>
               </div>
-              <div className="col-md-6 col-12 d-lg-flex d-block justify-content-lg-end">
+              <div className="col-md-6 col-12 d-lg-flex d-block justify-content-lg-end header-width">
                 <div className="d-lg-flex d-none search-container me-3 mt-lg-0 mt-3">
                   <input
                     type="text"
@@ -330,7 +330,7 @@ const EditDoctor = () => {
                     </Dropdown>
                     <Dropdown>
                       <Dropdown.Toggle variant="link" id="dropdown-user">
-                        <div className="d-flex align-items-center">
+                        <NavLink to={"/adminProfile"} className="d-flex align-items-center">
                           <img
                             src="/assets/images/profile.png"
                             alt="Lincoln Philips"
@@ -340,15 +340,8 @@ const EditDoctor = () => {
                             <h3 className="user-name mb-0">Lincoln Philips</h3>
                             <span className="user-role">Admin</span>
                           </div>
-                        </div>
+                        </NavLink>
                       </Dropdown.Toggle>
-                      <Dropdown.Menu>
-                        <Dropdown.Item href="#/profile">Profile</Dropdown.Item>
-                        <Dropdown.Item href="#/settings">
-                          Settings
-                        </Dropdown.Item>
-                        <Dropdown.Item href="#/logout">Logout</Dropdown.Item>
-                      </Dropdown.Menu>
                     </Dropdown>
                   </div>
                 </div>
@@ -408,7 +401,7 @@ const EditDoctor = () => {
                   </Dropdown>
                   <Dropdown>
                     <Dropdown.Toggle variant="link" id="dropdown-user">
-                      <div className="d-flex align-items-center">
+                      <NavLink to={"/adminProfile"} className="d-flex align-items-center">
                         <img
                           src="/assets/images/profile.png"
                           alt="Lincoln Philips"
@@ -418,13 +411,8 @@ const EditDoctor = () => {
                           <h3 className="user-name mb-0">Lincoln Philips</h3>
                           <span className="user-role">Admin</span>
                         </div>
-                      </div>
+                      </NavLink>
                     </Dropdown.Toggle>
-                    <Dropdown.Menu>
-                      <Dropdown.Item href="#/profile">Profile</Dropdown.Item>
-                      <Dropdown.Item href="#/settings">Settings</Dropdown.Item>
-                      <Dropdown.Item href="#/logout">Logout</Dropdown.Item>
-                    </Dropdown.Menu>
                   </Dropdown>
                 </div>
               </div>

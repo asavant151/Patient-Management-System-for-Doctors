@@ -1,5 +1,5 @@
 import React, { useEffect, useRef, useState } from "react";
-import { useLocation } from "react-router-dom";
+import { NavLink, useLocation } from "react-router-dom";
 import html2canvas from "html2canvas";
 import PatientSidebar from "../../../components/PatientSidebar/PatientSidebar";
 import { Dropdown, Modal } from "react-bootstrap";
@@ -21,7 +21,7 @@ const PrescriptionCard = ({
         <h5 className="mb-0">{doctor}</h5>
         <div className="d-flex align-items-center">
           <button className="btn p-0" onClick={handlePrescriptionPreview}>
-            <img src="./assets/images/eye-gray.svg" alt="Print" />
+            <img src="/assets/images/eye-gray.svg" alt="Print" />
           </button>
         </div>
       </div>
@@ -208,7 +208,7 @@ const PersonalHealthRecordPrescription = () => {
                   </ol>
                 </nav>
               </div>
-              <div className="col-md-6 col-12 d-lg-flex d-block justify-content-lg-end">
+              <div className="col-md-6 col-12 d-lg-flex d-block justify-content-lg-end header-width">
                 <div className="d-lg-flex d-none search-container me-3 mt-lg-0 mt-3">
                   <input
                     type="text"
@@ -303,7 +303,7 @@ const PersonalHealthRecordPrescription = () => {
                     </Dropdown>
                     <Dropdown>
                       <Dropdown.Toggle variant="link" id="dropdown-user">
-                        <div className="d-flex align-items-center">
+                        <NavLink to={"/adminProfile"} className="d-flex align-items-center">
                           <img
                             src="/assets/images/profile.png"
                             alt="Lincoln Philips"
@@ -313,15 +313,8 @@ const PersonalHealthRecordPrescription = () => {
                             <h3 className="user-name mb-0">Lincoln Philips</h3>
                             <span className="user-role">Admin</span>
                           </div>
-                        </div>
+                        </NavLink>
                       </Dropdown.Toggle>
-                      <Dropdown.Menu>
-                        <Dropdown.Item href="#/profile">Profile</Dropdown.Item>
-                        <Dropdown.Item href="#/settings">
-                          Settings
-                        </Dropdown.Item>
-                        <Dropdown.Item href="#/logout">Logout</Dropdown.Item>
-                      </Dropdown.Menu>
                     </Dropdown>
                   </div>
                 </div>
@@ -376,7 +369,7 @@ const PersonalHealthRecordPrescription = () => {
                   </Dropdown>
                   <Dropdown>
                     <Dropdown.Toggle variant="link" id="dropdown-user">
-                      <div className="d-flex align-items-center">
+                      <NavLink to={"/adminProfile"} className="d-flex align-items-center">
                         <img
                           src="/assets/images/profile.png"
                           alt="Lincoln Philips"
@@ -386,13 +379,8 @@ const PersonalHealthRecordPrescription = () => {
                           <h3 className="user-name mb-0">Lincoln Philips</h3>
                           <span className="user-role">Admin</span>
                         </div>
-                      </div>
+                      </NavLink>
                     </Dropdown.Toggle>
-                    <Dropdown.Menu>
-                      <Dropdown.Item href="#/profile">Profile</Dropdown.Item>
-                      <Dropdown.Item href="#/settings">Settings</Dropdown.Item>
-                      <Dropdown.Item href="#/logout">Logout</Dropdown.Item>
-                    </Dropdown.Menu>
                   </Dropdown>
                 </div>
               </div>
@@ -475,7 +463,7 @@ const PersonalHealthRecordPrescription = () => {
               </div>
               <div className="col-md-6">
                 <p>
-                  <strong>Prescription Date:</strong>{" "}
+                  <strong>Prescription Date:</strong>
                   {new Date().toLocaleDateString()}
                 </p>
                 <p>
@@ -541,7 +529,7 @@ const PersonalHealthRecordPrescription = () => {
             <p>
               Lorem Ipsum is simply dummy text of the printing and typesetting
               industry. Lorem Ipsum has been the industry's standard dummy text
-              ever since the{" "}
+              ever since the
             </p>
           </div>
           <div className="d-flex justify-content-between align-items-center">

@@ -40,7 +40,7 @@ const Register = () => {
       console.log("Form values:", values);
 
       const response = await axios.post(
-        "http://localhost:9500/v1/admin/create-admin",
+        "https://live-bakend.onrender.com/v1/admin/create-admin",
         {
           first_name: values.first_name,
           last_name: values.last_name,
@@ -113,7 +113,7 @@ const Register = () => {
   const fetchHospitals = async () => {
     try {
       const response = await axios.get(
-        "http://localhost:9500/v1/hospital/get-hospitals"
+        "https://live-bakend.onrender.com/v1/hospital/get-hospitals"
       );
       setHospitals(response.data.data);
     } catch (error) {
@@ -359,13 +359,13 @@ const Register = () => {
                       >
                         {showPassword ? (
                           <img
-                            src="./assets/images/eye-slash.svg"
+                            src="/assets/images/eye-slash.svg"
                             alt="eye-slash"
                             className="img-fluid"
                           />
                         ) : (
                           <img
-                            src="./assets/images/eye.svg"
+                            src="/assets/images/eye.svg"
                             alt="eye"
                             className="img-fluid"
                           />
@@ -398,13 +398,13 @@ const Register = () => {
                       >
                         {showConfirmPassword ? (
                           <img
-                            src="./assets/images/eye-slash.svg"
+                            src="/assets/images/eye-slash.svg"
                             alt="eye-slash"
                             className="img-fluid"
                           />
                         ) : (
                           <img
-                            src="./assets/images/eye.svg"
+                            src="/assets/images/eye.svg"
                             alt="eye"
                             className="img-fluid"
                           />

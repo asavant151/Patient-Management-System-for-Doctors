@@ -1,8 +1,13 @@
 import React from "react";
 import "./DoctorSidebar.scss";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 const DoctorSidebar = ({ isOpen, sidebarRef, activeLink }) => {
+  const navigate = useNavigate();
+  const logout = () => {
+    localStorage.removeItem("token");
+    navigate("/doctor-login");
+  };
   return (
     <>
       <div
@@ -67,7 +72,7 @@ const DoctorSidebar = ({ isOpen, sidebarRef, activeLink }) => {
               <li>
                 <Link
                   to={"/prescription-tools/create"}
-                  className={`nav-link ${
+                  className={`${
                     activeLink === "/prescription-tools/create" ||
                     activeLink === "/prescription-tools/create/details"
                       ? "active"
@@ -80,7 +85,7 @@ const DoctorSidebar = ({ isOpen, sidebarRef, activeLink }) => {
               <li>
                 <Link
                   to={"/prescription-tools/manage"}
-                  className={`nav-link ${
+                  className={`${
                     activeLink === "/prescription-tools/manage" ? "active" : ""
                   }`}
                 >
@@ -112,9 +117,9 @@ const DoctorSidebar = ({ isOpen, sidebarRef, activeLink }) => {
           </li>
         </ul>
         <div className="logout-section">
-          <a href="#logout" className="nav-link nav-links-6">
+          <button className="nav-link nav-links-6" onClick={logout}>
             Logout
-          </a>
+          </button>
         </div>
       </div>
     </>

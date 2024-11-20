@@ -1,6 +1,6 @@
 import React, { useEffect, useRef, useState } from "react";
 import "./PrescriptionAccess.scss";
-import { useLocation } from "react-router-dom";
+import { NavLink, useLocation } from "react-router-dom";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import html2canvas from "html2canvas";
@@ -23,10 +23,10 @@ const PrescriptionCard = ({
         <h5 className="mb-0">{doctor}</h5>
         <div className="d-flex align-items-center">
           <button className="btn p-0 me-2">
-            <img src="./assets/images/download-icon.svg" alt="Download" />
+            <img src="/assets/images/download-icon.svg" alt="Download" />
           </button>
           <button className="btn p-0" onClick={handlePrescriptionPreview}>
-            <img src="./assets/images/eye-gray.svg" alt="Print" />
+            <img src="/assets/images/eye-gray.svg" alt="Print" />
           </button>
         </div>
       </div>
@@ -49,7 +49,7 @@ const PrescriptionCard = ({
         </div>
         <div className="prescription-images-box mt-3">
           <img
-            src="./assets/images/prescription-placeholder.png"
+            src="/assets/images/prescription-placeholder.png"
             alt="Prescription"
             className="img-fluid"
           />
@@ -104,7 +104,7 @@ const CustomDateRangeSelector = ({
       />
       {startDate && endDate && (
         <button className="btn reset-dates-btn" onClick={resetDates}>
-          <img src="./assets/images/cross-icon.svg" alt="Reset" />
+          <img src="/assets/images/cross-icon.svg" alt="Reset" />
         </button>
       )}
     </div>
@@ -277,7 +277,7 @@ const PrescriptionAccess = () => {
                   </ol>
                 </nav>
               </div>
-              <div className="col-md-6 col-12 d-lg-flex d-block justify-content-lg-end">
+              <div className="col-md-6 col-12 d-lg-flex d-block justify-content-lg-end header-width">
                 <div className="d-lg-flex d-none search-container me-3 mt-lg-0 mt-3">
                   <input
                     type="text"
@@ -372,7 +372,7 @@ const PrescriptionAccess = () => {
                     </Dropdown>
                     <Dropdown>
                       <Dropdown.Toggle variant="link" id="dropdown-user">
-                        <div className="d-flex align-items-center">
+                        <NavLink to={"/adminProfile"} className="d-flex align-items-center">
                           <img
                             src="/assets/images/profile.png"
                             alt="Lincoln Philips"
@@ -382,15 +382,8 @@ const PrescriptionAccess = () => {
                             <h3 className="user-name mb-0">Lincoln Philips</h3>
                             <span className="user-role">Admin</span>
                           </div>
-                        </div>
+                        </NavLink>
                       </Dropdown.Toggle>
-                      <Dropdown.Menu>
-                        <Dropdown.Item href="#/profile">Profile</Dropdown.Item>
-                        <Dropdown.Item href="#/settings">
-                          Settings
-                        </Dropdown.Item>
-                        <Dropdown.Item href="#/logout">Logout</Dropdown.Item>
-                      </Dropdown.Menu>
                     </Dropdown>
                   </div>
                 </div>
@@ -445,7 +438,7 @@ const PrescriptionAccess = () => {
                   </Dropdown>
                   <Dropdown>
                     <Dropdown.Toggle variant="link" id="dropdown-user">
-                      <div className="d-flex align-items-center">
+                      <NavLink to={"/adminProfile"} className="d-flex align-items-center">
                         <img
                           src="/assets/images/profile.png"
                           alt="Lincoln Philips"
@@ -455,13 +448,8 @@ const PrescriptionAccess = () => {
                           <h3 className="user-name mb-0">Lincoln Philips</h3>
                           <span className="user-role">Admin</span>
                         </div>
-                      </div>
+                      </NavLink>
                     </Dropdown.Toggle>
-                    <Dropdown.Menu>
-                      <Dropdown.Item href="#/profile">Profile</Dropdown.Item>
-                      <Dropdown.Item href="#/settings">Settings</Dropdown.Item>
-                      <Dropdown.Item href="#/logout">Logout</Dropdown.Item>
-                    </Dropdown.Menu>
                   </Dropdown>
                 </div>
               </div>
@@ -538,7 +526,7 @@ const PrescriptionAccess = () => {
               </div>
               <div className="col-md-6">
                 <p>
-                  <strong>Prescription Date:</strong>{" "}
+                  <strong>Prescription Date:</strong>
                   {new Date().toLocaleDateString()}
                 </p>
                 <p>
@@ -604,7 +592,7 @@ const PrescriptionAccess = () => {
             <p>
               Lorem Ipsum is simply dummy text of the printing and typesetting
               industry. Lorem Ipsum has been the industry's standard dummy text
-              ever since the{" "}
+              ever since the
             </p>
           </div>
           <div className="d-flex justify-content-between align-items-center">

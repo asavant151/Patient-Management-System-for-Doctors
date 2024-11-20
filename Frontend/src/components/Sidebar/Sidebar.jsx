@@ -1,8 +1,13 @@
 import React from "react";
 import "./Sidebar.scss";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 const Sidebar = ({ isOpen, sidebarRef, activeLink }) => {
+  const navigate = useNavigate();
+  const logout = () => {
+    localStorage.removeItem("token");
+    navigate("/login");
+  };
   return (
     <>
       <div
@@ -21,7 +26,7 @@ const Sidebar = ({ isOpen, sidebarRef, activeLink }) => {
             <Link
               to={"/"}
               className={`nav-link nav-links-1 ${
-                activeLink === "/adminProfile" || activeLink === "/"
+                activeLink === "/" || activeLink === "/adminProfile"
                   ? "active"
                   : ""
               }`}
@@ -73,7 +78,7 @@ const Sidebar = ({ isOpen, sidebarRef, activeLink }) => {
               <li>
                 <Link
                   to={"/billing/monitor-billing"}
-                  className={`nav-link ${
+                  className={`${
                     activeLink === "/billing/monitor-billing" ||
                     activeLink === "/billing/pandingbills" ||
                     activeLink === "/billing/monitor-billing/invoice" ||
@@ -87,26 +92,34 @@ const Sidebar = ({ isOpen, sidebarRef, activeLink }) => {
                       : ""
                   }`}
                 >
+                  <div className="active-indicator">
+                    <span className="dot"></span>
+                    <span className="line"></span>
+                  </div>
                   Monitor Billing
                 </Link>
               </li>
               <li>
                 <Link
                   to={"/billing/insurance-claims"}
-                  className={`nav-link ${
+                  className={`${
                     activeLink === "/billing/insurance-claims" ||
                     activeLink === "/billing/insurance-claims/Invoice"
                       ? "active"
                       : ""
                   }`}
                 >
+                  <div className="active-indicator">
+                    <span className="dot"></span>
+                    <span className="line"></span>
+                  </div>
                   Insurance Claims
                 </Link>
               </li>
               <li>
                 <Link
                   to={"/billing/payment-process"}
-                  className={`nav-link ${
+                  className={`${
                     activeLink === "/billing/payment-process" ||
                     activeLink === "/billing/payment-process/edit" ||
                     activeLink === "/billing/payment-process/invoice"
@@ -114,6 +127,10 @@ const Sidebar = ({ isOpen, sidebarRef, activeLink }) => {
                       : ""
                   }`}
                 >
+                  <div className="active-indicator">
+                    <span className="dot"></span>
+                    <span className="line"></span>
+                  </div>
                   Payment Process
                 </Link>
               </li>
@@ -131,9 +148,9 @@ const Sidebar = ({ isOpen, sidebarRef, activeLink }) => {
           </li>
         </ul>
         <div className="logout-section">
-          <a href="#logout" className="nav-link nav-links-6">
+          <button className="nav-link nav-links-6" onClick={logout}>
             Logout
-          </a>
+          </button>
         </div>
       </div>
     </>

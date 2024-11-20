@@ -32,7 +32,7 @@ const ResetPassword = () => {
 
     try {
       const response = await fetch(
-        "http://localhost:9500/v1/admin/reset-password",
+        "https://live-bakend.onrender.com/v1/admin/reset-password",
         {
           method: "PUT",
           headers: {
@@ -89,13 +89,13 @@ const ResetPassword = () => {
                       >
                         {showPassword ? (
                           <img
-                            src="./assets/images/eye-slash.svg"
+                            src="/assets/images/eye-slash.svg"
                             alt="eye-slash"
                             className="img-fluid"
                           />
                         ) : (
                           <img
-                            src="./assets/images/eye.svg"
+                            src="/assets/images/eye.svg"
                             alt="eye"
                             className="img-fluid"
                           />
@@ -130,13 +130,13 @@ const ResetPassword = () => {
                       >
                         {showPassword2 ? (
                           <img
-                            src="./assets/images/eye-slash.svg"
+                            src="/assets/images/eye-slash.svg"
                             alt="eye-slash"
                             className="img-fluid"
                           />
                         ) : (
                           <img
-                            src="./assets/images/eye.svg"
+                            src="/assets/images/eye.svg"
                             alt="eye"
                             className="img-fluid"
                           />

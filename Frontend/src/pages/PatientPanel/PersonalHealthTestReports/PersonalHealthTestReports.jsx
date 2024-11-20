@@ -1,5 +1,5 @@
 import React, { useEffect, useRef, useState } from "react";
-import { useLocation } from "react-router-dom";
+import { NavLink, useLocation } from "react-router-dom";
 import html2canvas from "html2canvas";
 import PatientSidebar from "../../../components/PatientSidebar/PatientSidebar";
 import { Dropdown, Modal } from "react-bootstrap";
@@ -18,7 +18,7 @@ const PrescriptionCard = ({
         <h5 className="mb-0">{doctor}</h5>
         <div className="d-flex align-items-center">
           <button className="btn p-0" onClick={handlePrescriptionPreview}>
-            <img src="./assets/images/eye-gray.svg" alt="Print" />
+            <img src="/assets/images/eye-gray.svg" alt="Print" />
           </button>
         </div>
       </div>
@@ -193,7 +193,7 @@ const PersonalHealthTestReports = () => {
                   </ol>
                 </nav>
               </div>
-              <div className="col-md-6 col-12 d-lg-flex d-block justify-content-lg-end">
+              <div className="col-md-6 col-12 d-lg-flex d-block justify-content-lg-end header-width">
                 <div className="d-lg-flex d-none search-container me-3 mt-lg-0 mt-3">
                   <input
                     type="text"
@@ -288,7 +288,7 @@ const PersonalHealthTestReports = () => {
                     </Dropdown>
                     <Dropdown>
                       <Dropdown.Toggle variant="link" id="dropdown-user">
-                        <div className="d-flex align-items-center">
+                        <NavLink to={"/adminProfile"} className="d-flex align-items-center">
                           <img
                             src="/assets/images/profile.png"
                             alt="Lincoln Philips"
@@ -298,15 +298,8 @@ const PersonalHealthTestReports = () => {
                             <h3 className="user-name mb-0">Lincoln Philips</h3>
                             <span className="user-role">Admin</span>
                           </div>
-                        </div>
+                        </NavLink>
                       </Dropdown.Toggle>
-                      <Dropdown.Menu>
-                        <Dropdown.Item href="#/profile">Profile</Dropdown.Item>
-                        <Dropdown.Item href="#/settings">
-                          Settings
-                        </Dropdown.Item>
-                        <Dropdown.Item href="#/logout">Logout</Dropdown.Item>
-                      </Dropdown.Menu>
                     </Dropdown>
                   </div>
                 </div>
@@ -361,7 +354,7 @@ const PersonalHealthTestReports = () => {
                   </Dropdown>
                   <Dropdown>
                     <Dropdown.Toggle variant="link" id="dropdown-user">
-                      <div className="d-flex align-items-center">
+                      <NavLink to={"/adminProfile"} className="d-flex align-items-center">
                         <img
                           src="/assets/images/profile.png"
                           alt="Lincoln Philips"
@@ -371,13 +364,8 @@ const PersonalHealthTestReports = () => {
                           <h3 className="user-name mb-0">Lincoln Philips</h3>
                           <span className="user-role">Admin</span>
                         </div>
-                      </div>
+                      </NavLink>
                     </Dropdown.Toggle>
-                    <Dropdown.Menu>
-                      <Dropdown.Item href="#/profile">Profile</Dropdown.Item>
-                      <Dropdown.Item href="#/settings">Settings</Dropdown.Item>
-                      <Dropdown.Item href="#/logout">Logout</Dropdown.Item>
-                    </Dropdown.Menu>
                   </Dropdown>
                 </div>
               </div>
@@ -430,7 +418,7 @@ const PersonalHealthTestReports = () => {
                     src="/assets/images/telecop.png"
                     alt="telecop"
                     className="me-2 img-fluid"
-                  />{" "}
+                  />
                   <small>Accurate | Caring | Instant</small>
                 </p>
               </div>
@@ -441,7 +429,7 @@ const PersonalHealthTestReports = () => {
                   src="/assets/images/phone-icon.png"
                   alt="phone-icon"
                   className="img-fluid test-icon"
-                />{" "}
+                />
                 <small>01234567890 | 09123456789</small>
               </p>
               <p className="mb-0">
@@ -449,7 +437,7 @@ const PersonalHealthTestReports = () => {
                   src="/assets/images/email-icon.png"
                   alt="email-icon"
                   className="img-fluid test-icon"
-                />{" "}
+                />
                 <small>drlogypathlab@drlogy.com</small>
               </p>
             </div>

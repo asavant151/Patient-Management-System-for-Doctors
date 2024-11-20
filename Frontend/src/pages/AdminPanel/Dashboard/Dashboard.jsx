@@ -12,13 +12,23 @@ import {
 import "./Dashboard.scss";
 import Sidebar from "../../../components/Sidebar/Sidebar";
 import PatientsSummary from "../../../components/PatientsSummary/PatientsSummary";
-
+import { NavLink, useNavigate } from "react-router-dom";
+import axios from "axios";
 const Dashboard = () => {
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
+  const [patientCount, setPatientCount] = useState(0);
+  const [doctorCount, setDoctorCount] = useState(0);
+  const [patientNames, setPatientNames] = useState({});
   const [isSearchVisible, setIsSearchVisible] = useState(false);
   const [timeFrame, setTimeFrame] = useState("year");
   const [searchQuery, setSearchQuery] = useState("");
   const [filter, setFilter] = useState("All");
+  const [appointmentCount, setAppointmentCount] = useState(0);
+  const [totalBills, setTotalBills] = useState(0);
+  const [paidBills, setPaidBills] = useState(0);
+  const [bills, setBills] = useState([]);
+
+  const [pendingBills, setPendingBills] = useState(0);
   const [selectedTable, setSelectedTable] = useState("All");
   const [notifications, setNotifications] = useState([
     {
@@ -53,6 +63,8 @@ const Dashboard = () => {
 
   const noNotificationImage = "/assets/images/no-notification.png";
 
+  const navigate = useNavigate();
+
   const clearNotifications = () => {
     setNotifications([]); // Clear the notifications array
   };
@@ -80,7 +92,10 @@ const Dashboard = () => {
       closeSidebar();
     }
   };
+  const storedData = localStorage.getItem("user");
+  const adminname = JSON.parse(storedData)
 
+  const dashbordnm = adminname?.first_name + " " + adminname?.last_name;
   useEffect(() => {
     document.addEventListener("mousedown", handleClickOutside);
 
@@ -140,6 +155,14 @@ const Dashboard = () => {
     }
   };
 
+  const handleCreateBill = () => {
+    navigate("/billing/monitor-billing/createBill");
+  }
+
+  const handleTodayAppList = () => {
+    navigate("/patient-management")
+  }
+
   const doctorAppointments = [
     {
       icon: "Avatar.png",
@@ -183,6 +206,75 @@ const Dashboard = () => {
       appointmentType: "Online",
     },
   ];
+  useEffect(() => {
+    // Fetch all patients data
+    const fetchPatients = async () => {
+      try {
+        const response = await axios.get('https://live-bakend.onrender.com/v1/patient/getAllPatients');
+        setPatientCount(response.data.data.length);
+      } catch (error) {
+        console.error('Error fetching patient data:', error);
+      }
+    };
+
+    fetchPatients();
+
+    // Fetch all doctors data
+    const fetchDoctors = async () => {
+      try {
+        const response = await axios.get('https://live-bakend.onrender.com/v1/doctor/getAlldoctors');
+        setDoctorCount(response.data.data.length);
+      } catch (error) {
+        console.error('Error fetching doctor data:', error);
+      }
+    };
+
+    fetchDoctors();
+
+    // Fetch today's appointments
+    const fetchTodayAppointments = async () => {
+      try {
+        const adminId = localStorage.getItem('adminId');
+        if (!adminId) {
+          console.error('Admin ID not found in localStorage');
+          return;
+        }
+
+        const response = await axios.get(`https://live-bakend.onrender.com/v1/dashboard-adminFlow/appointement-today?adminId=${adminId}`);
+        setAppointmentCount(response.data.message === "No appointments found for today." ? 0 : response.data.data.length || 0);
+      } catch (error) {
+        console.error('Error fetching today’s appointments:', error);
+        setAppointmentCount(0);
+      }
+    };
+
+    fetchTodayAppointments();
+
+    // Fetch bills data
+    const fetchBills = async () => {
+      try {
+        const response = await axios.get('https://live-bakend.onrender.com/v1/bill/list-bill');
+        if (response.data.success) {
+          setBills(response.data.data);
+          const bills = response.data.data;
+          setTotalBills(bills.length);
+          setPaidBills(bills.filter(bill => bill.status === "Paid").length);
+          setPendingBills(bills.filter(bill => bill.status === "Unpaid").length);
+        }
+      } catch (error) {
+        console.error('Error fetching bills:', error);
+      }
+    };
+
+    fetchBills();
+    
+  }, []);
+
+
+  const handleInvoice = (bill) => {
+    console.log(bill,"bsdyfgsdifhdasuh");
+    navigate("/billing/payment-process/invoice", { state: { bill } });
+  };
 
   const filterAppointments = (appointments) => {
     return appointments.filter((appointment) => {
@@ -214,7 +306,7 @@ const Dashboard = () => {
             <div className="container-fluid">
               <div className="row align-items-center">
                 <div className="col-md-6 col-12 mb-lg-0 mb-3 mobile-screen">
-                  <h3 className="user-name mb-0">Good Morning ! Martin</h3>
+                  <h3 className="user-name mb-0">Good Morning ! {dashbordnm ? dashbordnm : "Martin"}</h3>
                   <p className="content">Hope you have a good day</p>
                 </div>
                 <div className="col-md-6 col-12 d-lg-flex d-block justify-content-lg-end">
@@ -233,7 +325,7 @@ const Dashboard = () => {
                     />
                     <Dropdown className="me-3">
                       <Dropdown.Toggle variant="link" id="dropdown-all">
-                      {selectedTable}
+                        {selectedTable}
                       </Dropdown.Toggle>
                       <Dropdown.Menu>
                         <Dropdown.Item onClick={() => setSelectedTable("All")}>
@@ -253,97 +345,92 @@ const Dashboard = () => {
                     </Dropdown>
                   </div>
                   <div className="d-lg-none d-flex align-items-center justify-content-between">
-                  <nav className="breadcrumb-container d-block d-lg-none p-0">
-                    <button className="btn btn-primary" onClick={toggleSidebar}>
-                      <i className="bi bi-text-left"></i>
-                    </button>
-                  </nav>
-                  <div className="d-flex align-items-center justify-content-center">
-                  <button className="btn" onClick={toggleSearch}>
-                    <img
-                      src="/assets/images/search.svg"
-                      alt="search"
-                      className="search-icon"
-                    />
-                  </button>
-                  {isSearchVisible && (
-                    <input
-                      type="text"
-                      className="form-control"
-                      placeholder="Quick Search"
-                      style={{ display: isSearchVisible ? "block" : "none" }}
-                    />
-                  )}
-                  <Dropdown className="notification-dropdown mx-3">
-                    <Dropdown.Toggle
-                      variant="link"
-                      className="notification-toggle"
-                    >
-                      <img
-                        src="/assets/images/notification-bing.svg"
-                        alt="Notification Icon"
-                        className="img-fluid"
-                      />
-                    </Dropdown.Toggle>
-
-                    <Dropdown.Menu className="notification-menu">
-                      <div className="notification-header d-flex justify-content-between align-items-center">
-                        <span>Notification</span>
-                        <button className="close-btn" onClick={clearNotifications}>&times;</button>
-                      </div>
-                      {notifications.length > 0 ? (
-                        notifications.map((notification) => (
-                          <div
-                            key={notification.id}
-                            className="notification-item d-flex align-items-start"
-                          >
-                            <img
-                              src={`/assets/images/${notification.icon}`}
-                              alt={notification.title}
-                              className="notification-icon"
-                            />
-                            <div className="notification-content">
-                              <h5>{notification.title}</h5>
-                              <p>{notification.description}</p>
-                            </div>
-                            <span className="notification-time">
-                              {notification.time}
-                            </span>
-                          </div>
-                        ))
-                      ) : (
-                        <div className="no-notifications text-center">
-                          <img
-                            src={noNotificationImage}
-                            alt="No Notifications"
-                            className="no-notifications-img"
-                          />
-                        </div>
-                      )}
-                    </Dropdown.Menu>
-                  </Dropdown>
-                  <Dropdown>
-                    <Dropdown.Toggle variant="link" id="dropdown-user">
-                      <div className="d-flex align-items-center">
+                    <nav className="breadcrumb-container d-block d-lg-none p-0">
+                      <button className="btn btn-primary" onClick={toggleSidebar}>
+                        <i className="bi bi-text-left"></i>
+                      </button>
+                    </nav>
+                    <div className="d-flex align-items-center justify-content-center">
+                      <button className="btn" onClick={toggleSearch}>
                         <img
-                          src="/assets/images/profile.png"
-                          alt="Lincoln Philips"
-                          className="profile-pic img-fluid"
+                          src="/assets/images/search.svg"
+                          alt="search"
+                          className="search-icon"
                         />
-                        <div className="d-none text-start">
-                          <h3 className="user-name mb-0">Lincoln Philips</h3>
-                          <span className="user-role">Admin</span>
-                        </div>
-                      </div>
-                    </Dropdown.Toggle>
-                    <Dropdown.Menu>
-                      <Dropdown.Item href="#/profile">Profile</Dropdown.Item>
-                      <Dropdown.Item href="#/settings">Settings</Dropdown.Item>
-                      <Dropdown.Item href="#/logout">Logout</Dropdown.Item>
-                    </Dropdown.Menu>
-                  </Dropdown>
+                      </button>
+                      {isSearchVisible && (
+                        <input
+                          type="text"
+                          className="form-control"
+                          placeholder="Quick Search"
+                          style={{ display: isSearchVisible ? "block" : "none" }}
+                        />
+                      )}
+                      <Dropdown className="notification-dropdown mx-3">
+                        <Dropdown.Toggle
+                          variant="link"
+                          className="notification-toggle"
+                        >
+                          <img
+                            src="/assets/images/notification-bing.svg"
+                            alt="Notification Icon"
+                            className="img-fluid"
+                          />
+                        </Dropdown.Toggle>
+
+                        <Dropdown.Menu className="notification-menu">
+                          <div className="notification-header d-flex justify-content-between align-items-center">
+                            <span>Notification</span>
+                            <button className="close-btn" onClick={clearNotifications}>&times;</button>
+                          </div>
+                          {notifications.length > 0 ? (
+                            notifications.map((notification) => (
+                              <div
+                                key={notification.id}
+                                className="notification-item d-flex align-items-start"
+                              >
+                                <img
+                                  src={`/assets/images/${notification.icon}`}
+                                  alt={notification.title}
+                                  className="notification-icon"
+                                />
+                                <div className="notification-content">
+                                  <h5>{notification.title}</h5>
+                                  <p>{notification.description}</p>
+                                </div>
+                                <span className="notification-time">
+                                  {notification.time}
+                                </span>
+                              </div>
+                            ))
+                          ) : (
+                            <div className="no-notifications text-center">
+                              <img
+                                src={noNotificationImage}
+                                alt="No Notifications"
+                                className="no-notifications-img"
+                              />
+                            </div>
+                          )}
+                        </Dropdown.Menu>
+                      </Dropdown>
+                      <Dropdown>
+                        <Dropdown.Toggle variant="link" id="dropdown-user">
+                          <NavLink to={"/adminProfile"} className="d-flex align-items-center">
+                            <img
+                              src="/assets/images/profile.png"
+                              alt="Lincoln Philips"
+                              className="profile-pic img-fluid"
+                            />
+                            <div className="d-none text-start">
+                              <h3 className="user-name mb-0">{dashbordnm ? dashbordnm : "Martin"}</h3>
+                              <span className="user-role">Admin</span>
+                            </div>
+                          </NavLink>
+                        </Dropdown.Toggle>
+                      </Dropdown>
+                    </div>
                   </div>
-                </div>
                   <div className="d-lg-flex d-none align-items-center">
                     <Dropdown className="notification-dropdown">
                       <Dropdown.Toggle
@@ -395,25 +482,18 @@ const Dashboard = () => {
                     </Dropdown>
                     <Dropdown>
                       <Dropdown.Toggle variant="link" id="dropdown-user">
-                        <div className="d-flex align-items-center">
+                        <NavLink to={"/adminProfile"} className="d-flex align-items-center">
                           <img
                             src="/assets/images/profile.png"
                             alt="Lincoln Philips"
                             className="profile-pic img-fluid"
                           />
                           <div className="d-block text-start">
-                            <h3 className="user-name mb-0">Lincoln Philips</h3>
+                            <h3 className="user-name mb-0">{dashbordnm ? dashbordnm : "Martin"}</h3>
                             <span className="user-role">Admin</span>
                           </div>
-                        </div>
+                        </NavLink>
                       </Dropdown.Toggle>
-                      <Dropdown.Menu>
-                        <Dropdown.Item href="#/profile">Profile</Dropdown.Item>
-                        <Dropdown.Item href="#/settings">
-                          Settings
-                        </Dropdown.Item>
-                        <Dropdown.Item href="#/logout">Logout</Dropdown.Item>
-                      </Dropdown.Menu>
                     </Dropdown>
                   </div>
                 </div>
@@ -436,7 +516,7 @@ const Dashboard = () => {
                             />
                             <div className="d-flex flex-column">
                               <h3 className="mb-0">Total Patients</h3>
-                              <p className="stat-number">1500</p>
+                              <p className="stat-number">{patientCount}</p>
                             </div>
                             <span className="line-1"></span>
                           </div>
@@ -450,7 +530,7 @@ const Dashboard = () => {
                             />
                             <div className="d-flex flex-column">
                               <h3 className="mb-0">Total Doctors</h3>
-                              <p className="stat-number">500</p>
+                              <p className="stat-number">{doctorCount}</p>
                             </div>
                             <span className="line-2"></span>
                           </div>
@@ -464,7 +544,7 @@ const Dashboard = () => {
                             />
                             <div className="d-flex flex-column">
                               <h3 className="mb-0">Today's Appointments</h3>
-                              <p className="stat-number">1080</p>
+                              <p className="stat-number">{appointmentCount}</p>
                             </div>
                             <span className="line-3"></span>
                           </div>
@@ -541,7 +621,7 @@ const Dashboard = () => {
                     <div className="col-xl-5 mt-lg-0 mt-4">
                       <div className="d-flex align-items-center justify-content-between mb-4">
                         <h3 className="billing-title">Billing & Payments</h3>
-                        <button className="create-btn">
+                        <button className="create-btn" onClick={handleCreateBill}>
                           <img
                             src="./assets/images/add.svg"
                             alt="add"
@@ -552,7 +632,7 @@ const Dashboard = () => {
                       </div>
                       <div className="d-flex align-items-center mb-3">
                         <span className="circle"></span>
-                        <p className="pending-text">Pending Bills: 50</p>
+                        <p className="pending-text">Pending Bills: {pendingBills}</p>
                       </div>
                       <div className="table-responsive">
                         <table className="table">
@@ -566,77 +646,37 @@ const Dashboard = () => {
                             </tr>
                           </thead>
                           <tbody className="text-center">
-                            {[
-                              {
-                                billNo: 5654,
-                                patientName: "Charlie Vaccaro",
-                                disease: "Colds and Flu",
-                                status: "Paid",
-                              },
-                              {
-                                billNo: 5655,
-                                patientName: "James George",
-                                disease: "Conjunctivitis",
-                                status: "Unpaid",
-                              },
-                              {
-                                billNo: 5656,
-                                patientName: "Craig Torff",
-                                disease: "Allergies",
-                                status: "Paid",
-                              },
-                              {
-                                billNo: 5657,
-                                patientName: "Chance Lipshutz",
-                                disease: "Diarrhea",
-                                status: "Unpaid",
-                              },
-                              {
-                                billNo: 5658,
-                                patientName: "Gustavo Saris",
-                                disease: "Headaches",
-                                status: "Paid",
-                              },
-                              {
-                                billNo: 5659,
-                                patientName: "Carter Bator",
-                                disease: "Mononucleosis",
-                                status: "Unpaid",
-                              },
-                              {
-                                billNo: 5660,
-                                patientName: "Kadin Schleifer",
-                                disease: "Stomach Aches",
-                                status: "Paid",
-                              },
-                            ].map((row, index) => (
-                              <tr key={index} className="border-b">
-                                <td className="bill-no py-3">{row.billNo}</td>
-                                <td className="patient-name py-3">
-                                  {row.patientName}
-                                </td>
-                                <td className="patient-name py-3">
-                                  {row.disease}
-                                </td>
-                                <td
-                                  className={`status-btn py-3 ${
-                                    row.status === "Paid"
-                                      ? "paid-btn"
-                                      : "unpaid-btn"
-                                  }`}
-                                >
-                                  <span>{row.status}</span>
-                                </td>
-                                <td className="action-btn py-3">
-                                  <img
-                                    src="./assets/images/eye-blue.svg"
-                                    alt="eye-blue"
-                                    className="img-fluid"
-                                  />
-                                </td>
-                              </tr>
-                            ))}
-                          </tbody>
+  {bills.map((bill, index) => {
+    return (
+      <tr key={index} className="border-b">
+        <td className="bill-no py-3">{bill.BillNumber || 'N/A'}</td>
+        <td className="patient-name py-3">
+          {bill.patient_name || 'Unknown Patient'}
+        </td>
+        <td className="patient-name py-3">
+          {bill.disease_name || 'N/A'}
+        </td>
+        <td className={`status-btn py-3 ${bill.status === "Paid" ? "paid-btn" : "unpaid-btn"}`}>
+          <span>{bill.status === "Paid" ? "Paid" : "Pending"}</span>
+        </td>
+        <td className="action-btn py-3">
+          <button
+            className="bg-transparent mx-md-3 mx-0 my-md-0 my-3"
+            onClick={() => handleInvoice(bill)}
+            style={{ border: "none", background: "transparent", cursor: "pointer" }}
+          >
+            <img
+              src="/assets/images/view-icon-box.svg"
+              alt="view-icon-box"
+              className="img-fluid"
+            />
+          </button>
+        </td>
+      </tr>
+    );
+  })}
+</tbody>
+
                         </table>
                       </div>
                     </div>
@@ -647,7 +687,7 @@ const Dashboard = () => {
                         <h5 className="billing-title">
                           Today's Appointments List
                         </h5>
-                        <button className="view-btn" type="button">
+                        <button className="view-btn" type="button" onClick={handleTodayAppList}>
                           View All
                         </button>
                       </div>
@@ -758,13 +798,13 @@ const Dashboard = () => {
                                 <th>Qualification</th>
                                 <th>Specialty</th>
                                 <th className="text-center">
-                                Working Time
+                                  Working Time
                                 </th>
                                 <th className="text-center">
-                                Patient Check Up Time
+                                  Patient Check Up Time
                                 </th>
                                 <th className="text-center">
-                                Break Time
+                                  Break Time
                                 </th>
                                 <th className="text-center">Action</th>
                               </tr>
@@ -788,15 +828,15 @@ const Dashboard = () => {
                                         {appointment.doctorName}
                                       </td>
                                       <td><img
-                                          src={`./assets/images/${appointment.gender}`}
-                                          alt={appointment.doctorName}
-                                          style={{
-                                            width: "30px",
-                                            height: "30px",
-                                            marginRight: "10px",
-                                          }}
-                                          className="img-fluid"
-                                        /></td>
+                                        src={`./assets/images/${appointment.gender}`}
+                                        alt={appointment.doctorName}
+                                        style={{
+                                          width: "30px",
+                                          height: "30px",
+                                          marginRight: "10px",
+                                        }}
+                                        className="img-fluid"
+                                      /></td>
                                       <td>{appointment.qualification}</td>
                                       <td>{appointment.specialty}</td>
                                       <td className="text-center appo-time">
@@ -861,7 +901,7 @@ const Dashboard = () => {
                                           }}
                                           className="img-fluid"
                                         />
-                                        {appointment.patientName}
+                                        {appointment.patient_Name}
                                       </td>
                                       <td>{appointment.patientIssue}</td>
                                       <td>{appointment.doctorName}</td>
@@ -871,12 +911,11 @@ const Dashboard = () => {
                                       </td>
                                       <td className="text-center appo-badge">
                                         <span
-                                          className={`badge badge-${
-                                            appointment.appointmentType ===
+                                          className={`badge badge-${appointment.appointmentType ===
                                             "Onsite"
-                                              ? "primary"
-                                              : "warning"
-                                          }`}
+                                            ? "primary"
+                                            : "warning"
+                                            }`}
                                         >
                                           {appointment.appointmentType}
                                         </span>
@@ -916,13 +955,13 @@ const Dashboard = () => {
                                 <th>Qualification</th>
                                 <th>Specialty</th>
                                 <th className="text-center">
-                                Working Time
+                                  Working Time
                                 </th>
                                 <th className="text-center">
-                                Patient Check Up Time
+                                  Patient Check Up Time
                                 </th>
                                 <th className="text-center">
-                                Break Time
+                                  Break Time
                                 </th>
                                 <th className="text-center">Action</th>
                               </tr>
@@ -946,15 +985,15 @@ const Dashboard = () => {
                                         {appointment.doctorName}
                                       </td>
                                       <td><img
-                                          src={`./assets/images/${appointment.gender}`}
-                                          alt={appointment.doctorName}
-                                          style={{
-                                            width: "30px",
-                                            height: "30px",
-                                            marginRight: "10px",
-                                          }}
-                                          className="img-fluid"
-                                        /></td>
+                                        src={`./assets/images/${appointment.gender}`}
+                                        alt={appointment.doctorName}
+                                        style={{
+                                          width: "30px",
+                                          height: "30px",
+                                          marginRight: "10px",
+                                        }}
+                                        className="img-fluid"
+                                      /></td>
                                       <td>{appointment.qualification}</td>
                                       <td>{appointment.specialty}</td>
                                       <td className="text-center appo-time">
@@ -1035,12 +1074,11 @@ const Dashboard = () => {
                                       </td>
                                       <td className="text-center appo-badge">
                                         <span
-                                          className={`badge badge-${
-                                            appointment.appointmentType ===
+                                          className={`badge badge-${appointment.appointmentType ===
                                             "Onsite"
-                                              ? "primary"
-                                              : "warning"
-                                          }`}
+                                            ? "primary"
+                                            : "warning"
+                                            }`}
                                         >
                                           {appointment.appointmentType}
                                         </span>
@@ -1076,4 +1114,4 @@ const Dashboard = () => {
   );
 };
 
-export default Dashboard;
+export default Dashboard;

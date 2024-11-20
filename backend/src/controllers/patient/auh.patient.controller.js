@@ -302,6 +302,34 @@ const forgotPass = async (req, res) => {
   }
 };
 
+const getAllPatients = async (req, res) => {
+  try {
+    // Fetch all patients using patientService or directly with the Patient model
+    const patients = await Patient.find({}); // Fetch all patients from the database
+
+    if (!patients || patients.length === 0) {
+      return res.status(404).json({
+        success: false,
+        message: "No patients found",
+      });
+    }
+
+    // Respond with the list of patients
+    res.status(200).json({
+      success: true,
+      message: "Patients retrieved successfully",
+      data: patients, // Send the list of patients
+      status: 200,
+    });
+  } catch (error) {
+    // Handle errors
+    res.status(500).json({
+      success: false,
+      message: "Failed to retrieve patients",
+      error: error.message,
+    });
+  }
+};
 
 
 // /* ------------------------------- VERIFY OTP ------------------------------- */
@@ -464,4 +492,5 @@ module.exports = {
   verifyOtp,
   resetPassword,
   changePassword,
+  getAllPatients
 };

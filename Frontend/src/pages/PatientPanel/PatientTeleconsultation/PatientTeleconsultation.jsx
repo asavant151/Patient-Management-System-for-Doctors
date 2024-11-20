@@ -1,6 +1,6 @@
 import React, { useEffect, useRef, useState } from "react";
 import { Button, Dropdown, Form, Modal, Tab, Tabs } from "react-bootstrap";
-import { useLocation, useNavigate } from "react-router-dom";
+import { NavLink, useLocation, useNavigate } from "react-router-dom";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import "./PatientTeleconsultation.scss";
@@ -47,7 +47,7 @@ const CustomDateRangeSelector = ({
       />
       {startDate && endDate && (
         <Button variant="link" className="reset-dates-btn" onClick={resetDates}>
-          <img src="./assets/images/cross-icon.svg" alt="Reset" />
+          <img src="/assets/images/cross-icon.svg" alt="Reset" />
         </Button>
       )}
     </div>
@@ -375,7 +375,7 @@ const PatientTeleconsultation = () => {
               src="/assets/images/calendar-remove.svg"
               alt="calendar-remove"
               className="img-fluid me-2"
-            />{" "}
+            />
             Cancel
           </button>
 
@@ -388,7 +388,7 @@ const PatientTeleconsultation = () => {
               src="/assets/images/call-calling.svg"
               alt="call-calling"
               className="img-fluid me-2"
-            />{" "}
+            />
             Join Call
           </button>
         </div>
@@ -551,7 +551,7 @@ const PatientTeleconsultation = () => {
               src="/assets/images/calendar-remove.svg"
               alt="calendar-remove"
               className="img-fluid me-2"
-            />{" "}
+            />
             Cancel
           </button>
 
@@ -564,7 +564,7 @@ const PatientTeleconsultation = () => {
               src="/assets/images/call-calling.svg"
               alt="call-calling"
               className="img-fluid me-2"
-            />{" "}
+            />
             Join Call
           </button>
         </div>
@@ -918,7 +918,7 @@ const PatientTeleconsultation = () => {
               src="/assets/images/appointment-yellow.svg"
               alt="appointment-yellow"
               className="img-fluyid me-2"
-            />{" "}
+            />
             This patient wants to meet you
           </div>
           <div className="row mb-2">
@@ -1011,7 +1011,7 @@ const PatientTeleconsultation = () => {
                   </ol>
                 </nav>
               </div>
-              <div className="col-md-6 col-12 d-lg-flex d-block justify-content-lg-end">
+              <div className="col-md-6 col-12 d-lg-flex d-block justify-content-lg-end header-width">
                 <div className="d-lg-flex d-none search-container me-3 mt-lg-0 mt-3">
                   <input
                     type="text"
@@ -1106,7 +1106,7 @@ const PatientTeleconsultation = () => {
                     </Dropdown>
                     <Dropdown>
                       <Dropdown.Toggle variant="link" id="dropdown-user">
-                        <div className="d-flex align-items-center">
+                        <NavLink to={"/adminProfile"} className="d-flex align-items-center">
                           <img
                             src="/assets/images/profile.png"
                             alt="Lincoln Philips"
@@ -1116,15 +1116,8 @@ const PatientTeleconsultation = () => {
                             <h3 className="user-name mb-0">Lincoln Philips</h3>
                             <span className="user-role">Admin</span>
                           </div>
-                        </div>
+                        </NavLink>
                       </Dropdown.Toggle>
-                      <Dropdown.Menu>
-                        <Dropdown.Item href="#/profile">Profile</Dropdown.Item>
-                        <Dropdown.Item href="#/settings">
-                          Settings
-                        </Dropdown.Item>
-                        <Dropdown.Item href="#/logout">Logout</Dropdown.Item>
-                      </Dropdown.Menu>
                     </Dropdown>
                   </div>
                 </div>
@@ -1179,7 +1172,7 @@ const PatientTeleconsultation = () => {
                   </Dropdown>
                   <Dropdown>
                     <Dropdown.Toggle variant="link" id="dropdown-user">
-                      <div className="d-flex align-items-center">
+                      <NavLink to={"/adminProfile"} className="d-flex align-items-center">
                         <img
                           src="/assets/images/profile.png"
                           alt="Lincoln Philips"
@@ -1189,13 +1182,8 @@ const PatientTeleconsultation = () => {
                           <h3 className="user-name mb-0">Lincoln Philips</h3>
                           <span className="user-role">Admin</span>
                         </div>
-                      </div>
+                      </NavLink>
                     </Dropdown.Toggle>
-                    <Dropdown.Menu>
-                      <Dropdown.Item href="#/profile">Profile</Dropdown.Item>
-                      <Dropdown.Item href="#/settings">Settings</Dropdown.Item>
-                      <Dropdown.Item href="#/logout">Logout</Dropdown.Item>
-                    </Dropdown.Menu>
                   </Dropdown>
                 </div>
               </div>

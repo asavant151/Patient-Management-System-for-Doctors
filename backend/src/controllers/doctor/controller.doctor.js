@@ -86,8 +86,9 @@ const updateDoctor = async (req, res) => {
     }
   };
   
-  
+ 
+
   module.exports = {
     updateDoctor
-  
+   
   };

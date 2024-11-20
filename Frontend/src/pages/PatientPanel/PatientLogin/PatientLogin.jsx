@@ -2,10 +2,11 @@ import React, { useState } from "react";
 import { Formik, Form, Field, ErrorMessage } from "formik";
 import axios from "axios";
 import AuthSlider from "../../../components/auth-slider/AuthSlider";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import * as Yup from "yup"; // Ensure you import Yup for validation
 import "./PatientLogin.scss";
 import { loginValidationSchema } from "../../../validation/AuthValidation";
+import toast from "react-hot-toast";
 
 const PatientLogin = () => {
   const [showPassword, setShowPassword] = useState(false);
@@ -13,6 +14,8 @@ const PatientLogin = () => {
   const togglePasswordVisibility = () => {
     setShowPassword(!showPassword);
   };
+
+  const navigate = useNavigate();
 
   const initialValues = {
     email: "",
@@ -23,7 +26,7 @@ const PatientLogin = () => {
   const handleSubmit = async (values) => {
     try {
       const response = await axios.post(
-        "http://localhost:9500/v1/patient/patient-login",
+        "https://live-bakend.onrender.com/v1/patient/patient-login",
         {
           identifier: values.email,
           password: values.password,
@@ -32,6 +35,9 @@ const PatientLogin = () => {
       localStorage.setItem("patientId", response.data.patientId);
       localStorage.setItem("token", response.data.token);
       localStorage.setItem("patient", JSON.stringify(response.data));
+
+      toast.success("Patient Login successful");
+      navigate("/personalHealthRecord");
       // Handle successful login (e.g., save token, redirect)
     } catch (error) {
       console.error("Login failed:", error.response?.data || error.message);
@@ -90,13 +96,13 @@ const PatientLogin = () => {
                       >
                         {showPassword ? (
                           <img
-                            src="./assets/images/eye-slash.svg"
+                            src="/assets/images/eye-slash.svg"
                             alt="eye-slash"
                             className="img-fluid"
                           />
                         ) : (
                           <img
-                            src="./assets/images/eye.svg"
+                            src="/assets/images/eye.svg"
                             alt="eye"
                             className="img-fluid"
                           />
@@ -138,8 +144,8 @@ const PatientLogin = () => {
                       Login
                     </button>
                     <div className="text-center account-text mt-3">
-                      Don't have an account?{" "}
-                      <Link to={"patient-register"} className="main-link ms-1">
+                      Don't have an account?
+                      <Link to={"/patient-register"} className="main-link ms-1">
                         Registration
                       </Link>
                     </div>

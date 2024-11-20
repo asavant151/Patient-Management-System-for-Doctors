@@ -384,11 +384,12 @@ const getPreviousAppointmentsForPatientInRange = async (req, res) => {
 // Function to fetch all appointments for a particular patient with a specific doctor
 const getPatientAppointmentsWithDoctorPrevious = async (req, res) => {
     try {
+
         const { patientId, doctorId } = req.body; // Get patientId and doctorId from request body
 
         // Validate that both patientId and doctorId are provided
         if (!patientId) {
-            return res.status(400).json({ message: 'patientId is required.' });
+             return res.status(400).json({ message: 'patientId is required.' });
         }
         if (!doctorId) {
             return res.status(400).json({ message: 'doctorId is required.' });

@@ -2,7 +2,7 @@ import React, { useEffect, useRef, useState } from "react";
 import { Dropdown } from "react-bootstrap";
 import DeleteDoctorModal from "../../../components/modals/DeleteDoctorModal";
 import DoctorDetailsDrawer from "../../../components/Drawer/DoctorDetailsDrawer";
-import { useLocation, useNavigate } from "react-router-dom";
+import { NavLink, useLocation, useNavigate } from "react-router-dom";
 import Sidebar from "../../../components/Sidebar/Sidebar";
 import axios from "axios";
 import "./DoctorManagement.scss";
@@ -106,7 +106,7 @@ const DoctorManagement = () => {
     if (selectedDoctor) {
       try {
         await axios.delete(
-          `http://localhost:9500/v1/admin/delete-doc-by-admin`,
+          `https://live-bakend.onrender.com/v1/admin/delete-doc-by-admin`,
           {
             headers: {
               Authorization: `Bearer ${token}`, // Include the token in the headers
@@ -130,7 +130,7 @@ const DoctorManagement = () => {
   const fetchDoctors = async () => {
     try {
       const response = await axios.get(
-        "http://localhost:9500/v1/doctor/getAlldoctors"
+        "https://live-bakend.onrender.com/v1/doctor/getAlldoctors"
       );
       setDoctors(response.data.data);
       setFilteredDoctors(response.data.searchResults);
@@ -151,7 +151,7 @@ const DoctorManagement = () => {
         const token = localStorage.getItem("token");
         axios
           .get(
-            `http://localhost:9500/v1/dashboard-admin/search-doctor-and-patient-list?query=${searchTerm}`,
+            `https://live-bakend.onrender.com/v1/dashboard-admin/search-doctor-and-patient-list?query=${searchTerm}`,
             {
               headers: {
                 Authorization: `Bearer ${token}`, // Include the token in the headers
@@ -175,7 +175,7 @@ const DoctorManagement = () => {
       const adminId = localStorage.getItem("adminId");
   
       const response = await axios.post(
-        `http://localhost:9500/v1/dashboard-adminFlow/doctor-list-id`,
+        `https://live-bakend.onrender.com/v1/dashboard-adminFlow/doctor-list-id`,
         {
           adminId: adminId,
           doctorId: doctorId,
@@ -226,7 +226,7 @@ const DoctorManagement = () => {
                   </ol>
                 </nav>
               </div>
-              <div className="col-md-6 col-12 d-lg-flex d-block justify-content-lg-end">
+              <div className="col-md-6 col-12 d-lg-flex d-block justify-content-lg-end header-width">
                 <div className="d-lg-flex d-none search-container me-3 mt-lg-0 mt-3">
                   <input
                     type="text"
@@ -326,7 +326,7 @@ const DoctorManagement = () => {
                     </Dropdown>
                     <Dropdown>
                       <Dropdown.Toggle variant="link" id="dropdown-user">
-                        <div className="d-flex align-items-center">
+                        <NavLink to={"/adminProfile"} className="d-flex align-items-center">
                           <img
                             src="/assets/images/profile.png"
                             alt="Lincoln Philips"
@@ -336,15 +336,8 @@ const DoctorManagement = () => {
                             <h3 className="user-name mb-0">Lincoln Philips</h3>
                             <span className="user-role">Admin</span>
                           </div>
-                        </div>
+                        </NavLink>
                       </Dropdown.Toggle>
-                      <Dropdown.Menu>
-                        <Dropdown.Item href="#/profile">Profile</Dropdown.Item>
-                        <Dropdown.Item href="#/settings">
-                          Settings
-                        </Dropdown.Item>
-                        <Dropdown.Item href="#/logout">Logout</Dropdown.Item>
-                      </Dropdown.Menu>
                     </Dropdown>
                   </div>
                 </div>
@@ -404,7 +397,7 @@ const DoctorManagement = () => {
                   </Dropdown>
                   <Dropdown>
                     <Dropdown.Toggle variant="link" id="dropdown-user">
-                      <div className="d-flex align-items-center">
+                      <NavLink to={"/adminProfile"} className="d-flex align-items-center">
                         <img
                           src="/assets/images/profile.png"
                           alt="Lincoln Philips"
@@ -414,13 +407,8 @@ const DoctorManagement = () => {
                           <h3 className="user-name mb-0">Lincoln Philips</h3>
                           <span className="user-role">Admin</span>
                         </div>
-                      </div>
+                      </NavLink>
                     </Dropdown.Toggle>
-                    <Dropdown.Menu>
-                      <Dropdown.Item href="#/profile">Profile</Dropdown.Item>
-                      <Dropdown.Item href="#/settings">Settings</Dropdown.Item>
-                      <Dropdown.Item href="#/logout">Logout</Dropdown.Item>
-                    </Dropdown.Menu>
                   </Dropdown>
                 </div>
               </div>
@@ -500,7 +488,7 @@ const DoctorManagement = () => {
                       </td>
                       <td>
                         <img
-                          src={`./assets/images/${doctor.gender}`}
+                          src={`/assets/images/${doctor.gender}`}
                           alt={doctor.firstName}
                           style={{
                             width: "30px",

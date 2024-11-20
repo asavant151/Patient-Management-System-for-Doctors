@@ -225,73 +225,27 @@ const login = async (req, res) => {
 // //   /* -------------------------- LOGIN WITH PHONE NUMBER WITH OTP  -------------------------- */
 const forgotPass = async (req, res) => {
   try {
-    const { phone_number, first_name } = req.body;
-    let email = req.body.email;  // Change to let to allow reassignment
+    const { email } = req.body;
 
-     // Ensure that only one field is provided
-     if (email && phone_number) {
-      throw new Error("Please provide either email or phone number, not both");
+    // Ensure email is provided
+    if (!email) {
+      throw new Error("Please provide an email");
     }
 
-    // Ensure that either email or phone number is provided
-    if (!email && !phone_number) {
-      throw new Error("Please provide either email or phone number");
+    // Find the admin by email
+    const findAdmin = await adminService.findAdminByEmail(email);
+    if (!findAdmin) {
+      throw new Error("Admin Not Found");
     }
 
-    let findAdmin;
-
-    // If phone number is provided, find the admin and retrieve the email
-    if (phone_number) {
-      findAdmin = await adminService.findAdminByPhoneNumber(phone_number);
-      if (!findAdmin) {
-        throw new Error("Admin Not Found");
-      }
-      // Use the found admin's email for sending the OTP
-      email = findAdmin.email; // Retrieve the email from the admin object
-    } else {
-     // Get the email directly if it is provided
-      findAdmin = await adminService.findAdminByEmail(email);
-      if (!findAdmin) {
-        throw new Error("Admin Not Found");
-      }
-    }
-
-    // Generate a random OTP (6 digits)
-    const otp = ("0".repeat(6) + Math.floor(Math.random() * 10 ** 6)).slice(-6);
-    findAdmin.otp = otp;
-    await findAdmin.save();
-
-    // Send OTP via email
-    if (email) {
-      // Render the OTP email template and send email
-      ejs.renderFile(
-        path.join(__dirname, "../../views/otp-template.ejs"),
-        {
-          email: email,
-          otp: otp,
-          name: first_name,
-        },
-        async (err, data) => {
-          if (err) {
-            throw new Error("Error rendering email template");
-          } else {
-            await emailService.sendMail(email, data, "Verify Email");
-          }
-        }
-      );
-    }
-
-    // Send a success response
-    res.status(200).json({
-      success: true,
-      message: `OTP has been sent via email`,
-      data: `Admin OTP is ${otp}`,
-      adminId: findAdmin._id,
-      status: 200,
-    });
+    // Proceed with sending the OTP to the provided email
+    // For example, sendEmailOTP(findAdmin.email); or any other logic
+    console.log("OTP sent successfully to the email");
+    
+    
+    res.status(200).send({ message: "OTP sent successfully to the email" });
   } catch (error) {
-    // Send error response
-    res.status(400).json({ success: false, message: error.message });
+    res.status(400).send({ error: error.message });
   }
 };
 

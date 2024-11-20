@@ -1,42 +1,13 @@
 import React, { useEffect, useRef, useState } from "react";
 import { Dropdown } from "react-bootstrap";
 import Sidebar from "../../../../components/Sidebar/Sidebar";
-import { useLocation } from "react-router-dom";
+import { NavLink, useLocation } from "react-router-dom";
 import "./PaymentProcessInvoice.scss";
 
 const PaymentProcessInvoice = () => {
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
   const [isSearchVisible, setIsSearchVisible] = useState(false);
-  const [notifications, setNotifications] = useState([
-    {
-      id: 1,
-      title: "Change Invoice Theme",
-      description: "Lincoln Philips changed the Invoice Theme.",
-      time: "5 min ago",
-      icon: "theme-icon.svg",
-    },
-    {
-      id: 2,
-      title: "Dr.Bharat",
-      description: "Created a bill by Dr. Bharat.",
-      time: "5 min ago",
-      icon: "theme-icon.svg",
-    },
-    {
-      id: 3,
-      title: "Payment Received",
-      description: "24,668 is the payment done of Miracle Canter.",
-      time: "1:52PM",
-      icon: "payment-received-icon.svg",
-    },
-    {
-      id: 4,
-      title: "Payment Cancelled",
-      description: "24,668 is the payment cancelled of Miracle Canter.",
-      time: "1:52PM",
-      icon: "payment-cancelled-icon.svg",
-    },
-  ]);
+  const [notifications, setNotifications] = useState([]);
 
   const noNotificationImage = "/assets/images/no-notification.png";
 
@@ -45,7 +16,6 @@ const PaymentProcessInvoice = () => {
   };
 
   const sidebarRef = useRef(null);
-  const location = useLocation();
 
   const toggleSidebar = () => {
     setIsSidebarOpen((prevState) => !prevState);
@@ -68,7 +38,13 @@ const PaymentProcessInvoice = () => {
       closeSidebar();
     }
   };
-
+  const location = useLocation();
+  const { bill } = location.state || {}; // Retrieve the passed bill data
+  const billData = location.state?.bill;
+  console.log("bill on invoice page", bill);
+  if (!bill) {
+    return <div>No bill data available</div>;
+  }
   useEffect(() => {
     document.addEventListener("mousedown", handleClickOutside);
 
@@ -76,6 +52,20 @@ const PaymentProcessInvoice = () => {
       document.removeEventListener("mousedown", handleClickOutside);
     };
   }, [isSidebarOpen]);
+
+  const billDate = new Date(billData.BillDate);
+  const formattedBillDate = billDate.toLocaleDateString("en-GB", {
+    year: "numeric",
+    month: "long",
+    day: "numeric",
+  });
+
+  // Format Bill Time
+  const billTime = new Date(billData.BillTime);
+  const formattedBillTime = billTime.toLocaleTimeString("en-GB", {
+    hour: "2-digit",
+    minute: "2-digit",
+  });
 
   return (
     <div className="d-flex">
@@ -211,7 +201,10 @@ const PaymentProcessInvoice = () => {
                     </Dropdown>
                     <Dropdown>
                       <Dropdown.Toggle variant="link" id="dropdown-user">
-                        <div className="d-flex align-items-center">
+                        <NavLink
+                          to={"/adminProfile"}
+                          className="d-flex align-items-center"
+                        >
                           <img
                             src="/assets/images/profile.png"
                             alt="Lincoln Philips"
@@ -221,15 +214,8 @@ const PaymentProcessInvoice = () => {
                             <h3 className="user-name mb-0">Lincoln Philips</h3>
                             <span className="user-role">Admin</span>
                           </div>
-                        </div>
+                        </NavLink>
                       </Dropdown.Toggle>
-                      <Dropdown.Menu>
-                        <Dropdown.Item href="#/profile">Profile</Dropdown.Item>
-                        <Dropdown.Item href="#/settings">
-                          Settings
-                        </Dropdown.Item>
-                        <Dropdown.Item href="#/logout">Logout</Dropdown.Item>
-                      </Dropdown.Menu>
                     </Dropdown>
                   </div>
                 </div>
@@ -289,7 +275,10 @@ const PaymentProcessInvoice = () => {
                   </Dropdown>
                   <Dropdown>
                     <Dropdown.Toggle variant="link" id="dropdown-user">
-                      <div className="d-flex align-items-center">
+                      <NavLink
+                        to={"/adminProfile"}
+                        className="d-flex align-items-center"
+                      >
                         <img
                           src="/assets/images/profile.png"
                           alt="Lincoln Philips"
@@ -299,13 +288,8 @@ const PaymentProcessInvoice = () => {
                           <h3 className="user-name mb-0">Lincoln Philips</h3>
                           <span className="user-role">Admin</span>
                         </div>
-                      </div>
+                      </NavLink>
                     </Dropdown.Toggle>
-                    <Dropdown.Menu>
-                      <Dropdown.Item href="#/profile">Profile</Dropdown.Item>
-                      <Dropdown.Item href="#/settings">Settings</Dropdown.Item>
-                      <Dropdown.Item href="#/logout">Logout</Dropdown.Item>
-                    </Dropdown.Menu>
                   </Dropdown>
                 </div>
               </div>
@@ -337,15 +321,18 @@ const PaymentProcessInvoice = () => {
                 <div className="col-md-6 text-lg-end mt-lg-0 mt-4">
                   <p className="doctor-info-contentbox">
                     <strong className="doctor-info-title">Bill No</strong>
-                    <span className="doctor-info-dot">:</span> 1234
+                    <span className="doctor-info-dot">:</span>
+                    {bill?.billNumber} {billData.BillNumber}
                   </p>
                   <p className="doctor-info-contentbox">
                     <strong className="doctor-info-title">Bill Date</strong>
-                    <span className="doctor-info-dot">:</span> 20 June, 2020
+                    <span className="doctor-info-dot">:</span> {bill.date}
+                    {formattedBillDate}
                   </p>
                   <p className="doctor-info-contentbox">
                     <strong className="doctor-info-title">Bill Time</strong>
-                    <span className="doctor-info-dot">:</span> 10:45 PM
+                    <span className="doctor-info-dot">:</span> {bill.time}
+                    {formattedBillTime}
                   </p>
                 </div>
               </div>
@@ -356,8 +343,8 @@ const PaymentProcessInvoice = () => {
                 <div className="col-md-6">
                   <p className="invoice-details-contentbox">
                     <strong className="invoice-details-title">Name</strong>
-                    <span className="invoice-details-dot">:</span> Miracle
-                    Kenter
+                    <span className="invoice-details-dot">:</span>
+                    {bill.patientName} {billData.patient_name}
                   </p>
                   <p className="invoice-details-contentbox">
                     <strong className="invoice-details-title">Gender</strong>
@@ -378,19 +365,21 @@ const PaymentProcessInvoice = () => {
                     <strong className="invoice-details-title">
                       Disease Name
                     </strong>
-                    <span className="invoice-details-dot">:</span> Jasuam Saris
+                    <span className="invoice-details-dot">:</span>
+                    {bill.diseaseName} {billData.disease_name}
                   </p>
                   <p className="invoice-details-contentbox">
                     <strong className="invoice-details-title">
                       Phone Number
                     </strong>
-                    <span className="invoice-details-dot">:</span> 9757766557
+                    <span className="invoice-details-dot">:</span>
+                    {bill.phoneNumber}
                   </p>
                   <p className="invoice-details-contentbox">
                     <strong className="invoice-details-title">
                       Payment Type
                     </strong>
-                    <span className="invoice-details-dot">:</span>{" "}
+                    <span className="invoice-details-dot">:</span>
                     <span className="text-blue">Online</span>
                   </p>
                 </div>

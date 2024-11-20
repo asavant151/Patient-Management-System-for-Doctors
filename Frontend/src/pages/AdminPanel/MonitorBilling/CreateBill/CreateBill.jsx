@@ -1,35 +1,40 @@
 import React, { useEffect, useRef, useState } from "react";
 import { Dropdown } from "react-bootstrap";
 import Sidebar from "../../../../components/Sidebar/Sidebar";
-import { useLocation } from "react-router-dom";
+import { NavLink, useLocation } from "react-router-dom";
 import { Minus } from "lucide-react";
 import "./CreateBill.scss";
+import axios from "axios";
+import toast from "react-hot-toast";
+
+const initialFormState = {
+  patientName: "",
+  phoneNumber: "",
+  gender: "",
+  age: "",
+  doctorName: "",
+  diseaseName: "",
+  description: "",
+  paymentType: "",
+  billDate: "",
+  billTime: "",
+  billNumber: "",
+  discount: "",
+  tax: "",
+  amount: "",
+  totalAmount: "",
+  address: "",
+  insuranceCompany: "",
+  insurancePlan: "",
+  claimAmount: "",
+  claimedAmount: "",
+  prescriptionId: "6712ad98c336ad16fa2364e3"
+};
 
 const CreateBill = () => {
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
   const [isSearchVisible, setIsSearchVisible] = useState(false);
-  const [formData, setFormData] = useState({
-    patientName: "",
-    phoneNumber: "",
-    gender: "",
-    age: "",
-    doctorName: "",
-    diseaseName: "",
-    description: "",
-    paymentType: "",
-    billDate: "",
-    billTime: "",
-    billNumber: "",
-    discount: "",
-    tax: "",
-    amount: "",
-    totalAmount: "",
-    address: "",
-    insuranceCompany: "",
-    insurancePlan: "",
-    claimAmount: "",
-    claimedAmount: "",
-  });
+  const [formData, setFormData] = useState(initialFormState);
 
   const [notifications, setNotifications] = useState([
     {
@@ -112,8 +117,22 @@ const CreateBill = () => {
     setFormData(newFormData);
   };
 
-  const handleSave = () => {
-    console.log("Form Data:", formData); // Log form data to the console
+  const handleSave = async (event) => {
+    event.preventDefault();
+  
+    try {
+      const response = await axios.post(
+        "https://live-bakend.onrender.com/v1/bill/create-bill",
+        formData
+      );
+      console.log(formData, "formData");
+      
+      console.log("Bill created successfully:", response.data);
+      toast.success(response.data.message);
+      setFormData(initialFormState);
+    } catch (error) {
+      toast.error(error);
+    }
   };
 
   const renderField = (key, value) => {
@@ -218,7 +237,7 @@ const CreateBill = () => {
                   </ol>
                 </nav>
               </div>
-              <div className="col-md-6 col-12 d-lg-flex d-block justify-content-lg-end">
+              <div className="col-md-6 col-12 d-lg-flex d-block justify-content-lg-end header-width">
                 <div className="d-lg-flex d-none search-container me-3 mt-lg-0 mt-3">
                   <input
                     type="text"
@@ -313,7 +332,7 @@ const CreateBill = () => {
                     </Dropdown>
                     <Dropdown>
                       <Dropdown.Toggle variant="link" id="dropdown-user">
-                        <div className="d-flex align-items-center">
+                        <NavLink to={"/adminProfile"} className="d-flex align-items-center">
                           <img
                             src="/assets/images/profile.png"
                             alt="Lincoln Philips"
@@ -323,15 +342,8 @@ const CreateBill = () => {
                             <h3 className="user-name mb-0">Lincoln Philips</h3>
                             <span className="user-role">Admin</span>
                           </div>
-                        </div>
+                        </NavLink>
                       </Dropdown.Toggle>
-                      <Dropdown.Menu>
-                        <Dropdown.Item href="#/profile">Profile</Dropdown.Item>
-                        <Dropdown.Item href="#/settings">
-                          Settings
-                        </Dropdown.Item>
-                        <Dropdown.Item href="#/logout">Logout</Dropdown.Item>
-                      </Dropdown.Menu>
                     </Dropdown>
                   </div>
                 </div>
@@ -386,7 +398,7 @@ const CreateBill = () => {
                   </Dropdown>
                   <Dropdown>
                     <Dropdown.Toggle variant="link" id="dropdown-user">
-                      <div className="d-flex align-items-center">
+                      <NavLink to={"/adminProfile"} className="d-flex align-items-center">
                         <img
                           src="/assets/images/profile.png"
                           alt="Lincoln Philips"
@@ -396,13 +408,8 @@ const CreateBill = () => {
                           <h3 className="user-name mb-0">Lincoln Philips</h3>
                           <span className="user-role">Admin</span>
                         </div>
-                      </div>
+                      </NavLink>
                     </Dropdown.Toggle>
-                    <Dropdown.Menu>
-                      <Dropdown.Item href="#/profile">Profile</Dropdown.Item>
-                      <Dropdown.Item href="#/settings">Settings</Dropdown.Item>
-                      <Dropdown.Item href="#/logout">Logout</Dropdown.Item>
-                    </Dropdown.Menu>
                   </Dropdown>
                 </div>
               </div>
@@ -415,8 +422,8 @@ const CreateBill = () => {
             <form>
               <div className="row">
                 {Object.entries(formData).map(([key, value]) => (
-                  <div className="col-lg-3 col-md-6 col-12 mb-5">
-                    <div className="form-floating position-relative" key={key}>
+                  <div className="col-lg-3 col-md-6 col-12 mb-5"  key={key}>
+                    <div className="form-floating position-relative">
                       {renderField(key, value)}
                       <label htmlFor={key}>
                         {key.charAt(0).toUpperCase() + key.slice(1)}
@@ -487,4 +494,4 @@ const CreateBill = () => {
   );
 };
 
-export default CreateBill;
+export default CreateBill;

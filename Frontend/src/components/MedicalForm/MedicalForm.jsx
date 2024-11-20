@@ -95,7 +95,7 @@ const MedicalForm = () => {
 
           <div className="form-group">
             <label>
-              I the undersigned,{" "}
+              I the undersigned,
               <span className="placeholders">_____________________________</span> Doctor of
               Medicine, see no reason that the above participant, on
               examination, cannot take part in competitive or non-competitive

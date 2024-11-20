@@ -1,12 +1,15 @@
 import React, { useEffect, useRef, useState } from "react";
 import { Dropdown, Modal, Button } from "react-bootstrap";
 import Sidebar from "../../../components/Sidebar/Sidebar";
-import { useLocation, useNavigate } from "react-router-dom";
+import { NavLink, useLocation, useNavigate } from "react-router-dom";
 import "./PaymentProcess.scss";
-
+import axios from "axios";
 const PaymentProcess = () => {
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
   const [isSearchVisible, setIsSearchVisible] = useState(false);
+  const [bills, setBills] = useState([]);
+  const [filteredData, setFilteredData] = useState([]);
+
   const [billingData, setBillingData] = useState([
     {
       billNumber: "5654",
@@ -17,129 +20,10 @@ const PaymentProcess = () => {
       date: "2 Jan, 2022",
       time: "4:30 PM",
     },
-    {
-      billNumber: "5654",
-      patientName: "Talan Press",
-      diseaseName: "Conjunctivitis",
-      phoneNumber: "89564 25462",
-      status: "Unpaid",
-      date: "25 Jan, 2022",
-      time: "4:30 PM",
-    },
-    {
-      billNumber: "5654",
-      patientName: "Alfredo Vaccaro",
-      diseaseName: "Allergies",
-      phoneNumber: "89564 25462",
-      status: "Paid",
-      date: "5 Jan, 2022",
-      time: "4:30 PM",
-    },
-    {
-      billNumber: "5654",
-      patientName: "Giana Press",
-      diseaseName: "Colds and Flu",
-      phoneNumber: "89564 25462",
-      status: "Unpaid",
-      date: "2 Jan, 2022",
-      time: "4:30 PM",
-    },
-    {
-      billNumber: "5654",
-      patientName: "Nolan Botosh",
-      diseaseName: "Diarrhea",
-      phoneNumber: "89564 25462",
-      status: "Paid",
-      date: "6 Jan, 2022",
-      time: "4:30 PM",
-    },
-    {
-      billNumber: "5654",
-      patientName: "Alfredo Vaccaro",
-      diseaseName: "Colds and Flu",
-      phoneNumber: "89564 25462",
-      status: "Unpaid",
-      date: "20 Jan, 2022",
-      time: "4:30 PM",
-    },
-    {
-      billNumber: "5654",
-      patientName: "Rayna Rosser",
-      diseaseName: "Mononucleosis",
-      phoneNumber: "89564 25462",
-      status: "Paid",
-      date: "2 Jun, 2022",
-      time: "4:30 PM",
-    },
-    {
-      billNumber: "5654",
-      patientName: "Alfredo Vaccaro",
-      diseaseName: "Colds and Flu",
-      phoneNumber: "89564 25462",
-      status: "Paid",
-      date: "11 Jan, 2022",
-      time: "4:30 PM",
-    },
-    {
-      billNumber: "5654",
-      patientName: "Alfredo Vaccaro",
-      diseaseName: "Stomach Aches",
-      phoneNumber: "89564 25462",
-      status: "Unpaid",
-      date: "2 Jan, 2022",
-      time: "4:30 PM",
-    },
-    {
-      billNumber: "5654",
-      patientName: "Alfredo Vaccaro",
-      diseaseName: "Stomach Aches",
-      phoneNumber: "89564 25462",
-      status: "Paid",
-      date: "2 Jan, 2022",
-      time: "4:30 PM",
-    },
-    {
-      billNumber: "5654",
-      patientName: "Rayna Rosser",
-      diseaseName: "Mononucleosis",
-      phoneNumber: "89564 25462",
-      status: "Paid",
-      date: "2 Jun, 2022",
-      time: "4:30 PM",
-    },
-    {
-      billNumber: "5654",
-      patientName: "Alfredo Vaccaro",
-      diseaseName: "Colds and Flu",
-      phoneNumber: "89564 25462",
-      status: "Paid",
-      date: "20 Jan, 2022",
-      time: "4:30 PM",
-    },
+
     // Add more data as needed
   ]);
   const [notifications, setNotifications] = useState([
-    {
-      id: 1,
-      title: "Change Invoice Theme",
-      description: "Lincoln Philips changed the Invoice Theme.",
-      time: "5 min ago",
-      icon: "theme-icon.svg",
-    },
-    {
-      id: 2,
-      title: "Dr.Bharat",
-      description: "Created a bill by Dr. Bharat.",
-      time: "5 min ago",
-      icon: "theme-icon.svg",
-    },
-    {
-      id: 3,
-      title: "Payment Received",
-      description: "24,668 is the payment done of Miracle Canter.",
-      time: "1:52PM",
-      icon: "payment-received-icon.svg",
-    },
     {
       id: 4,
       title: "Payment Cancelled",
@@ -150,7 +34,6 @@ const PaymentProcess = () => {
   ]);
   const [showModal, setShowModal] = useState(false);
   const [searchTerm, setSearchTerm] = useState("");
-  const [filteredData, setFilteredData] = useState(billingData);
 
   const sidebarRef = useRef(null);
   const location = useLocation();
@@ -186,6 +69,29 @@ const PaymentProcess = () => {
       closeSidebar();
     }
   };
+  useEffect(() => {
+    // Fetch data from API
+    axios
+      .get("https://live-bakend.onrender.com/v1/bill/list-bill")
+      .then((response) => {
+        if (response.data.success) {
+          const formattedBills = response.data.data.map((bill) => ({
+            billNumber: bill.BillNumber,
+            patientName: bill.patient_name, // Assuming you want the patient name directly
+            diseaseName: bill.disease_name,
+            phoneNumber: bill.phoneNumber,
+            status: bill.status,
+            date: new Date(bill.BillDate).toLocaleDateString(), // Formatting the date
+            time: new Date(bill.BillTime).toLocaleTimeString(), // Formatting the time
+          }));
+          setBills(formattedBills);
+          setFilteredData(formattedBills); // Assuming you want to use the full list for now
+        }
+      })
+      .catch((error) => {
+        console.error("Error fetching bill data:", error);
+      });
+  }, []);
 
   useEffect(() => {
     document.addEventListener("mousedown", handleClickOutside);
@@ -214,8 +120,8 @@ const PaymentProcess = () => {
     setSearchTerm("");
   };
 
-  const handleInvoice = () => {
-    navigate("/billing/payment-process/invoice");
+  const handleInvoice = (bill) => {
+    navigate("/billing/payment-process/invoice", { state: { bill } });
   };
 
   const handleEditBill = () => {
@@ -267,7 +173,10 @@ const PaymentProcess = () => {
                     className="img-fluid"
                   />
                 </button>
-                <button className="bg-transparent mx-md-3 mx-0 my-md-0 my-3" onClick={handleInvoice}>
+                <button
+                  className="bg-transparent mx-md-3 mx-0 my-md-0 my-3"
+                  onClick={() => handleInvoice(bill)}
+                >
                   <img
                     src="/assets/images/view-icon-box.svg"
                     alt="view-icon-box"
@@ -433,7 +342,10 @@ const PaymentProcess = () => {
                     </Dropdown>
                     <Dropdown>
                       <Dropdown.Toggle variant="link" id="dropdown-user">
-                        <div className="d-flex align-items-center">
+                        <NavLink
+                          to={"/adminProfile"}
+                          className="d-flex align-items-center"
+                        >
                           <img
                             src="/assets/images/profile.png"
                             alt="Lincoln Philips"
@@ -443,15 +355,8 @@ const PaymentProcess = () => {
                             <h3 className="user-name mb-0">Lincoln Philips</h3>
                             <span className="user-role">Admin</span>
                           </div>
-                        </div>
+                        </NavLink>
                       </Dropdown.Toggle>
-                      <Dropdown.Menu>
-                        <Dropdown.Item href="#/profile">Profile</Dropdown.Item>
-                        <Dropdown.Item href="#/settings">
-                          Settings
-                        </Dropdown.Item>
-                        <Dropdown.Item href="#/logout">Logout</Dropdown.Item>
-                      </Dropdown.Menu>
                     </Dropdown>
                   </div>
                 </div>
@@ -511,7 +416,10 @@ const PaymentProcess = () => {
                   </Dropdown>
                   <Dropdown>
                     <Dropdown.Toggle variant="link" id="dropdown-user">
-                      <div className="d-flex align-items-center">
+                      <NavLink
+                        to={"/adminProfile"}
+                        className="d-flex align-items-center"
+                      >
                         <img
                           src="/assets/images/profile.png"
                           alt="Lincoln Philips"
@@ -521,13 +429,8 @@ const PaymentProcess = () => {
                           <h3 className="user-name mb-0">Lincoln Philips</h3>
                           <span className="user-role">Admin</span>
                         </div>
-                      </div>
+                      </NavLink>
                     </Dropdown.Toggle>
-                    <Dropdown.Menu>
-                      <Dropdown.Item href="#/profile">Profile</Dropdown.Item>
-                      <Dropdown.Item href="#/settings">Settings</Dropdown.Item>
-                      <Dropdown.Item href="#/logout">Logout</Dropdown.Item>
-                    </Dropdown.Menu>
                   </Dropdown>
                 </div>
               </div>

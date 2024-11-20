@@ -1,7 +1,7 @@
 import React, { useEffect, useRef, useState } from "react";
 import { Dropdown, Tab, Tabs } from "react-bootstrap";
 import Sidebar from "../../../components/Sidebar/Sidebar";
-import { useLocation, useNavigate } from "react-router-dom";
+import { NavLink, useLocation, useNavigate } from "react-router-dom";
 import "./PatientManagement.scss";
 import PatientDetailsModal from "../../../components/modals/PatientDetailsModal/PatientDetailsModal";
 import axios from 'axios';
@@ -44,7 +44,7 @@ const PatientManagement = () => {
       }
 
       const todayResponse = await axios.get(
-        "http://localhost:9500/v1/dashboard-adminFlow/appointement-today",
+        "https://live-bakend.onrender.com/v1/dashboard-adminFlow/appointement-today",
         { params: { adminId: adminId } }
       );
 
@@ -52,7 +52,7 @@ const PatientManagement = () => {
       if (todayResponse.data.appointments && todayResponse.data.appointments.length > 0) {
         const todayAppointments = todayResponse.data.appointments.map(appointment => ({
           id: appointment._id,
-          patientName: `${appointment.patientId.first_name} ${appointment.patientId.last_name}`,
+          // patientName: `${appointment.patientId.first_name} ${appointment.patientId.last_name}`,
           patientIssue: appointment.patient_issue,
           doctorName: appointment.doctorId.firstName,
           diseaseName: appointment.diseas_name,
@@ -85,7 +85,7 @@ const PatientManagement = () => {
       }
 
       const upcomingResponse = await axios.get(
-        "http://localhost:9500/v1/dashboard-adminFlow/appointement-upcomming",
+        "https://live-bakend.onrender.com/v1/dashboard-adminFlow/appointement-upcomming",
         { params: { adminId: adminId } }
       );
 
@@ -93,7 +93,7 @@ const PatientManagement = () => {
       if (upcomingResponse.data.appointments && upcomingResponse.data.appointments.length > 0) {
         const upcomingAppointments = upcomingResponse.data.appointments.map(appointment => ({
           id: appointment._id,
-          patientName: `${appointment.patientId.first_name} ${appointment.patientId.last_name}`,
+          // patientName: `${appointment.patientId.first_name} ${appointment.patientId.last_name}`,
           patientIssue: appointment.patient_issue,
           doctorName: appointment.doctorId.firstName,
           diseaseName: appointment.diseas_name,
@@ -126,7 +126,7 @@ const PatientManagement = () => {
       }
 
       const previousResponse = await axios.get(
-        "http://localhost:9500/v1/dashboard-adminFlow/appointement-previous",
+        "https://live-bakend.onrender.com/v1/dashboard-adminFlow/appointement-previous",
         { params: { adminId: adminId } }
       );
 
@@ -134,7 +134,7 @@ const PatientManagement = () => {
       if (previousResponse.data.appointments && previousResponse.data.appointments.length > 0) {
         const previousAppointments = previousResponse.data.appointments.map(appointment => ({
           id: appointment._id,
-          patientName: `${appointment.patientId.first_name} ${appointment.patientId.last_name}`,
+          // patientName: `${appointment.patientId.first_name} ${appointment.patientId.last_name}`,
           patientIssue: appointment.patient_issue,
           doctorName: appointment.doctorId.firstName,
           diseaseName: appointment.diseas_name,
@@ -167,7 +167,7 @@ const PatientManagement = () => {
       }
 
       const canceledResponse = await axios.get(
-        "http://localhost:9500/v1/dashboard-adminFlow/appointement-cancel",
+        "https://live-bakend.onrender.com/v1/dashboard-adminFlow/appointement-cancel",
         { params: { adminId: adminId } }
       );
 
@@ -175,7 +175,7 @@ const PatientManagement = () => {
       if (canceledResponse.data.appointments && canceledResponse.data.appointments.length > 0) {
         const canceledAppointments = canceledResponse.data.appointments.map(appointment => ({
           id: appointment._id,
-          patientName: `${appointment.patientId.first_name} ${appointment.patientId.last_name}`,
+          // patientName: `${appointment.patientId.first_name} ${appointment.patientId.last_name}`,
           patientIssue: appointment.patient_issue,
           doctorName: appointment.doctorId.firstName,
           diseaseName: appointment.diseas_name,
@@ -439,7 +439,7 @@ const PatientManagement = () => {
                   </ol>
                 </nav>
               </div>
-              <div className="col-md-6 col-12 d-lg-flex d-block justify-content-lg-end">
+              <div className="col-md-6 col-12 d-lg-flex d-block justify-content-lg-end header-width">
                 <div className="d-lg-flex d-none search-container me-3 mt-lg-0 mt-3">
                   <input
                     type="text"
@@ -534,7 +534,7 @@ const PatientManagement = () => {
                     </Dropdown>
                     <Dropdown>
                       <Dropdown.Toggle variant="link" id="dropdown-user">
-                        <div className="d-flex align-items-center">
+                        <NavLink to={"/adminProfile"} className="d-flex align-items-center">
                           <img
                             src="/assets/images/profile.png"
                             alt="Lincoln Philips"
@@ -544,15 +544,8 @@ const PatientManagement = () => {
                             <h3 className="user-name mb-0">Lincoln Philips</h3>
                             <span className="user-role">Admin</span>
                           </div>
-                        </div>
+                        </NavLink>
                       </Dropdown.Toggle>
-                      <Dropdown.Menu>
-                        <Dropdown.Item href="#/profile">Profile</Dropdown.Item>
-                        <Dropdown.Item href="#/settings">
-                          Settings
-                        </Dropdown.Item>
-                        <Dropdown.Item href="#/logout">Logout</Dropdown.Item>
-                      </Dropdown.Menu>
                     </Dropdown>
                   </div>
                 </div>
@@ -607,7 +600,7 @@ const PatientManagement = () => {
                   </Dropdown>
                   <Dropdown>
                     <Dropdown.Toggle variant="link" id="dropdown-user">
-                      <div className="d-flex align-items-center">
+                      <NavLink to={"/adminProfile"} className="d-flex align-items-center">
                         <img
                           src="/assets/images/profile.png"
                           alt="Lincoln Philips"
@@ -617,13 +610,8 @@ const PatientManagement = () => {
                           <h3 className="user-name mb-0">Lincoln Philips</h3>
                           <span className="user-role">Admin</span>
                         </div>
-                      </div>
+                      </NavLink>
                     </Dropdown.Toggle>
-                    <Dropdown.Menu>
-                      <Dropdown.Item href="#/profile">Profile</Dropdown.Item>
-                      <Dropdown.Item href="#/settings">Settings</Dropdown.Item>
-                      <Dropdown.Item href="#/logout">Logout</Dropdown.Item>
-                    </Dropdown.Menu>
                   </Dropdown>
                 </div>
               </div>
@@ -655,11 +643,11 @@ const PatientManagement = () => {
           </Tab>
         ))}
       </Tabs>
-      <PatientDetailsModal
+      {/* <PatientDetailsModal
         open={isModalOpen}
         handleClose={() => setIsModalOpen(false)}
         patient={selectedPatient}
-      />
+      /> */}
         </div>
       </div>
       <PatientDetailsModal

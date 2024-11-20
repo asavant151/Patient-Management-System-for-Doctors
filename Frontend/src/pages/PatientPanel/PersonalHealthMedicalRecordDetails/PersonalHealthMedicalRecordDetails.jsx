@@ -1,21 +1,26 @@
 import React, { useEffect, useRef, useState } from "react";
 import { Dropdown, Tab, Tabs } from "react-bootstrap";
-import { useLocation, useNavigate } from "react-router-dom";
+import { NavLink, useLocation, useNavigate } from "react-router-dom";
 import "./PersonalHealthMedicalRecordDetails.scss";
 import PatientSidebar from "../../../components/PatientSidebar/PatientSidebar";
 import MedicalForm from "../../../components/MedicalForm/MedicalForm";
 import PrescriptionForm from "../../../components/PrescriptionForm/PrescriptionForm";
-
+import axios from "axios";
 const PersonalHealthMedicalRecordDetails = () => {
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
   const [isSearchVisible, setIsSearchVisible] = useState(false);
   const [activeTab, setActiveTab] = useState("AllAppointment");
+  const [appointments, setAppointments] = useState([]);
   const [documents, setDocuments] = useState([
     { id: 1 },
     { id: 2 },
     { id: 3 },
     { id: 4 },
   ]);
+  const patientdata = JSON.parse(localStorage.getItem("patient"));
+  const patientinfo= patientdata.data;
+  console.log( patientdata.data, "patient");
+  const patientId = patientinfo._id; 
   const [prescriptions, setPrescriptions] = useState([
     { id: 1 },
     { id: 2 },
@@ -23,6 +28,21 @@ const PersonalHealthMedicalRecordDetails = () => {
     { id: 4 },
   ]);
 
+  useEffect(() => {
+    const fetchAppointments = async () => {
+      try {
+        const response = await axios.post(
+          "https://live-bakend.onrender.com/v1/patient-flow-personal-health-record/personal-details-list-medical",
+          { patientId } // Pass patientId in the body
+        );
+        setAppointments(response.data); // Update state with the response data
+      } catch (error) {
+        console.error("Error fetching appointments:", error);
+      }
+    };
+
+    fetchAppointments();
+  }, [patientId]);
 
   const sidebarRef = useRef(null);
   const location = useLocation();
@@ -94,151 +114,30 @@ const PersonalHealthMedicalRecordDetails = () => {
     setNotifications([]); // Clear the notifications array
   };
 
-  const appointments = [
-    {
-      type: "Online",
-      hospitalname: "Shamuba Hospital",
-      doctorspeciality: "MBBS",
-      name: "Dr. Ryan Vetrovs",
-      issue: "Feeling Tired",
-      disease: "Viral Infection",
-      date: "2 Jan, 2022",
-      time: "10:10 AM",
-    },
-    {
-      type: "Online",
-      hospitalname: "Shamuba Hospital",
-      doctorspeciality: "MBBS",
-      name: "Dr. Marcus Septimus",
-      issue: "Feeling Tired",
-      disease: "Viral Infection",
-      date: "2 Jan, 2022",
-      time: "10:10 AM",
-    },
-    {
-      type: "Online",
-      hospitalname: "Shamuba Hospital",
-      doctorspeciality: "MBBS",
-      name: "Dr. Alfonso Dokidis",
-      issue: "Feeling Tired",
-      disease: "Viral Infection",
-      date: "2 Jan, 2022",
-      time: "10:10 AM",
-    },
-    {
-      type: "Online",
-      hospitalname: "Shamuba Hospital",
-      doctorspeciality: "MBBS",
-      name: "Dr. Davis Korsgaard",
-      issue: "Feeling Tired",
-      disease: "Viral Infection",
-      date: "2 Jan, 2022",
-      time: "10:10 AM",
-    },
-    {
-      type: "Online",
-      hospitalname: "Shamuba Hospital",
-      doctorspeciality: "MBBS",
-      name: "Dr. Ryan Botosh",
-      issue: "Feeling Tired",
-      disease: "Viral Infection",
-      date: "2 Jan, 2022",
-      time: "10:10 AM",
-    },
-    {
-      type: "Online",
-      hospitalname: "Shamuba Hospital",
-      doctorspeciality: "MBBS",
-      name: "Dr. Nolan Dias",
-      issue: "Feeling Tired",
-      disease: "Viral Infection",
-      date: "2 Jan, 2022",
-      time: "10:10 AM",
-    },
-    {
-      type: "Online",
-      hospitalname: "Shamuba Hospital",
-      doctorspeciality: "MBBS",
-      name: "Dr. Ahmad Arcand",
-      issue: "Feeling Tired",
-      disease: "Viral Infection",
-      date: "2 Jan, 2022",
-      time: "10:10 AM",
-    },
-    {
-      type: "Online",
-      hospitalname: "Shamuba Hospital",
-      doctorspeciality: "MBBS",
-      name: "Dr. Wilson Arcand",
-      issue: "Feeling Tired",
-      disease: "Viral Infection",
-      date: "2 Jan, 2022",
-      time: "10:10 AM",
-    },
-    {
-      type: "Online",
-      hospitalname: "Shamuba Hospital",
-      doctorspeciality: "MBBS",
-      name: "Dr. Jaylon Korsgaard",
-      issue: "Feeling Tired",
-      disease: "Viral Infection",
-      date: "2 Jan, 2022",
-      time: "10:10 AM",
-    },
-    {
-      type: "Online",
-      hospitalname: "Shamuba Hospital",
-      doctorspeciality: "MBBS",
-      name: "Dr. Abram Stanton",
-      issue: "Feeling Tired",
-      disease: "Viral Infection",
-      date: "2 Jan, 2022",
-      time: "10:10 AM",
-    },
-    {
-      type: "Online",
-      hospitalname: "Shamuba Hospital",
-      doctorspeciality: "MBBS",
-      name: "Dr. James Saris",
-      issue: "Feeling Tired",
-      disease: "Viral Infection",
-      date: "2 Jan, 2022",
-      time: "10:10 AM",
-    },
-    {
-      type: "Online",
-      hospitalname: "Shamuba Hospital",
-      doctorspeciality: "MBBS",
-      name: "Dr. Leo Lipshutz",
-      issue: "Feeling Tired",
-      disease: "Viral Infection",
-      date: "2 Jan, 2022",
-      time: "10:10 AM",
-    },
-  ];
+
 
   const renderAppointmentCard = (appointment) => (
-    <div className="appointment-card">
+    <div className="appointment-card" key={appointment.appointmentId}>
       <div className="d-flex align-items-center justify-content-between">
-        <h3>{appointment.name}</h3>
+        <h3>{appointment.doctorName || "Unknown Doctor"}</h3>
       </div>
       <div className="appointment-card-details">
         <div className="row">
           <div className="col-6">
             <p className="appo-card-details-title">Hospital Name</p>
-            <p className="appo-card-details-title">Appointment Type</p>
             <p className="appo-card-details-title">Appointment Date</p>
-            <p className="appo-card-details-title">Appointment Time</p>
             <p className="appo-card-details-title">Patient Issue</p>
             <p className="appo-card-details-title">Disease Name</p>
           </div>
           <div className="col-6 text-end">
-            <p>{appointment.hospitalname}</p>
-            <p className="appo-card-details-type">{appointment.type}</p>
-            <p>{appointment.date}</p>
-            <p>{appointment.time}</p>
-            <p>{appointment.issue}</p>
-            <p>{appointment.disease}</p>
+            <p>{appointment.hospitalName || "Unknown Hospital"}</p>
+            <p>
+              {appointment.app_date
+                ? new Date(appointment.app_date).toLocaleDateString()
+                : "No Date Available"}
+            </p>
+            <p>{appointment.status === 0 ? "Pending" : "Completed"}</p>
+            <p>{appointment.disease_name || "No Disease Info"}</p>
           </div>
         </div>
       </div>
@@ -504,7 +403,7 @@ const PersonalHealthMedicalRecordDetails = () => {
                     </Dropdown>
                     <Dropdown>
                       <Dropdown.Toggle variant="link" id="dropdown-user">
-                        <div className="d-flex align-items-center">
+                        <NavLink to={"/adminProfile"} className="d-flex align-items-center">
                           <img
                             src="/assets/images/profile.png"
                             alt="Lincoln Philips"
@@ -514,15 +413,8 @@ const PersonalHealthMedicalRecordDetails = () => {
                             <h3 className="user-name mb-0">Lincoln Philips</h3>
                             <span className="user-role">Admin</span>
                           </div>
-                        </div>
+                        </NavLink>
                       </Dropdown.Toggle>
-                      <Dropdown.Menu>
-                        <Dropdown.Item href="#/profile">Profile</Dropdown.Item>
-                        <Dropdown.Item href="#/settings">
-                          Settings
-                        </Dropdown.Item>
-                        <Dropdown.Item href="#/logout">Logout</Dropdown.Item>
-                      </Dropdown.Menu>
                     </Dropdown>
                   </div>
                 </div>
@@ -577,7 +469,7 @@ const PersonalHealthMedicalRecordDetails = () => {
                   </Dropdown>
                   <Dropdown>
                     <Dropdown.Toggle variant="link" id="dropdown-user">
-                      <div className="d-flex align-items-center">
+                      <NavLink to={"/adminProfile"} className="d-flex align-items-center">
                         <img
                           src="/assets/images/profile.png"
                           alt="Lincoln Philips"
@@ -587,13 +479,8 @@ const PersonalHealthMedicalRecordDetails = () => {
                           <h3 className="user-name mb-0">Lincoln Philips</h3>
                           <span className="user-role">Admin</span>
                         </div>
-                      </div>
+                      </NavLink>
                     </Dropdown.Toggle>
-                    <Dropdown.Menu>
-                      <Dropdown.Item href="#/profile">Profile</Dropdown.Item>
-                      <Dropdown.Item href="#/settings">Settings</Dropdown.Item>
-                      <Dropdown.Item href="#/logout">Logout</Dropdown.Item>
-                    </Dropdown.Menu>
                   </Dropdown>
                 </div>
               </div>

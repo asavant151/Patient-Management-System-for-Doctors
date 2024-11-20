@@ -3,6 +3,9 @@ import { Dropdown, Modal, Button, Form } from "react-bootstrap";
 import "./InvoicePage.scss";
 import PatientSidebar from "../PatientSidebar/PatientSidebar";
 import PaymentSuccessModal from "../modals/PaymentSuccessModal/PaymentSuccessModal";
+import { NavLink } from "react-router-dom";
+import { useLocation } from 'react-router-dom';
+import axios from "axios";
 
 const InvoicePage = () => {
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
@@ -10,37 +13,17 @@ const InvoicePage = () => {
   const [showPaymentModal, setShowPaymentModal] = useState(false);
   const [paymentMethod, setPaymentMethod] = useState("");
   const [showModal, setShowModal] = useState(false);
+  const [doctor, setDoctor] = useState(null);
+  const [error, setError] = useState(null);
   const [notifications, setNotifications] = useState([
-    {
-      id: 1,
-      title: "Change Invoice Theme",
-      description: "Lincoln Philips changed the Invoice Theme.",
-      time: "5 min ago",
-      icon: "theme-icon.svg",
-    },
-    {
-      id: 2,
-      title: "Dr.Bharat",
-      description: "Created a bill by Dr. Bharat.",
-      time: "5 min ago",
-      icon: "theme-icon.svg",
-    },
-    {
-      id: 3,
-      title: "Payment Received",
-      description: "24,668 is the payment done of Miracle Canter.",
-      time: "1:52PM",
-      icon: "payment-received-icon.svg",
-    },
-    {
-      id: 4,
-      title: "Payment Cancelled",
-      description: "24,668 is the payment cancelled of Miracle Canter.",
-      time: "1:52PM",
-      icon: "payment-cancelled-icon.svg",
-    },
+   
   ]);
+  const location = useLocation();
+  const { appointmentData } = location.state || {}; // Retrieve passed data
 
+  if (!appointmentData) {
+    return <div>No appointment data available.</div>;
+  }
   const noNotificationImage = "/assets/images/no-notification.png";
 
   const clearNotifications = () => {
@@ -93,11 +76,35 @@ const InvoicePage = () => {
     setShowPaymentModal(false)
     setShowModal(true);
   };
+  useEffect(() => {
+    const fetchDoctor = async () => {
+      try {
+        // Send the doctorId directly in the body, not wrapped in another object
+        const response = await axios.post(
+          'https://live-bakend.onrender.com/v1/doctor/get-doctor-by-id',
+          { doctorId: appointmentData.doctorId }  // Correct: sending the doctorId as a direct value
+        );
+        setDoctor(response.data.data);
+        console.log("Doctor data:", response.data);
+      } catch (err) {
+        setError(err.response ? err.response.data.message : 'Error fetching doctor data');
+        console.error("Error fetching doctor data:", err);
+      }
+    };
+    
 
+    if (appointmentData.doctorId) {
+      fetchDoctor();
+    }
+  }, [appointmentData.doctorId]);
+  
   const handleCloseModal = () => {
     setShowModal(false);
   };
-
+  const patientdata = JSON.parse(localStorage.getItem("patient"));
+  console.log( patientdata.data, "patient");
+  const patientinfo= patientdata.data;
+  const patientId = patientinfo._id; 
   return (
     <div className="d-flex">
       <div className="w-15 w-md-0">
@@ -129,7 +136,7 @@ const InvoicePage = () => {
                   </ol>
                 </nav>
               </div>
-              <div className="col-md-6 col-12 d-lg-flex d-block justify-content-lg-end">
+              <div className="col-md-6 col-12 d-lg-flex d-block justify-content-lg-end header-width">
                 <div className="d-lg-flex d-none search-container me-3 mt-lg-0 mt-3">
                   <input
                     type="text"
@@ -224,7 +231,7 @@ const InvoicePage = () => {
                   </Dropdown>
                   <Dropdown>
                     <Dropdown.Toggle variant="link" id="dropdown-user">
-                      <div className="d-flex align-items-center">
+                      <NavLink to={"/adminProfile"} className="d-flex align-items-center">
                         <img
                           src="/assets/images/profile.png"
                           alt="Lincoln Philips"
@@ -234,13 +241,8 @@ const InvoicePage = () => {
                           <h3 className="user-name mb-0">Lincoln Philips</h3>
                           <span className="user-role">Admin</span>
                         </div>
-                      </div>
+                      </NavLink>
                     </Dropdown.Toggle>
-                    <Dropdown.Menu>
-                      <Dropdown.Item href="#/profile">Profile</Dropdown.Item>
-                      <Dropdown.Item href="#/settings">Settings</Dropdown.Item>
-                      <Dropdown.Item href="#/logout">Logout</Dropdown.Item>
-                    </Dropdown.Menu>
                   </Dropdown>
                   </div>
                 </div>
@@ -295,7 +297,7 @@ const InvoicePage = () => {
                   </Dropdown>
                   <Dropdown>
                     <Dropdown.Toggle variant="link" id="dropdown-user">
-                      <div className="d-flex align-items-center">
+                      <NavLink to={"/adminProfile"} className="d-flex align-items-center">
                         <img
                           src="/assets/images/profile.png"
                           alt="Lincoln Philips"
@@ -305,13 +307,8 @@ const InvoicePage = () => {
                           <h3 className="user-name mb-0">Lincoln Philips</h3>
                           <span className="user-role">Admin</span>
                         </div>
-                      </div>
+                      </NavLink>
                     </Dropdown.Toggle>
-                    <Dropdown.Menu>
-                      <Dropdown.Item href="#/profile">Profile</Dropdown.Item>
-                      <Dropdown.Item href="#/settings">Settings</Dropdown.Item>
-                      <Dropdown.Item href="#/logout">Logout</Dropdown.Item>
-                    </Dropdown.Menu>
                   </Dropdown>
                 </div>
               </div>
@@ -334,7 +331,7 @@ const InvoicePage = () => {
             <div className="doctor-info">
               <div className="row align-items-center justify-content-between">
                 <div className="col-md-6">
-                  <h3>Dr. Bharat Patel</h3>
+                  <h3>{doctor?.firstName}</h3>
                   <p>
                     Lorem ipsum dolor sit amet, consectetur adipiscing elit.
                     Proin mattis turpis nisl, viverra scelerisque porta eu.
@@ -347,11 +344,11 @@ const InvoicePage = () => {
                   </p>
                   <p className="doctor-info-contentbox">
                     <strong className="doctor-info-title">Bill Date</strong>
-                    <span className="doctor-info-dot">:</span> 20 June, 2020
+                    <span className="doctor-info-dot">:</span>{appointmentData.app_date}
                   </p>
                   <p className="doctor-info-contentbox">
                     <strong className="doctor-info-title">Bill Time</strong>
-                    <span className="doctor-info-dot">:</span> 10:45 PM
+                    <span className="doctor-info-dot">:</span> {appointmentData.app_time}
                   </p>
                 </div>
               </div>
@@ -362,16 +359,15 @@ const InvoicePage = () => {
                 <div className="col-md-6">
                   <p className="invoice-details-contentbox">
                     <strong className="invoice-details-title">Name</strong>
-                    <span className="invoice-details-dot">:</span> Miracle
-                    Kenter
+                    <span className="invoice-details-dot">:</span> {patientinfo.first_name + " " + patientinfo.last_name}
                   </p>
                   <p className="invoice-details-contentbox">
                     <strong className="invoice-details-title">Gender</strong>
-                    <span className="invoice-details-dot">:</span> Male
+                    <span className="invoice-details-dot">:</span> {patientinfo.gender}
                   </p>
                   <p className="invoice-details-contentbox">
                     <strong className="invoice-details-title">Age</strong>
-                    <span className="invoice-details-dot">:</span> 36 Years
+                    <span className="invoice-details-dot">:</span> {patientinfo.age} Years
                   </p>
                   <p className="invoice-details-contentbox text-lg-nowrap">
                     <strong className="invoice-details-title">Address</strong>
@@ -384,19 +380,19 @@ const InvoicePage = () => {
                     <strong className="invoice-details-title">
                       Disease Name
                     </strong>
-                    <span className="invoice-details-dot">:</span> Jasuam Saris
+                    <span className="invoice-details-dot">:</span> {appointmentData.diseas_name}
                   </p>
                   <p className="invoice-details-contentbox">
                     <strong className="invoice-details-title">
                       Phone Number
                     </strong>
-                    <span className="invoice-details-dot">:</span> 9757766557
+                    <span className="invoice-details-dot">:</span> {patientinfo.phone_number}
                   </p>
                   <p className="invoice-details-contentbox">
                     <strong className="invoice-details-title">
                       Payment Type
                     </strong>
-                    <span className="invoice-details-dot">:</span>{" "}
+                    <span className="invoice-details-dot">:</span>
                     <span className="text-blue">Insurance</span>
                   </p>
                 </div>
@@ -677,4 +673,4 @@ const InvoicePage = () => {
   );
 };
 
-export default InvoicePage;
+export default InvoicePage;

@@ -4,6 +4,7 @@ import AuthSlider from "../../../components/auth-slider/AuthSlider";
 import { Link, useNavigate } from "react-router-dom";
 import { loginValidationSchema } from "../../../validation/AuthValidation";
 import "./DoctorLogin.scss";
+import axios from "axios";
 
 const DoctorLogin = () => {
   const [showPassword, setShowPassword] = useState(false);
@@ -23,13 +24,14 @@ const DoctorLogin = () => {
   const handleSubmit = async (values, { setSubmitting }) => {
     try {
       const response = await axios.post(
-        "http://localhost:9500/v1/doctor/doctor-login",
+        "https://live-bakend.onrender.com/v1/doctor/doctor-login",
         {
           identifier: values.email,
           password: values.password,
         }
       );
 
+      localStorage.setItem("user", JSON.stringify(response.data.data)); 
       localStorage.setItem("token", response.data.token);
       localStorage.setItem("refreshToken", response.data.refreshToken);
 
@@ -98,13 +100,13 @@ const DoctorLogin = () => {
                       >
                         {showPassword ? (
                           <img
-                            src="./assets/images/eye-slash.svg"
+                            src="/assets/images/eye-slash.svg"
                             alt="eye-slash"
                             className="img-fluid"
                           />
                         ) : (
                           <img
-                            src="./assets/images/eye.svg"
+                            src="/assets/images/eye.svg"
                             alt="eye"
                             className="img-fluid"
                           />

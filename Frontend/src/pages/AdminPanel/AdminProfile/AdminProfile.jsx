@@ -2,8 +2,8 @@ import React, { useEffect, useRef, useState } from "react";
 import Sidebar from "../../../components/Sidebar/Sidebar";
 import { Dropdown } from "react-bootstrap";
 import "./AdminProfile.scss";
-import { useLocation } from "react-router-dom";
-
+import { json, NavLink, useLocation } from "react-router-dom";
+import axios from "axios";
 const AdminProfile = () => {
   const [oldPass, setOldPass] = useState("");
   const [newPass, setNewPass] = useState("");
@@ -21,7 +21,7 @@ const AdminProfile = () => {
     last_name: "",
     email: "",
     phone_number: "",
-    hospitalId: "", // Store hospitalId here
+    hospitalId: "",
     gender: "",
     city: "",
     state: "",
@@ -159,72 +159,92 @@ const AdminProfile = () => {
 
     try {
       const response = await axios.post(
-        "http://localhost:9500/v1/admin/change-password",
+        "https://live-bakend.onrender.com/v1/admin/change-password",
         {
           oldpass: oldPass,
           newpass: newPass,
           confirmpass: confirmPass,
-          adminId: profileData._id
+          adminId: profileData._id,
         },
         {
           headers: {
             Authorization: `Bearer ${token}`,
-          }
+          },
         }
       );
 
       if (response?.data?.success) {
         alert("Password changed successfully!");
       } else {
-        alert("Failed to change password: " + (response?.data?.message || "Unknown error"));
+        alert(
+          "Failed to change password: " +
+            (response?.data?.message || "Unknown error")
+        );
       }
     } catch (error) {
       console.error("Error occurred:", error);
-      alert("Error changing password: " + (error.response?.data?.message || error.message));
+      alert(
+        "Error changing password: " +
+          (error.response?.data?.message || error.message)
+      );
     }
   };
 
   // Fetch hospital data
-  const fetchHospitalData = async (hospitalId) => {
+  const fetchHospitalData = async () => {
     try {
-      const response = await axios.post(
-        "http://localhost:9500/v1/hospital/get-hospital-by-id",
-        { id: hospitalId },
+      const hospitalId = JSON.parse(storedData)?.hospitalId;
+      console.log("Extracted hospitalId:", hospitalId); // Log to confirm the value
+
+      if (!hospitalId) {
+        console.error("No hospitalId found in stored data.");
+        return;
+      }
+
+      const response = await axios.get(
+        `https://live-bakend.onrender.com/v1/hospital/get-hospital-by-id/${hospitalId}`,
         {
           headers: {
             Authorization: `Bearer ${token}`,
-          }
+          },
         }
       );
 
       if (response?.data?.success) {
-        setHospitalName(response.data.hospitalName); // Assuming the response contains a hospitalName
+        setHospitalName(response.data.data.hospitalName);
       } else {
-        console.error("Failed to fetch hospital data: " + (response?.data?.message || "Unknown error"));
+        console.error(
+          "Failed to fetch hospital data:",
+          response?.data?.message || "Unknown error"
+        );
       }
     } catch (error) {
       console.error("Error fetching hospital data:", error);
     }
   };
 
+  const storedData = localStorage.getItem("user");
+
   useEffect(() => {
     document.addEventListener("mousedown", handleClickOutside);
 
-    const storedData = localStorage.getItem("user");
     if (storedData) {
       const data = JSON.parse(storedData);
+
       setProfileData({
         first_name: data.first_name || "",
         last_name: data.last_name || "",
         email: data.email || "",
         phone_number: data.phone_number || "",
-        hospitalId: data.hospitalId || "", // Ensure this matches your data
+        hospitalId: data.hospitalId || "",
         gender: data.gender || "",
         city: data.city || "",
         state: data.state || "",
         country: data.country || "",
         _id: data._id || "",
       });
+      console.log(profileData);
+      console.log(data.data);
 
       // Fetch hospital name using hospitalId
       if (data.hospitalId) {
@@ -272,7 +292,7 @@ const AdminProfile = () => {
                     </ol>
                   </nav>
                 </div>
-                <div className="col-md-6 col-12 d-lg-flex d-block justify-content-lg-end">
+                <div className="col-md-6 col-12 d-lg-flex d-block justify-content-lg-end header-width header-width">
                   <div className="d-lg-flex d-none search-container me-3 mt-lg-0 mt-3">
                     <input
                       type="text"
@@ -296,97 +316,104 @@ const AdminProfile = () => {
                     </Dropdown>
                   </div>
                   <div className="d-lg-none d-flex align-items-center justify-content-between">
-                  <nav className="breadcrumb-container d-block d-lg-none p-0">
-                    <button className="btn btn-primary" onClick={toggleSidebar}>
-                      <i className="bi bi-text-left"></i>
-                    </button>
-                  </nav>
-                  <div className="d-flex align-items-center justify-content-center">
-                  <button className="btn" onClick={toggleSearch}>
-                    <img
-                      src="/assets/images/search.svg"
-                      alt="search"
-                      className="search-icon"
-                    />
-                  </button>
-                  {isSearchVisible && (
-                    <input
-                      type="text"
-                      className="form-control"
-                      placeholder="Quick Search"
-                      style={{ display: isSearchVisible ? "block" : "none" }}
-                    />
-                  )}
-                  <Dropdown className="notification-dropdown mx-3">
-                    <Dropdown.Toggle
-                      variant="link"
-                      className="notification-toggle"
-                    >
-                      <img
-                        src="/assets/images/notification-bing.svg"
-                        alt="Notification Icon"
-                        className="img-fluid"
-                      />
-                    </Dropdown.Toggle>
-
-                    <Dropdown.Menu className="notification-menu">
-                      <div className="notification-header d-flex justify-content-between align-items-center">
-                        <span>Notification</span>
-                        <button className="close-btn" onClick={clearNotifications}>&times;</button>
-                      </div>
-                      {notifications.length > 0 ? (
-                        notifications.map((notification) => (
-                          <div
-                            key={notification.id}
-                            className="notification-item d-flex align-items-start"
-                          >
-                            <img
-                              src={`/assets/images/${notification.icon}`}
-                              alt={notification.title}
-                              className="notification-icon"
-                            />
-                            <div className="notification-content">
-                              <h5>{notification.title}</h5>
-                              <p>{notification.description}</p>
-                            </div>
-                            <span className="notification-time">
-                              {notification.time}
-                            </span>
-                          </div>
-                        ))
-                      ) : (
-                        <div className="no-notifications text-center">
-                          <img
-                            src={noNotificationImage}
-                            alt="No Notifications"
-                            className="no-notifications-img"
-                          />
-                        </div>
-                      )}
-                    </Dropdown.Menu>
-                  </Dropdown>
-                  <Dropdown>
-                    <Dropdown.Toggle variant="link" id="dropdown-user">
-                      <div className="d-flex align-items-center">
+                    <nav className="breadcrumb-container d-block d-lg-none p-0">
+                      <button
+                        className="btn btn-primary"
+                        onClick={toggleSidebar}
+                      >
+                        <i className="bi bi-text-left"></i>
+                      </button>
+                    </nav>
+                    <div className="d-flex align-items-center justify-content-center">
+                      <button className="btn" onClick={toggleSearch}>
                         <img
-                          src="/assets/images/profile.png"
-                          alt="Lincoln Philips"
-                          className="profile-pic img-fluid"
+                          src="/assets/images/search.svg"
+                          alt="search"
+                          className="search-icon"
                         />
-                        <div className="d-none text-start">
-                          <h3 className="user-name mb-0">Lincoln Philips</h3>
-                          <span className="user-role">Admin</span>
-                        </div>
-                      </div>
-                    </Dropdown.Toggle>
-                    <Dropdown.Menu>
-                      <Dropdown.Item href="#/profile">Profile</Dropdown.Item>
-                      <Dropdown.Item href="#/settings">Settings</Dropdown.Item>
-                      <Dropdown.Item href="#/logout">Logout</Dropdown.Item>
-                    </Dropdown.Menu>
-                  </Dropdown>
+                      </button>
+                      {isSearchVisible && (
+                        <input
+                          type="text"
+                          className="form-control"
+                          placeholder="Quick Search"
+                          style={{
+                            display: isSearchVisible ? "block" : "none",
+                          }}
+                        />
+                      )}
+                      <Dropdown className="notification-dropdown mx-3">
+                        <Dropdown.Toggle
+                          variant="link"
+                          className="notification-toggle"
+                        >
+                          <img
+                            src="/assets/images/notification-bing.svg"
+                            alt="Notification Icon"
+                            className="img-fluid"
+                          />
+                        </Dropdown.Toggle>
+
+                        <Dropdown.Menu className="notification-menu">
+                          <div className="notification-header d-flex justify-content-between align-items-center">
+                            <span>Notification</span>
+                            <button
+                              className="close-btn"
+                              onClick={clearNotifications}
+                            >
+                              &times;
+                            </button>
+                          </div>
+                          {notifications.length > 0 ? (
+                            notifications.map((notification) => (
+                              <div
+                                key={notification.id}
+                                className="notification-item d-flex align-items-start"
+                              >
+                                <img
+                                  src={`/assets/images/${notification.icon}`}
+                                  alt={notification.title}
+                                  className="notification-icon"
+                                />
+                                <div className="notification-content">
+                                  <h5>{notification.title}</h5>
+                                  <p>{notification.description}</p>
+                                </div>
+                                <span className="notification-time">
+                                  {notification.time}
+                                </span>
+                              </div>
+                            ))
+                          ) : (
+                            <div className="no-notifications text-center">
+                              <img
+                                src={noNotificationImage}
+                                alt="No Notifications"
+                                className="no-notifications-img"
+                              />
+                            </div>
+                          )}
+                        </Dropdown.Menu>
+                      </Dropdown>
+                      <Dropdown>
+                        <Dropdown.Toggle variant="link" id="dropdown-user">
+                          <NavLink to={"/adminProfile"} className="d-flex align-items-center">
+                            <img
+                              src="/assets/images/profile.png"
+                              alt="Lincoln Philips"
+                              className="profile-pic img-fluid"
+                            />
+                            <div className="d-none text-start">
+                              <h3 className="user-name mb-0">
+                                Lincoln Philips
+                              </h3>
+                              <span className="user-role">Admin</span>
+                            </div>
+                          </NavLink>
+                        </Dropdown.Toggle>
+                      </Dropdown>
+                    </div>
                   </div>
-                </div>
                   <div className="d-lg-flex d-none align-items-center">
                     <Dropdown className="notification-dropdown">
                       <Dropdown.Toggle
@@ -403,7 +430,12 @@ const AdminProfile = () => {
                       <Dropdown.Menu className="notification-menu">
                         <div className="notification-header d-flex justify-content-between align-items-center">
                           <span>Notification</span>
-                          <button className="close-btn" onClick={clearNotifications}>&times;</button>
+                          <button
+                            className="close-btn"
+                            onClick={clearNotifications}
+                          >
+                            &times;
+                          </button>
                         </div>
                         {notifications.length > 0 ? (
                           notifications.map((notification) => (
@@ -438,7 +470,7 @@ const AdminProfile = () => {
                     </Dropdown>
                     <Dropdown>
                       <Dropdown.Toggle variant="link" id="dropdown-user">
-                        <div className="d-flex align-items-center">
+                        <NavLink to={"/adminProfile"} className="d-flex align-items-center">
                           <img
                             src="/assets/images/profile.png"
                             alt="Lincoln Philips"
@@ -448,15 +480,8 @@ const AdminProfile = () => {
                             <h3 className="user-name mb-0">Lincoln Philips</h3>
                             <span className="user-role">Admin</span>
                           </div>
-                        </div>
+                        </NavLink>
                       </Dropdown.Toggle>
-                      <Dropdown.Menu>
-                        <Dropdown.Item href="#/profile">Profile</Dropdown.Item>
-                        <Dropdown.Item href="#/settings">
-                          Settings
-                        </Dropdown.Item>
-                        <Dropdown.Item href="#/logout">Logout</Dropdown.Item>
-                      </Dropdown.Menu>
                     </Dropdown>
                   </div>
                 </div>
@@ -466,7 +491,7 @@ const AdminProfile = () => {
           <div className="container-fluid profile-page py-4">
             <h1 className="page-title">Profile Setting</h1>
             <div className="row">
-              <div className="col-lg-12 col-md-4 mt-4">
+              <div className="col-12 mt-4">
                 <div className="admin-spacing">
                   <div className="card">
                     <div className="row">
@@ -715,14 +740,14 @@ const AdminProfile = () => {
                                 <div className="col-lg-4 col-md-6 mb-3">
                                   <div className="form-floating mb-3">
                                     <input
-                                     type="text"
-                                     name="country"
-                                     className={"form-control"}
-                                     id="Country"
-                                     placeholder="Country"
-                                     value={profileData.country}
-                                     onChange={handleInputChange}
-                                     disabled={!isEditable}
+                                      type="text"
+                                      name="country"
+                                      className={"form-control"}
+                                      id="Country"
+                                      placeholder="Country"
+                                      value={profileData.country}
+                                      onChange={handleInputChange}
+                                      disabled={!isEditable}
                                     />
                                     <label htmlFor="Country">Country</label>
                                   </div>
@@ -750,6 +775,7 @@ const AdminProfile = () => {
                         </div>
 
                         {/* Change Password Section */}
+
                         <div
                           className={`collapse ${
                             activeSection === "change-password" ? "show" : ""
@@ -761,16 +787,18 @@ const AdminProfile = () => {
                             <p className="admin-content mb-4">
                               To change your password, please fill in the fields
                               below. Your password must contain at least 8
-                              characters, it must also include at least one
-                              upper case letter, one lower case letter, one
-                              number and one special character.
+                              characters, and it must also include at least one
+                              uppercase letter, one lowercase letter, one
+                              number, and one special character.
                             </p>
-                            <form>
+                            <form onSubmit={handleSubmit}>
                               <div className="form-floating mb-3 position-relative">
                                 <input
                                   type={showPassword ? "text" : "password"}
+                                  value={oldPass}
+                                  onChange={(e) => setOldPass(e.target.value)}
                                   name="CurrentPassword"
-                                  className={"form-control"}
+                                  className="form-control"
                                   id="CurrentPassword"
                                   placeholder="Enter Current Password"
                                 />
@@ -803,8 +831,10 @@ const AdminProfile = () => {
                               <div className="form-floating mb-3 position-relative">
                                 <input
                                   type={showPassword2 ? "text" : "password"}
+                                  value={newPass}
+                                  onChange={(e) => setNewPass(e.target.value)}
                                   name="newpassword"
-                                  className={"form-control"}
+                                  className="form-control"
                                   id="newpassword"
                                   placeholder="Enter New Password"
                                 />
@@ -837,8 +867,12 @@ const AdminProfile = () => {
                               <div className="form-floating mb-3 position-relative">
                                 <input
                                   type={showPassword3 ? "text" : "password"}
+                                  value={confirmPass}
+                                  onChange={(e) =>
+                                    setConfirmPass(e.target.value)
+                                  }
                                   name="ConfirmPassword"
-                                  className={"form-control"}
+                                  className="form-control"
                                   id="ConfirmPassword"
                                   placeholder="Enter Confirm Password"
                                 />

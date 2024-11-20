@@ -33,7 +33,7 @@ const Otp_screen = () => {
     try {
       // Make the API request with the email and OTP
       const response = await axios.post(
-        "http://localhost:9500/v1/admin/verify-otp",
+        "https://live-bakend.onrender.com/v1/admin/verify-otp",
         {
           email, // Pass the stored email
           otp: values.otp.join(""), // Concatenate the OTP array to a string
@@ -84,12 +84,12 @@ const Otp_screen = () => {
                     <div className="d-flex align-items-center justify-content-between">
                       <div className="mb-3 d-flex align-items-center">
                         <img
-                          src="./assets/images/clock.svg"
+                          src="/assets/images/clock.svg"
                           alt="clock"
                           className="img-fluid me-2"
                         />
                         <h6 className="otp-time mb-0">
-                          {`00:${timeLeft < 10 ? `0${timeLeft}` : timeLeft}`}{" "}
+                          {`00:${timeLeft < 10 ? `0${timeLeft}` : timeLeft}`}
                           sec
                         </h6>
                       </div>

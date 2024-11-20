@@ -6,11 +6,13 @@ import "./Login.scss";
 import { loginValidationSchema } from "../../../validation/AuthValidation";
 import axios from "axios";
 import toast from "react-hot-toast";
+import { useAuth } from "../../../hooks/useAuth";
 
 const Login = () => {
   const [showPassword, setShowPassword] = useState(false);
   const [error, setError] = useState(null);
   const navigate = useNavigate();
+  const { login } = useAuth();
 
   const togglePasswordVisibility = () => {
     setShowPassword(!showPassword);
@@ -25,7 +27,7 @@ const Login = () => {
   const handleSubmit = async (values, { setSubmitting }) => {
     try {
       const response = await axios.post(
-        "http://localhost:9500/v1/admin/admin-login",
+        "https://live-bakend.onrender.com/v1/admin/admin-login",
         {
           identifier: values.email, // 'email' represents both email and phone
           password: values.password,
@@ -37,6 +39,9 @@ const Login = () => {
         localStorage.setItem("adminId", adminId);
         const token = response.data.token;
         localStorage.setItem("token", token);
+        if (token) {
+          login(token);
+        }
         setError(null);
         toast.success(response.data.message);
         setTimeout(() => {
@@ -103,13 +108,13 @@ const Login = () => {
                       >
                         {showPassword ? (
                           <img
-                            src="./assets/images/eye-slash.svg"
+                            src="/assets/images/eye-slash.svg"
                             alt="eye-slash"
                             className="img-fluid"
                           />
                         ) : (
                           <img
-                            src="./assets/images/eye.svg"
+                            src="/assets/images/eye.svg"
                             alt="eye"
                             className="img-fluid"
                           />
@@ -124,7 +129,7 @@ const Login = () => {
                         className="invalid-feedback"
                       />
                     </div>
-                    {error && <p className="text-danger">{error}</p>}{" "}
+                    {error && <p className="text-danger">{error}</p>}
                     {/* Show error */}
                     <div className="d-flex align-items-center justify-content-between">
                       <div className="mb-3 form-check">
@@ -151,7 +156,7 @@ const Login = () => {
                       Login
                     </button>
                     <div className="text-center account-text mt-3">
-                      Don't have an account?{" "}
+                      Don't have an account?
                       <Link to={"/register"} className="main-link ms-1">
                         Registration
                       </Link>

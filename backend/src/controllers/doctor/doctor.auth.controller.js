@@ -9,7 +9,24 @@ const path = require("path");
 const {  emailService, doctorService } = require("../../services");
 const Doctor = require("../../models/doctor.model");
 
+// const getAllDoctors = async (req, res) => {
+//   try {
+//     const doctors = await Doctor.find(); // Fetch all doctors from the database
 
+//     res.status(200).json({
+//       status: 200,
+//       success: true,
+//       data: doctors,
+//       message: "All doctors retrieved successfully",
+//     });
+//   } catch (error) {
+//     res.status(500).json({
+//       status: 500,
+//       success: false,
+//       message: error.message || "Internal Server Error",
+//     });
+//   }
+// };
 /* -------------------------- LOGIN/SIGNIN DOCTOR  0-new 1-already -------------------------- */
 const login = async (req, res) => {
   try {

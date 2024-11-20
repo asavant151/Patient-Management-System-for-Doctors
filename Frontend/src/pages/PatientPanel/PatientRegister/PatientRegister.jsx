@@ -1,9 +1,10 @@
 import React, { useState, useEffect } from "react";
 import AuthSlider from "../../../components/auth-slider/AuthSlider";
 import { Formik, Form, Field, ErrorMessage } from "formik";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
 import "./PatientRegister.scss";
+import toast from "react-hot-toast";
 
 const PatientRegister = () => {
   const [showPassword, setShowPassword] = useState(false);
@@ -13,6 +14,8 @@ const PatientRegister = () => {
   const [states, setStates] = useState([]);
   const [cities, setCities] = useState([]);
   const [hospitals, setHospitals] = useState([]);
+
+  const navigate = useNavigate();
 
   const togglePasswordVisibility = () => setShowPassword(!showPassword);
   const toggleConfirmPasswordVisibility = () =>
@@ -35,6 +38,7 @@ const PatientRegister = () => {
     height: "",
     weight: "",
     birthdate: "",
+    patient_address: "",
     patientAddress: "",
   };
 
@@ -55,6 +59,7 @@ const PatientRegister = () => {
       dob: values.birthdate,
       blood_group: values.bloodgroup,
       weight: values.weight,
+      patient_address: values.patient_address,
       height: values.height,
     };
     console.log(payload);
@@ -62,10 +67,11 @@ const PatientRegister = () => {
       console.log("Form values:", values);
     try {
       const response = await axios.post(
-        "http://localhost:9500/v1/patient/create-patient",
+        "https://live-bakend.onrender.com/v1/patient/create-patient",
         payload
       );
-      // Optionally, you can redirect or show a success message
+      toast.success("Patient Registration successfull");
+      navigate("/login");
     } catch (error) {
       console.error(
         "Registration error:",
@@ -114,7 +120,7 @@ const PatientRegister = () => {
   const fetchHospitals = async () => {
     try {
       const response = await axios.get(
-        "http://localhost:9500/v1/hospital/get-hospitals"
+        "https://live-bakend.onrender.com/v1/hospital/get-hospitals"
       );
       setHospitals(response.data.data);
     } catch (error) {
@@ -456,6 +462,25 @@ const PatientRegister = () => {
                       />
                     </div>
 
+                    <div className="form-floating mb-3">
+                      <Field
+                        type="text"
+                        name="patient_address"
+                        className={`form-control ${
+                          errors.patient_address && touched.patient_address
+                            ? "is-invalid"
+                            : ""
+                        }`}
+                        placeholder="Enter Address"
+                      />
+                      <label htmlFor="email">Address</label>
+                      <ErrorMessage
+                        name="patient_address"
+                        component="div"
+                        className="invalid-feedback"
+                      />
+                    </div>
+
                     {/* Password */}
                     <div className="form-floating mb-3 position-relative">
                       <Field
@@ -476,8 +501,8 @@ const PatientRegister = () => {
                         <img
                           src={
                             showPassword
-                              ? "./assets/images/eye-slash.svg"
-                              : "./assets/images/eye.svg"
+                              ? "/assets/images/eye-slash.svg"
+                              : "/assets/images/eye.svg"
                           }
                           alt="toggle password"
                           className="img-fluid"
@@ -511,8 +536,8 @@ const PatientRegister = () => {
                         <img
                           src={
                             showConfirmPassword
-                              ? "./assets/images/eye-slash.svg"
-                              : "./assets/images/eye.svg"
+                              ? "/assets/images/eye-slash.svg"
+                              : "/assets/images/eye.svg"
                           }
                           alt="toggle confirm password"
                           className="img-fluid"
@@ -539,8 +564,8 @@ const PatientRegister = () => {
                         className="form-check-label"
                         htmlFor="agreeToTerms"
                       >
-                        I agree to the{" "}
-                        <span style={{ color: "blue" }}>Terms</span> and{" "}
+                        I agree to the
+                        <span style={{ color: "blue" }}>Terms</span> and
                         <span style={{ color: "blue" }}>Privacy Policy</span>
                       </label>
                       <ErrorMessage
@@ -556,7 +581,7 @@ const PatientRegister = () => {
                     </button>
 
                     <div className="text-center account-text mt-3">
-                      Already have an account?{" "}
+                      Already have an account?
                       <Link to={"/patient-login"} className="main-link ms-1">
                         Login
                       </Link>
