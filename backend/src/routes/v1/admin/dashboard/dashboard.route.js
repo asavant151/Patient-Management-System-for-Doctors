@@ -18,15 +18,15 @@ router.delete("/doctor-list-delete",authenticAdmin, dashboardController.deleteDo
 
 
 
-router.get("/appointement-today", dashboardController.getTodayAppointments);
-router.get("/appointement-upcomming", dashboardController.getUpcomingAppointments);
-router.get("/appointement-previous", dashboardController.getPreviousAppointments);
-router.get("/appointement-cancel", dashboardController.getCanceledAppointments);
-router.get("/appointement-wise-patient-detail-id", dashboardController.getAppointmentDetailsOfPatientById);
+router.get("/appointement-today",authenticAdmin, dashboardController.getTodayAppointments);
+router.get("/appointement-upcomming",authenticAdmin, dashboardController.getUpcomingAppointments);
+router.get("/appointement-previous",authenticAdmin, dashboardController.getPreviousAppointments);
+router.get("/appointement-cancel", authenticAdmin,dashboardController.getCanceledAppointments);
+router.get("/appointement-wise-patient-detail-id", authenticAdmin,dashboardController.getAppointmentDetailsOfPatientById);
 
-router.get("/dashboard-main-count", dashboardController.getDashboardCount);
-router.get("/dashboard-patient-count-month-week", dashboardController.getPatientCounts);
-router.get("/dashboard-patient-count-new-old", dashboardController.getPatientCountsNewOld);
+router.get("/dashboard-main-count", authenticAdmin,dashboardController.getDashboardCount);
+router.get("/dashboard-patient-count-month-week",authenticAdmin, dashboardController.getPatientCounts);
+router.get("/dashboard-patient-count-new-old",authenticAdmin, dashboardController.getPatientCountsNewOld);
 
 
 

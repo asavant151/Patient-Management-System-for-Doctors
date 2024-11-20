@@ -62,10 +62,6 @@ router.get("/doctorflow-cancel-appointmentbook-date",
                     // authenticDoctor, 
                     doctorFlowAppointmentController.getAllAppointments);
 
-                    
-
-
-
 
 router.post("/create-appointment-book",
     // authenticPatient, 
@@ -92,15 +88,11 @@ router.post("/create-cancel-appointment",
 
                 router.get("/appointment-list-pending-status-patient",
                     authenticDoctor, 
-                    bookapointmentPatientController.appointmentTypeOnlineList);
+                    bookapointmentPatientController.appointmentTypeOnlineList);  
 
-
-
-                                    
-
-                                    // router.get("/details-of-patient",
-                                    //     authenticDoctor, 
-                                    //     doctorFlowAppointmentController.getAllAppointments);
+     // router.get("/details-of-patient",
+            //     authenticDoctor, 
+      //     doctorFlowAppointmentController.getAllAppointments);
 
 
 
